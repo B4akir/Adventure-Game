@@ -1,0 +1,39 @@
+
+Setting: 
+- Nekako si iz buducnosti dosao u proslost. 
+Ponijeo si sa sobom 1 item iz buducnosti. Svaki item iz buducnosti
+ima limitiran broj koristenja.5
+
+- Svaki karakter ima basic napad. Pored starting itema
+moze naci i iteme na podu. U zavaisnosti od klase.
+
+
+
+
+
+// Apsolutni ludjak.
+Probudio si se kao carobnjak:
+
+- Sicofrenicki manijak si.
+Imas 3 napada:
+	- Summon (Tvoj sizofrenicki prijatelj napadne 
+neprijatelja. Uvijek je 0 damagea)
+	- Fireball ( Imas moderni flametrhower iz buducnosti. 5 koristenja)
+	- Posion attack (Pljunes neprijatelja)
+
+
+// Omogucava ulazenje u zakljucane prostore
+Probudio si se kao lopov:
+
+	- Pickpocket i lockpicking ( Imas zapravo polugu
+mozes nokautirati nekog polugom i ukrasti mu inventory.
+Tako isto mozes  "lockpickat" vrata sa polugom. 3)
+	- Potion of speed ( Potion koji ti daje viska napade tokom poteza)
+	- Suckerpunch ( Udara jace nego basic attack, jer je iznenada)
+
+
+//Basic dosadan build, ali stabilan.
+Probudio si se kao vitez :
+	- Pistolj( Pistolj 4 metka)
+	- Armour (-1 napad za neprijatelja)
+	- Mac ( Mac je, sta se ima reci vise)
