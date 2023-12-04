@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include "select_class.c"
+#include "character.selection.c"
 
 int onSelectedKlasa();
 int selectClass();
-
+char *selectName();
 
 
 
@@ -12,9 +12,9 @@ int selectClass();
 int main (){
 
 int odabir = onSelectedKlasa();
+char *ime= selectName();
 
-
-
+printf("%s",ime);
 
 
 return 0;
@@ -22,5 +22,3 @@ return 0;
 }
 
 
-
- 

@@ -68,3 +68,17 @@ int odabir=selectClass();
 
 return odabir;
  }
+
+
+
+ char *selectName(){
+
+    static char selectedName[20];
+    printf("Kako se zovete? \n");
+    scanf("%s", selectedName );
+    return selectedName;
+
+
+}
+
+
