@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void boardCreation();
 
@@ -15,9 +16,13 @@ void initPlayer();
 
 int main (){
 
+int x,y;
+printf("x \n");
+scanf("%d",&x);
+printf("y \n");
+scanf("%d",&y);
 
-
-boardCreation(2,3);
+boardCreation(x,y);
 
 
 return 0;
@@ -27,10 +32,11 @@ return 0;
 
 
 
-void boardCreation(int x,int y)
+void boardCreation(int x, int y)
 {
 int HEIGHT = 10;
 int WIDTH= 20;
+
 
 system("cls");
 
@@ -48,6 +54,7 @@ for (int j=0;j<WIDTH;j++){
 }
  printf("\n");
 }
+
 
 
 }
