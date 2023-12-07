@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void boardCreation();
+
 
 #define HEIGHT 10
 #define WIDTH 20
@@ -14,13 +14,9 @@ typedef struct {
 
 }Player;
 
-void initPlayer(Player *player){
-
-player->x= HEIGHT/2;
-player->y= WIDTH/2;
-
-
-};
+ void boardCreation(Player *player);
+ void movement(Player *player);
+ void initPlayer(Player *player);
 
 
 int main (){
@@ -30,9 +26,10 @@ Player player;
 
 initPlayer(&player);
 
-
+while (1){
 boardCreation(&player);
-
+movement(&player);
+}
 
 return 0;
 
@@ -46,14 +43,14 @@ void boardCreation(Player *player)
 
 
 
-system("cls");
+system ("cls");
 
 for (int i=0;i<HEIGHT;i++){
     
    
 for (int j=0;j<WIDTH;j++){
     
-    if (i==player->x && j==player->y){
+    if (i==player->y && j==player->x){
         printf("@");
     }
     else{
@@ -65,15 +62,44 @@ for (int j=0;j<WIDTH;j++){
 
 
 
+
+
+
 }
 
-// void initPlayer(Player *player){
-
-//     player->x=WIDTH/2;
-//     player->y=WIDHT/2;
-
-
-// }
 
 
 
+void initPlayer(Player *player){
+
+player->y= HEIGHT/2;
+player->x= WIDTH/2;
+
+
+};
+
+
+void movement(Player *player){
+
+char unos;
+
+printf("---> \n");
+scanf("%c",&unos);
+
+switch (unos){
+    case 'w':
+    player->y--;
+    break;
+case 's':
+    player->y++;
+    break;
+case 'd':
+    player->x++;
+    break;
+case 'a':
+    player->x--;
+    break;
+
+}
+
+}
