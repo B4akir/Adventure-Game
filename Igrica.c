@@ -3,6 +3,9 @@
 
 void boardCreation();
 
+#define HEIGHT 10
+#define WIDTH 20
+
 
 
 
@@ -11,18 +14,24 @@ typedef struct {
 
 }Player;
 
-void initPlayer();
+void initPlayer(Player *player){
+
+player->x= HEIGHT/2;
+player->y= WIDTH/2;
+
+
+};
 
 
 int main (){
 
-int x,y;
-printf("x \n");
-scanf("%d",&x);
-printf("y \n");
-scanf("%d",&y);
 
-boardCreation(x,y);
+Player player;
+
+initPlayer(&player);
+
+
+boardCreation(&player);
 
 
 return 0;
@@ -32,10 +41,9 @@ return 0;
 
 
 
-void boardCreation(int x, int y)
+void boardCreation(Player *player)
 {
-int HEIGHT = 10;
-int WIDTH= 20;
+
 
 
 system("cls");
@@ -45,7 +53,7 @@ for (int i=0;i<HEIGHT;i++){
    
 for (int j=0;j<WIDTH;j++){
     
-    if (i==x && j==y){
+    if (i==player->x && j==player->y){
         printf("@");
     }
     else{
