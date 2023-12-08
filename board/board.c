@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "..\karakter_stvari\karakter.h"
 
 
 #define HEIGHT 10
@@ -24,6 +25,8 @@ typedef struct {
  void boardCreation(Player *player){
     // Karakter funkcija
     
+    Character karakter;
+    printf("%c",karakter.karakter);
 
 
 system ("cls");
