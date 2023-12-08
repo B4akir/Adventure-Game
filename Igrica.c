@@ -2,21 +2,22 @@
 #include <stdlib.h>
 #include "Board\board.c"
 #include "karakter_stvari\character_selection.c"
+#include "karakter_stvari\karakter.h"
 
 
 #define HEIGHT 10
 #define WIDTH 20
 
-
+//pocetak
+ void kreator(Character *karakter);
 
 //board
- void boardCreation(Player *player);
+ void boardCreation(Player *player, Character *karakter);
  void movement(Player *player);
  void initPlayer(Player *player);
 
 
-//pocetak
- void kreator(Character *karakter);
+
 
 
 
@@ -29,14 +30,13 @@ Character karakter;
  kreator(&karakter);
 
 
-printf("%c",karakter.karakter);
 
 Player player;
 initPlayer(&player);
 
 
 while (1){
-boardCreation(&player);
+boardCreation(&player,&karakter);
 movement(&player);
 }
 
