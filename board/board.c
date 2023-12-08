@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 #define HEIGHT 10
 #define WIDTH 20
 
@@ -10,16 +11,19 @@ typedef struct {
 
 }Player;
 
+
+// main
  void boardCreation(Player *player);
  void movement(Player *player);
  void initPlayer(Player *player);
+ 
 
 
 
 
- void boardCreation(Player *player)
-{
-
+ void boardCreation(Player *player){
+    // Karakter funkcija
+    
 
 
 system ("cls");
