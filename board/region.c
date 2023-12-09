@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "..\karakter_stvari\karakter.h"
+#include "world.h"
 
 
 #define HEIGHT 10
 #define WIDTH 20
-
 
 typedef struct {
     int x,y;
@@ -85,7 +85,7 @@ for (int j=0;j<WIDTH;j++){
         printf("%c",karakter->karakter);
     }
     else{
-        printf(".");
+        printf("1");
     }
 }
 printf("\n");

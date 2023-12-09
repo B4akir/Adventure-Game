@@ -1,0 +1,10 @@
+
+
+Moram promijeniti naicn ispisa svijeta. Napravio sam world.h matricu, u njoj cu cuvati sve podatke. Modificirati cu region matricu da umjesto ispisuje, salje podakte strukturi h.
+Onda struktura h ce se ispisati konstanto, time kada god primi podatke od bilo koje druge funckije .Struktura h ce prikazati tu promjenu u zavisnosti od toga sta trazim. 
+World.h planiram da bude globalni svijet igrice. Onda poslije cu definisiati opet regiju da mijenja varijable u zavisnosti od if petlji. Tako mogu napraviti regije, hodnjike i overall svijet.
+Da bude funkcionaln a ne samo iluzija prikaza.
+
+Dakle imat cu:
+- Initialization: kalkulise gdje su stvari
+-Rendering: ispisuje stvari u zavisnosti od inizijalizacije
