@@ -88,7 +88,8 @@ for (int j=0;j<WIDTH;j++){
         printf(".");
     }
 }
- printf("\n");
+printf("\n");
+ 
 }
 
 
