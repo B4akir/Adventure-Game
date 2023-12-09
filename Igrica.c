@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Board\board.c"
+#include "Board\region.c"
 #include "karakter_stvari\character_selection.c"
 #include "karakter_stvari\karakter.h"
 
