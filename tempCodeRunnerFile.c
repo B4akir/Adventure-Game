@@ -1,5 +1,49 @@
-#include "character.selection.c"
+#include <stdio.h>
+#include <stdlib.h>
+#include "Board\board.c"
+#include "karakter_stvari\character_selection.c"
+#include "karakter_stvari\karakter.h"
 
-// int onSelectedKlasa();
-// int selectClass();
-// char *selectName();
+
+#define HEIGHT 10
+#define WIDTH 20
+
+//pocetak
+ void kreator(Character *karakter);
+
+//board
+ void boardCreation(Player *player, Character *karakter);
+ void movement(Player *player);
+ void initPlayer(Player *player);
+
+
+
+
+
+
+int main (){
+
+
+//karakter dio
+
+Character karakter;
+ kreator(&karakter);
+
+
+
+Player player;
+initPlayer(&player,&karakter);
+
+
+while (1){
+boardCreation(&player);
+movement(&player);
+}
+
+return 0;
+
+}
+
+
+
+

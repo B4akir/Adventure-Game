@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "..\karakter_stvari\karakter.h"
 
 
 #define HEIGHT 10
@@ -12,43 +13,14 @@ typedef struct {
 }Player;
 
 
+
 // main
- void boardCreation(Player *player);
+ void boardCreation(Player *player, Character *karakter);
  void movement(Player *player);
  void initPlayer(Player *player);
  
 
 
-
-
- void boardCreation(Player *player){
-    // Karakter funkcija
-    
-
-
-system ("cls");
-
-for (int i=0;i<HEIGHT;i++){
-    
-   
-for (int j=0;j<WIDTH;j++){
-    
-    if (i==player->y && j==player->x){
-        printf("@");
-    }
-    else{
-        printf(".");
-    }
-}
- printf("\n");
-}
-
-
-
-
-
-
-}
 
 
 
@@ -69,6 +41,7 @@ char unos;
 printf("---> \n");
 scanf("%c",&unos);
 
+
 switch (unos){
     case 'w':
     player->y--;
@@ -86,3 +59,45 @@ case 'a':
 }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+ void boardCreation(Player *player,Character *karakter){
+    
+ system ("cls");
+
+for (int i=0;i<HEIGHT;i++){
+    
+   
+for (int j=0;j<WIDTH;j++){
+    
+    if (i==player->y && j==player->x){
+        printf("%c",karakter->karakter);
+    }
+    else{
+        printf(".");
+    }
+}
+ printf("\n");
+}
+
+
+
+
+
+
+}
+
+
+
+
