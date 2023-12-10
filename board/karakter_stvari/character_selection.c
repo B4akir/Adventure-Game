@@ -1,4 +1,4 @@
-#include "karakter.h"
+#include "..\shared\karakter.h"
 #include <stdio.h>
 
 void kreator(Character *karakter) {

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "..\karakter_stvari\karakter.h"
-#include "big-m.h"
+#include ".\shared\karakter.h"
+#include ".\shared\big-m.h"
 
 
 #define HEIGHT 10

@@ -8,8 +8,9 @@ typedef struct {
 }Player;
 
 
-void initPlayer(Player *player);
+
 void movement(Player *player);
+void initalPosition(Player *player);
 
 
 #endif // PLAYER_H

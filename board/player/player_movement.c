@@ -1,13 +1,6 @@
 #include <stdio.h>
-#include "player.h"
+#include "..\shared\player.h"
 
-void initPlayer(Player *player){ // pocetna pozicija playera
-
-player->y= HEIGHT/2;
-player->x= WIDTH/2;
-
-
-}; 
 
 
 void movement(Player *player){ // player movement
