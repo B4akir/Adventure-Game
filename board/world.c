@@ -4,21 +4,21 @@
 
 
 
-void initializeMatrix(Matrix *matrix){
+void initWorld(World *world){
 
 
-for (int i=0;i<10;i++){
-  for (int j=0;j<20;j++){
+for (int i=0;i<100;i++){
+  for (int j=0;j<100;j++){
 
 if (i==5 && j==5){
 
-matrix->data[i][j]='w';
+world->data[i][j]='w';
 
 }
 
 else{
 
-  matrix->data[i][j]='.';
+  world->data[i][j]='.';
 }
 
 
@@ -27,10 +27,10 @@ else{
 }
 
 
-for (int i=0; i<10; i++){
-  for (int j=0; j<20; j++){
+for (int i=0; i<100; i++){
+  for (int j=0; j<100; j++){
 
-    printf("%c",matrix->data[i][j]);
+    printf("%c",world->data[i][j]);
   }
   printf("\n");
 }
@@ -45,9 +45,9 @@ for (int i=0; i<10; i++){
 
 int main (){
 
-Matrix matrix;
+World world;
 
-initializeMatrix(&matrix);
+initWorld(&world);
 
 
 
