@@ -1,111 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "..\karakter_stvari\karakter.h"
-#include "world.h"
+#include "big-m.h"
 
 
 #define HEIGHT 10
 #define WIDTH 20
 
-typedef struct {
-    int x,y;
 
-}Player;
 
 
 
 // main
- void boardCreation(Player *player, Character *karakter);
- void movement(Player *player);
- void initPlayer(Player *player);
- 
+ void regionInit(World *world);
 
 
 
-
-
-
-void initPlayer(Player *player){
-
-player->y= HEIGHT/2;
-player->x= WIDTH/2;
-
-
-}; 
-
-
-void movement(Player *player){
-
-char unos;
-
-printf("---> \n");
-scanf("%c",&unos);
-
-
-switch (unos){
-    case 'w':
-    player->y--;
-    break;
-case 's':
-    player->y++;
-    break;
-case 'd':
-    player->x++;
-    break;
-case 'a':
-    player->x--;
-    break;
-
-}
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
- void boardCreation(Player *player,Character *karakter){
+ void regionInit( World *world){
     
 
-char matrica[HEIGHT][WIDTH];
-
-
- system ("cls");
-
-for (int i=0;i<HEIGHT;i++){
+for (int i=0;i<20;i++){
     
    
-for (int j=0;j<WIDTH;j++){
+for (int j=0;j<10;j++){
     
-    if (i==player->y && j==player->x){
-        matrica[i][j]=karakter->karakter;
-    }
-    else{
-        matrica[i][j]='.';
-    }
+if ( i<4 &&  j<4){
+
+    world->data[i][j]='0';
 }
-printf("\n");
+
+
+
+
+
+
+   
+}
+
  
 }
 
 
-for (int i=0;i<HEIGHT;i++){
-    
-for (int j=0;j<WIDTH;j++){
-    
-   printf("%c",matrica[i][j]);
-}
-printf("\n");
- 
-}
+
 
 
 

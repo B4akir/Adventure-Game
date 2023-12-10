@@ -1,46 +1,40 @@
 #include <stdio.h>
 #include "big-m.h"
+#include "region.c"
 
-
-
+void regionInit(World *world);
 
 void initWorld(World *world){
 
 
-for (int i=0;i<100;i++){
-  for (int j=0;j<100;j++){
+  for (int i=0;i<100;i++){
+    for (int j=0;j<100;j++){
 
-if (i==5 && j==5){
-
-world->data[i][j]='w';
-
-}
-
-else{
-
-  world->data[i][j]='.';
-}
+    world->data[i][j]=' ';
 
 
-
+    }
   }
 }
 
 
-for (int i=0; i<100; i++){
-  for (int j=0; j<100; j++){
+void ispis(World *world){
+
+
+  for (int i=0;i<100;i++){
+    for (int j=0;j<100;j++){
 
     printf("%c",world->data[i][j]);
+
+
+    }
+
+    printf("\n");
   }
-  printf("\n");
 }
 
 
 
-
-
-
-}
 
 
 int main (){
@@ -48,6 +42,8 @@ int main (){
 World world;
 
 initWorld(&world);
+regionInit(&world);
+ispis (&world);
 
 
 
