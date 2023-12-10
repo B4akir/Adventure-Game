@@ -4,12 +4,12 @@
 #define MATRIX_H
 
 // Define matrix dimensions
-#define ROWS 3
-#define COLS 3
+#define HEIGHT 10
+#define WIDTH 20
 
 // Define the matrix structure
 typedef struct {
-    int data[ROWS][COLS];
+    char data[HEIGHT][WIDTH];
 } Matrix;
 
 // Function to initialize the global matrix

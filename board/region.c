@@ -31,7 +31,7 @@ player->y= HEIGHT/2;
 player->x= WIDTH/2;
 
 
-};
+}; 
 
 
 void movement(Player *player){
@@ -74,6 +74,10 @@ case 'a':
 
  void boardCreation(Player *player,Character *karakter){
     
+
+char matrica[HEIGHT][WIDTH];
+
+
  system ("cls");
 
 for (int i=0;i<HEIGHT;i++){
@@ -82,11 +86,22 @@ for (int i=0;i<HEIGHT;i++){
 for (int j=0;j<WIDTH;j++){
     
     if (i==player->y && j==player->x){
-        printf("%c",karakter->karakter);
+        matrica[i][j]=karakter->karakter;
     }
     else{
-        printf("1");
+        matrica[i][j]='.';
     }
+}
+printf("\n");
+ 
+}
+
+
+for (int i=0;i<HEIGHT;i++){
+    
+for (int j=0;j<WIDTH;j++){
+    
+   printf("%c",matrica[i][j]);
 }
 printf("\n");
  
@@ -98,6 +113,7 @@ printf("\n");
 
 
 }
+
 
 
 

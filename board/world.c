@@ -1,45 +1,55 @@
 #include <stdio.h>
-#include "region.c"
-#include <stdlib.h>
-#include "..\karakter_stvari\character_selection.c"
-#include "..\karakter_stvari\karakter.h"
-
-
-#define wHEIGHT 12
-#define wWIDTH 8
+#include "big-m.h"
 
 
 
 
- int main(){
-    
-Character karakter;
- kreator(&karakter);
+void initializeMatrix(Matrix *matrix){
 
 
+for (int i=0;i<10;i++){
+  for (int j=0;j<20;j++){
 
-Player player;
-initPlayer(&player);
+if (i==5 && j==5){
 
+matrix->data[i][j]='w';
 
-
- system ("cls");
-
-for (int i=0;i<wHEIGHT;i++){
-    
-   
-for (int j=0;j<wWIDTH;j++){
-     
-     if (i<6 && j>4){
-        boardCreation(&player,&karakter);
-     }
-     
-     
-     else{printf("0");}   
-    }
-    printf("\n");
 }
 
- 
+else{
+
+  matrix->data[i][j]='.';
 }
- 
+
+
+
+  }
+}
+
+
+for (int i=0; i<10; i++){
+  for (int j=0; j<20; j++){
+
+    printf("%c",matrix->data[i][j]);
+  }
+  printf("\n");
+}
+
+
+
+
+
+
+}
+
+
+int main (){
+
+Matrix matrix;
+
+initializeMatrix(&matrix);
+
+
+
+
+}
