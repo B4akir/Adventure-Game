@@ -50,20 +50,21 @@ initalPosition(&player);
 initWorld(&world);
 regionInit(&world);
 
-while (1){
-
-
-
-
-
-initPlayer(&player,&world, &karakter);
-
-ispis (&world);
-movement(&player);
-
-
+while (1) {
+    initWorld(&world); // Reset the board
+    regionInit(&world);
+    movement(&player);
+    initPlayer(&player, &world, &karakter);
+    ispis(&world);
 }
 
+
+
+/* Problemi:
+Board se ne resetuje;
+Player uvijek ostaje na istoj poziciji; Ostavlja trag iza sebe
+Na pocetku pokazuje duplikat
+*/
 
 
 
