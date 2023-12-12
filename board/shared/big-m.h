@@ -4,7 +4,7 @@
 #define MATRIX_H
 #include "player.h"
 #include "karakter.h"
-
+#include "region.h"
 // Define matrix dimensions
 
 
@@ -16,6 +16,6 @@ typedef struct {
 // Function to initialize the global matrix
 void initWorld(World *world);
 void initPlayer(Player *player, World *world, Character *karakter);
-void regionInit(World *world);
+void regionIntoWorld(Region *region, World *world)
 
 #endif // MATRIX_H

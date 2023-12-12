@@ -6,10 +6,13 @@
 #include ".\player\init_player.c"
 #include ".\shared\player.h"
 #include ".\karakter_stvari\character_selection.c"
-void regionInit(World *world);
+#include ".\shared\region.h"
+
+
+void regionIntoWorld( Region *region, World *world);
 void initWorld(World *world);
 void kreator(Character *karakter);
-
+void regionInit(*Region region);
 
 
 void initPlayer(Player *player, World *world, Character *karakter);
@@ -43,16 +46,16 @@ int main (){
 World world;
 Player player;
 Character karakter;
-
+Region region;
 
 kreator(&karakter);
 initalPosition(&player);
 initWorld(&world);
-regionInit(&world);
+regionInit(&region);
 
 while (1) {
     initWorld(&world); // Reset the board
-    regionInit(&world);
+    regionIntoWorld(&region,&world);
     movement(&player);
     initPlayer(&player, &world, &karakter);
     ispis(&world);
@@ -60,11 +63,7 @@ while (1) {
 
 
 
-/* Problemi:
-Board se ne resetuje;
-Player uvijek ostaje na istoj poziciji; Ostavlja trag iza sebe
-Na pocetku pokazuje duplikat
-*/
+
 
 
 
