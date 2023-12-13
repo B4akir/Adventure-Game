@@ -74,11 +74,14 @@ void regionIntoWorld(Region *region, World *world) {
 }
 
 void initializeRegions(World *world) {
-    Region regions[3];
+    Region regions[5];
 
-    regionInit(&regions[0]/*index*/, 10/*x*/, 0/*y*/, 10,/*width*/ 6, /*height*/'O' /*karakter*/);
-    regionInit(&regions[1], 5, 15, 5, 8, 'X');
-    regionInit(&regions[2], 20, 5, 5, 10, '*');
+    regionInit(&regions[0]/*index*/, 0/*y*/, 0/*x*/, 7,/*height*/ 10, /*width*/'.' /*karakter*/);
+    regionInit(&regions[1], 1, 15, 3, 12, '.');
+    regionInit(&regions[2], 12, 1, 10, 10, '.');
+    regionInit(&regions[3], 20, 5, 5, 10, '*');
+    regionInit(&regions[4], 20, 5, 5, 10, '*');
+
 
     for (int i = 0; i < 3; i++) {
         regionIntoWorld(&regions[i], world);
@@ -111,6 +114,9 @@ int main() {
    
 
     ispis(&world);
+
+int x;
+    scanf("%d",x);
    
 
 

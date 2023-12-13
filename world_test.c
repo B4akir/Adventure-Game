@@ -12,7 +12,7 @@ typedef struct {
 
 
 typedef struct {
-    char data[30][30];
+    char data[30][20];
 } World;
 
 
@@ -28,7 +28,7 @@ typedef struct {
 
 void initWorld(World *world) {
     for (int i = 0; i < 30; i++) {
-        for (int j = 0; j < 30; j++) {
+        for (int j = 0; j < 20; j++) {
             
           
          world->data[i][j] = ' ';
@@ -43,7 +43,7 @@ void initWorld(World *world) {
 void ispis(World *world) {
     system("cls");
     for (int i = 0; i < 30; i++) {
-        for (int j = 0; j < 30; j++) {
+        for (int j = 0; j < 20; j++) {
             printf("%c", world->data[i][j]);
         }
         printf("\n");
@@ -113,7 +113,7 @@ void initPlayer(Player *player, World *world, Character *karakter) {
 
 void regionIntoWorld(Region *region, World *world) {
     for (int i = 0; i < 30; i++) {
-        for (int j = 0; j < 30; j++) {
+        for (int j = 0; j < 20; j++) {
             if ((i >= region->startY && i <= region->startY + region->height) &&
                 (j >= region->startX && j <= region->startX + region->width)) {
                 // Check if on the edge
@@ -129,11 +129,14 @@ void regionIntoWorld(Region *region, World *world) {
 }
 
 void initializeRegions(World *world) {
-    Region regions[3];
+    Region regions[5];
 
-    regionInit(&regions[0]/*index*/, 10/*x*/, 0/*y*/, 10,/*width*/ 6, /*height*/'.' /*karakter*/);
-    regionInit(&regions[1], 5, 15, 5, 8, '.');
-    regionInit(&regions[2], 20, 5, 5, 10, '.');
+    regionInit(&regions[0]/*index*/, 0/*y*/, 0/*x*/, 7,/*height*/ 10, /*width*/'.' /*karakter*/);
+    regionInit(&regions[1], 1, 15, 3, 12, '.');
+    regionInit(&regions[2], 12, 1, 10, 10, '.');
+    regionInit(&regions[3], 20, 5, 5, 10, '*');
+    regionInit(&regions[4], 20, 5, 5, 10, '*');
+
 
     for (int i = 0; i < 3; i++) {
         regionIntoWorld(&regions[i], world);
