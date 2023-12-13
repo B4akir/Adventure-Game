@@ -6,22 +6,37 @@ typedef struct {
 } World;
 
 typedef struct {
-    int startX, startY;
+    int startX, startY; // Switched startX and startY
     int width, height;
     char fillCharacter;
     int regionSize;
 } Region;
 
-void regionInit(Region *region) {
-    region->startX = 3;
-    region->startY = 10;
-    region->width = 6;
-    region->height = 10;
-    region->fillCharacter = 'O';
-
-    printf("Region x: %d, Region y: %d, Region width: %d, Region height: %d, Region char: %c\n",
-           region->startX, region->startY, region->width, region->height, region->fillCharacter);
+void regionInit(Region *region, int startY, int startX, int height, int width, char fillCharacter) {
+    region->startY = startY;
+    region->startX = startX;
+    region->height = height;
+    region->width = width;
+    region->fillCharacter = fillCharacter;
 }
+
+
+
+typedef struct {
+    int x,y;
+
+}Player;
+
+typedef struct {
+    char karakter;
+    char ime[20];
+} Character;
+
+
+
+
+
+
 
 void initWorld(World *world) {
     for (int i = 0; i < 30; i++) {
@@ -31,9 +46,9 @@ void initWorld(World *world) {
     }
 }
 
-void ispis(World *world, Region *region) {
+void ispis(World *world) {
     system("cls");
-    for (int i = 0; i <30;  i++) {
+    for (int i = 0; i < 30; i++) {
         for (int j = 0; j < 30; j++) {
             printf("%c", world->data[i][j]);
         }
@@ -44,24 +59,61 @@ void ispis(World *world, Region *region) {
 void regionIntoWorld(Region *region, World *world) {
     for (int i = 0; i < 30; i++) {
         for (int j = 0; j < 30; j++) {
-            if ((i >= region->startX && i <= region->startX + region->height) &&
-                (j >= region->startY && j <= region->startY + region->width)) {
-                world->data[i][j] = region->fillCharacter;
+            if ((i >= region->startY && i <= region->startY + region->height) &&
+                (j >= region->startX && j <= region->startX + region->width)) {
+                // Check if on the edge
+                if (i == region->startY || i == region->startY + region->height ||
+                    j == region->startX || j == region->startX + region->width) {
+                    world->data[i][j] = '#';
+                } else {
+                    world->data[i][j] = region->fillCharacter;
+                }
             }
         }
     }
 }
 
+void initializeRegions(World *world) {
+    Region regions[3];
+
+    regionInit(&regions[0]/*index*/, 10/*x*/, 0/*y*/, 10,/*width*/ 6, /*height*/'O' /*karakter*/);
+    regionInit(&regions[1], 5, 15, 5, 8, 'X');
+    regionInit(&regions[2], 20, 5, 5, 10, '*');
+
+    for (int i = 0; i < 3; i++) {
+        regionIntoWorld(&regions[i], world);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 int main() {
-    Region region;
     World world;
+    Region region;
+    Character karakter;
+
+
 
     initWorld(&world);
-    regionInit(&region);
-    
-    regionIntoWorld(&region, &world);
-    ispis(&world, &region);
+    initializeRegions(&world);
+   
+
+    ispis(&world);
+   
+
+
 
     return 0;
 }
