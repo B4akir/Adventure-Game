@@ -87,8 +87,8 @@ void regionIntoWorld(Region *region, World *world) {
 
  
 
-void doorL(Region *region, World *world){
-    Region *region0 = &regions[0];
+void doorL(Region *region, World *world,int index){
+    Region *region0 = &regions[index];
 
     int y = region0->startY;
     int x = region0->startX;
@@ -148,7 +148,7 @@ void doorB(Region *region, World *world){
 
 void initializeRegions(World *world) {
     regionInit(&regions[0], /* y*/1,   /* x*/ 0, /* height*/ 7,  /* width*/  10, '.');
-    regionInit(&regions[1], 1, 30, 4, 12, '1');
+    regionInit(&regions[1], 1, 30, 5, 12, '1');
     regionInit(&regions[2], 12, 1, 5, 15, '2');
     regionInit(&regions[3], 25, 5, 5, 10, '3');
     regionInit(&regions[4], 10, 30, 5, 10, '4');
@@ -185,9 +185,9 @@ int main() {
     initWorld(&world);
     initializeRegions(&world);
    
-   doorL(&region, &world);
+   doorL(&region, &world,1);
     ispis(&world);
- 
+ doorL(&region, &world,1);
 int x;
     scanf("%d",x);
    
