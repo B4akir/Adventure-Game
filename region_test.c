@@ -33,7 +33,7 @@ typedef struct {
 } Character;
 
 
-
+   Region regions[6];
 
 
 
@@ -83,27 +83,71 @@ void regionIntoWorld(Region *region, World *world) {
 
 
 
-void doors(Region *region, World *world){
-    // Calculate the middle points of each wall
-    int midX = region->startX + region->width / 2;
-    int midY = region->startY + region->height / 2;
 
-    // Add a door at the middle point of each wall
-    if (region->startX > 0) // left wall
-        world->data[midY][region->startX] = '#'; // Changed this line
-    if (region->startY > 0) // top wall
-        world->data[region->startY][midX] = '#'; // Changed this line
-    if (region->startX + region->width < 50) // right wall
-        world->data[midY][region->startX + region->width] = '#';
-    if (region->startY + region->height < 50) // bottom wall
-        world->data[region->startY + region->height][midX] = '#';
+
+ 
+
+void doorL(Region *region, World *world){
+    Region *region0 = &regions[0];
+
+    int y = region0->startY;
+    int x = region0->startX;
+    int height = region0->height;
+    int width = region0->width;
+    char character = region0->fillCharacter;
+
+    printf("y: %d\n", y);
+    printf("x: %d\n", x);
+    printf("height: %d\n", height);
+    printf("width: %d\n", width);
+    printf("character: %c\n", character);
+
+
+int i=(y+height)/2;
+
+
+world->data[i][x] = '#';
+
+printf("i: %d\n", i);
+
+
+}
+
+    // Now you can use x, y, width, height, and character
+
+
+
+
+
+
+
+void doorR(Region *region, World *world){
+
+
+
+
+
+}
+
+void doorT(Region *region, World *world){
+
+
+
+
+
+}
+
+void doorB(Region *region, World *world){
+
+
+
+
+
 }
 
 
 void initializeRegions(World *world) {
-    Region regions[6];
-
-    regionInit(&regions[0], 0, 0, 7, 10, '.');
+    regionInit(&regions[0], /* y*/1,   /* x*/ 0, /* height*/ 7,  /* width*/  10, '.');
     regionInit(&regions[1], 1, 30, 4, 12, '1');
     regionInit(&regions[2], 12, 1, 5, 15, '2');
     regionInit(&regions[3], 25, 5, 5, 10, '3');
@@ -112,7 +156,6 @@ void initializeRegions(World *world) {
 
     for (int i = 0; i < 6; i++) {
         regionIntoWorld(&regions[i], world);
-        doors(&regions[i], world);  // Call the doors function for each region
     }
 }
 
@@ -136,15 +179,15 @@ int main() {
     World world;
     Region region;
     Character karakter;
-
+  
 
 
     initWorld(&world);
     initializeRegions(&world);
    
-
+   doorL(&region, &world);
     ispis(&world);
-
+ 
 int x;
     scanf("%d",x);
    
