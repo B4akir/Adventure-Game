@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+#define HEIGHT 40
+#define WIDTH 40
+
 typedef struct {
     int x,y;
 
@@ -12,7 +15,7 @@ typedef struct {
 
 
 typedef struct {
-    char data[30][20];
+    char data[HEIGHT][WIDTH];
 } World;
 
 
@@ -24,11 +27,15 @@ typedef struct {
 } Region;
 
 
+
+
+
+
 //world
 
 void initWorld(World *world) {
-    for (int i = 0; i < 30; i++) {
-        for (int j = 0; j < 20; j++) {
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
             
           
          world->data[i][j] = ' ';
@@ -42,8 +49,8 @@ void initWorld(World *world) {
 
 void ispis(World *world) {
     system("cls");
-    for (int i = 0; i < 30; i++) {
-        for (int j = 0; j < 20; j++) {
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
             printf("%c", world->data[i][j]);
         }
         printf("\n");
@@ -112,8 +119,8 @@ void initPlayer(Player *player, World *world, Character *karakter) {
 //regions
 
 void regionIntoWorld(Region *region, World *world) {
-    for (int i = 0; i < 30; i++) {
-        for (int j = 0; j < 20; j++) {
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
             if ((i >= region->startY && i <= region->startY + region->height) &&
                 (j >= region->startX && j <= region->startX + region->width)) {
                 // Check if on the edge
@@ -138,7 +145,7 @@ void initializeRegions(World *world) {
     regionInit(&regions[4], 20, 5, 5, 10, '*');
 
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 5; i++) {
         regionIntoWorld(&regions[i], world);
     }
 }
@@ -194,3 +201,17 @@ ispis(&world);
 
 
 }
+
+/*
+
+Todo list:
+
+- Make hodjiks
+- Restrict player movement to hodnjiks and regions
+- Make appearing regions and hodnjiks
+- Make doorways
+
+
+
+
+*/
