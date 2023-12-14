@@ -13,7 +13,6 @@ typedef struct {
     char ime[20];
 } Character;
 
-
 typedef struct {
     char data[HEIGHT][WIDTH];
 } World;
@@ -136,16 +135,14 @@ void regionIntoWorld(Region *region, World *world) {
 }
 
 void initializeRegions(World *world) {
-    Region regions[5];
+    Region regions[3];
 
     regionInit(&regions[0]/*index*/, 0/*y*/, 0/*x*/, 7,/*height*/ 10, /*width*/'.' /*karakter*/);
     regionInit(&regions[1], 1, 15, 3, 12, '.');
-    regionInit(&regions[2], 12, 1, 10, 10, '.');
-    regionInit(&regions[3], 20, 5, 5, 10, '*');
-    regionInit(&regions[4], 20, 5, 5, 10, '*');
+    regionInit(&regions[2], 12, 20, 10, 10, '.');
+ 
 
-
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
         regionIntoWorld(&regions[i], world);
     }
 }
@@ -202,16 +199,3 @@ ispis(&world);
 
 }
 
-/*
-
-Todo list:
-
-- Make hodjiks
-- Restrict player movement to hodnjiks and regions
-- Make appearing regions and hodnjiks
-- Make doorways
-
-
-
-
-*/
