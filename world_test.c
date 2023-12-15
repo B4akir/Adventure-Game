@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <Windows.h>
-
+#include <conio.h>
 
 #define HODNJIK 176
 #define VRATA 15
@@ -81,8 +81,8 @@ void ispis(World *world) {
 //player
 void initalPosition(Player *player){ // pocetna pozicija playera
 
-player->y= 0;
-player->x= 0;
+player->y= 29;
+player->x= 66;
 
 
 }; 
@@ -436,14 +436,17 @@ Region region;
 
 kreator(&karakter);
 initalPosition(&player);
-
-while(1){
-
-  
 initWorld(&world);
 initializeRegions(&world);
 initializeDoors(&world, &region);
 hodnjikInit(&world);
+
+while(1){
+
+  
+
+
+
 
 movement(&player);
 initPlayer(&player,&world,&karakter);

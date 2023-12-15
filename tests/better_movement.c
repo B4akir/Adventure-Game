@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <Windows.h>
+#include <conio.h>
 
-
-#define HODNJIK 34
+#define HODNJIK 176
 #define VRATA 15
 #define ZID 186
 #define PLAFON 205
@@ -16,31 +16,8 @@
 
 
 
-#define HEIGHT 40
+#define HEIGHT 22
 #define WIDTH 134
-
-
-typedef struct {
-    char data[HEIGHT][WIDTH];
-} World;
-
-typedef struct {
-    int startX, startY; // Switched startX and startY
-    int width, height;
-    char fillCharacter;
-    int regionSize;
-} Region;
-
-void regionInit(Region *region, int startY, int startX, int height, int width, char fillCharacter) {
-    region->startY = startY;
-    region->startX = startX;
-    region->height = height;
-    region->width = width;
-    region->fillCharacter = fillCharacter;
-}
-
-
-
 
 
 
@@ -52,43 +29,41 @@ typedef struct {
 
 typedef struct {
     char karakter;
-    char ime[30];
+    char ime[20];
 } Character;
 
+typedef struct {
+    char data[HEIGHT][WIDTH];
+} World;
 
 
-
-
+typedef struct {
+    int startX, startY; // Switched startX and startY
+    int width, height;
+    char fillCharacter;
+    int regionSize;
+} Region;
 
 
    Region regions[8];
 
 
 
+//world
+
 void initWorld(World *world) {
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
-
-            if (i==HEIGHT-1 && j==WIDTH-1){
-                world->data[i][j] = 'X';
-            }
-
-            else if (i==0 && j==0){
-                world->data[i][j] = 'X';
-            }
-           else  if (i==0 && j==WIDTH-1){
-                world->data[i][j] = 'X';
-            }
-           else  if (i==HEIGHT-1 && j==0){
-                world->data[i][j] = 'X';
-            }
-            else{
-                world->data[i][j] = ' ';
-            }
-       
+            
+          
+         world->data[i][j] = ' ';
         }
     }
 }
+
+
+
+
 
 void ispis(World *world) {
     system("cls");
@@ -99,6 +74,67 @@ void ispis(World *world) {
         printf("\n");
     }
 }
+
+
+
+
+//player
+void initalPosition(Player *player){ // pocetna pozicija playera
+
+player->y= 0;
+player->x= 0;
+
+
+}; 
+
+void movement(Player *player){ // player movement
+
+char unos;
+
+printf("Pomjeri se: \n");
+scanf("%c",&unos);
+
+
+switch (unos){
+    case 'w':
+    player->y--;
+    break;
+case 's':
+    player->y++;
+    break;
+case 'd':
+    player->x++;
+    break;
+case 'a':
+    player->x--;
+    break;
+
+}
+
+}
+
+
+void kreator(Character *karakter) {
+    printf("Unesite vase ime:\n");
+    scanf("%19s", karakter->ime);
+
+    // Clear the input buffer to prevent issues with the following character input
+    while (getchar() != '\n');
+
+    printf("Kako zelite izgledati? \nUnesite bilo koji ASCII karakter:\n");
+    scanf(" %c", &karakter->karakter);
+}
+
+void initPlayer(Player *player, World *world, Character *karakter) {
+  
+
+
+    world->data[player->y][player->x] = karakter->karakter;
+}
+
+
+
+//regions
 
 void regionIntoWorld(Region *region, World *world) {
     for (int i = 0; i < HEIGHT; i++) {
@@ -137,12 +173,38 @@ void regionIntoWorld(Region *region, World *world) {
     }
 }
 
+void initializeRegions(World *world) {
+    regionInit(&regions[0], /* y*/8,   /* x*/ 60, /* height*/ 7,  /* width*/  21, '.');
+     regionInit(&regions[1], 8, 89, 5, 12, '1');
+     regionInit(&regions[2], 0, 90, 4, 20, '2');
+     regionInit(&regions[3], 0, 50, 4, 25, '3');
+     regionInit(&regions[4], 0, 17, 4, 8, '4');
+     regionInit(&regions[5], 2, 8, 5, 15, '5');
+     regionInit(&regions[6], 10, 12, 5, 5, '6');
+   
+
+    for (int i = 0; i < 7; i++) {
+        regionIntoWorld(&regions[i], world);
+    }
+}
+
+
+
+void regionInit(Region *region, int startY, int startX, int height, int width, char fillCharacter) {
+    region->startY = startY;
+    region->startX = startX;
+    region->height = height;
+    region->width = width;
+    region->fillCharacter = fillCharacter;
+}
 
 
 
 
- 
 
+
+
+//doors i hodnjiks
 void doorL(Region *region, World *world,int index){
     Region *region0 = &regions[index];
 
@@ -222,35 +284,12 @@ void doorB(Region *region, World *world, int index){
 
 }
 
-
-//  #define HEIGHT 40
-// #define WIDTH 134
-
-
-
-
-void initializeRegions(World *world) {
-    regionInit(&regions[0], /* y*/30,   /* x*/ 60, /* height*/ 7,  /* width*/  21, '.');
-     regionInit(&regions[1], 30, 89, 5, 12, '1');
-     regionInit(&regions[2], 22, 90, 4, 20, '2');
-     regionInit(&regions[3], 22, 50, 4, 25, '3');
-     regionInit(&regions[4], 18, 17, 4, 8, '4');
-     regionInit(&regions[5], 25, 8, 5, 15, '5');
-     regionInit(&regions[6], 33, 12, 5, 5, '6');
-   
-
-    for (int i = 0; i < 7; i++) {
-        regionIntoWorld(&regions[i], world);
-    }
-}
-
-
 void initializeDoors(World *world, Region *region) {
     
     
     //regija 0
     doorR(region, world, 0);
-    doorL(region, world, 0);
+  
 
 
 // regija 1
@@ -264,7 +303,6 @@ void initializeDoors(World *world, Region *region) {
 
 //regija 3
 doorR(region, world, 3);
-doorT(region, world, 3);
 doorL(region, world, 3);
 
 
@@ -331,14 +369,90 @@ for (int i=0; i<HEIGHT; i++){
 }
 
 
-
-
 hodnjikInit(World *world){
-    // hodnjikH(11,4,17,world);
-    // hodnjikH(11+16,3,2,world);
 
-    // hodnjikV(36,7,2,world);
-    
+//x,y,z
+  //4 
+  hodnjikH(26,20,17,world);
+  hodnjikV(21,23,1,world);
+
+
+
+//5
+hodnjikH(15,24,5,world);
+hodnjikV(15,31,1,world);
+
+//6
+hodnjikH(14,32,1,world);
+
+
+//3
+hodnjikV(26+17,20,4,world);
+hodnjikH(43,24,6,world);
+
+
+//2
+hodnjikH(76,24,13,world);
+
+
+//1
+hodnjikV(95,28,1,world);
+hodnjikH(95,28,5,world);
+hodnjikV(95+5,27,1,world);
+
+
+//0
+hodnjikH(82,33,5,world);
+hodnjikV(82+6,32,1,world);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+int main (){
+
+World world;
+Character karakter;
+Player player;
+Region region;
+
+
+//region    
+//
+
+
+///
+
+
+
+
+kreator(&karakter);
+initalPosition(&player);
+initWorld(&world);
+initializeRegions(&world);
+initializeDoors(&world, &region);
+hodnjikInit(&world);
+
+while(1){
+
+  
+
+
+
+
+movement(&player);
+initPlayer(&player,&world,&karakter);
+
+ispis(&world);
+
 
 
 
@@ -349,30 +463,6 @@ hodnjikInit(World *world){
 
 
 
-int main() {
-    World world;
-    Region region;
-    Character karakter;
 
-
-
-    initWorld(&world);
-    initializeRegions(&world);
-    initializeDoors(&world, &region);
-    hodnjikInit(&world);
-
- 
-
-    ispis(&world);
-int x;
-
-
-
-
-    scanf("%d",&x);
-   
-
-
-
-    return 0;
 }
+
