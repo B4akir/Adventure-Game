@@ -1,0 +1,11 @@
+
+
+1. Resize the whole world for better rendering: branch Resize
+2. Improve/ add player movement restriction so player can only move on regions and hodnji: branch player_restriction
+
+Future:
+
+- Enemies
+- Hp
+- Items
+- Pickups
