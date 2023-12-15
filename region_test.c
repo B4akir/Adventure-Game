@@ -56,6 +56,15 @@ typedef struct {
 } Character;
 
 
+typedef struct{
+
+int x,y;
+int index;
+}VrataK
+
+
+
+
    Region regions[8];
 
 
@@ -226,26 +235,57 @@ void doorB(Region *region, World *world, int index){
 
 void initializeRegions(World *world) {
     regionInit(&regions[0], /* y*/30,   /* x*/ 60, /* height*/ 7,  /* width*/  21, '.');
-    // regionInit(&regions[1], 1, 30, 5, 12, '1');
-    // regionInit(&regions[2], 12, 1, 5, 15, '2');
-    // regionInit(&regions[3], 25, 5, 5, 10, '3');
-    // regionInit(&regions[4], 10, 30, 5, 10, '4');
-    // regionInit(&regions[5], 25, 30, 5, 5, '5');
-    // regionInit(&regions[6], 25, 30, 5, 5, '5');
-    // regionInit(&regions[7], 25, 30, 5, 5, '5');
+     regionInit(&regions[1], 30, 89, 5, 12, '1');
+     regionInit(&regions[2], 22, 90, 4, 20, '2');
+     regionInit(&regions[3], 22, 50, 4, 25, '3');
+     regionInit(&regions[4], 18, 17, 4, 8, '4');
+     regionInit(&regions[5], 25, 8, 5, 15, '5');
+     regionInit(&regions[6], 33, 12, 5, 5, '6');
    
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 7; i++) {
         regionIntoWorld(&regions[i], world);
     }
 }
 
 
 void initializeDoors(World *world, Region *region) {
+    
+    
+    //regija 0
     doorR(region, world, 0);
     doorL(region, world, 0);
 
-    
+
+// regija 1
+    doorL(region, world, 1);
+    doorT(region, world, 1);
+
+//regija 2
+    doorB(region, world, 2);
+    doorL(region, world, 2);
+
+
+//regija 3
+doorR(region, world, 3);
+doorT(region, world, 3);
+doorL(region, world, 3);
+
+
+
+//regija 4
+    doorR(region, world, 4);
+    doorB(region, world, 4);
+
+
+//regija 5
+doorT(region, world, 5);
+doorB(region, world, 5);
+
+
+//regia 6
+doorT(region, world, 6);
+
 
 }
 
