@@ -371,18 +371,6 @@ hodnjikV(82+6,32,1,world);
 
 
 
-vrata(World *world){
-
-
-    for (int i=0; i<HEIGHT; i++){
-        for (int j=0; j<WIDTH; j++){
-            if (world->data[i][j]==VRATA){
-                printf("i: %d   j: %d \n", i, j);
-            }
-        }
-    }
-}
-
 
 
 
@@ -403,7 +391,7 @@ int main() {
  
 
     ispis(&world);
-    vrata(&world);
+   
 int x;
 
 
