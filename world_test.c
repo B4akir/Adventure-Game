@@ -16,16 +16,22 @@
 
 
 
-#define HEIGHT 40
-#define WIDTH 134
+#define HEIGHT 18
+#define WIDTH 80
 
 
 
 
 typedef struct {
     int x,y;
+    char prevCell;
 
 }Player;
+
+
+typedef struct {
+    char oldChar;
+}oldChar;
 
 typedef struct {
     char karakter;
@@ -37,6 +43,8 @@ typedef struct {
 } World;
 
 
+
+// krene od tacke x i y te se siri prema desno. 
 typedef struct {
     int startX, startY; // Switched startX and startY
     int width, height;
@@ -44,13 +52,12 @@ typedef struct {
     int regionSize;
 } Region;
 
-
+// array regija
    Region regions[8];
 
 
 
-//world
-
+// definise prazna polja
 void initWorld(World *world) {
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
@@ -64,7 +71,7 @@ void initWorld(World *world) {
 
 
 
-
+// ispisuje finalnu matricu
 void ispis(World *world) {
     system("cls");
     for (int i = 0; i < HEIGHT; i++) {
@@ -78,94 +85,153 @@ void ispis(World *world) {
 
 
 
-//player
+
 void initalPosition(Player *player){ // pocetna pozicija playera
 
-player->y= 29;
-player->x= 66;
+player->y= 4;
+player->x= 7;
 
 
 }; 
 
-void movement(Player *player){ // player movement
-
-char unos;
-
-printf("Pomjeri se: \n");
-scanf("%c",&unos);
 
 
-switch (unos){
-    case 'w':
-    player->y--;
-    break;
-case 's':
-    player->y++;
-    break;
-case 'd':
-    player->x++;
-    break;
-case 'a':
-    player->x--;
-    break;
 
+// ceka da player unese w a s d, 
+// 
+
+void movement(Player *player, World *world, oldChar *oldchar){ // player movement
+
+
+    int newX, newY;
+
+    world->data[player->y][player->x] = oldchar->oldChar;   //uzima podatke na trenuntim kordinatama playera da ih poslije moze zamijeniti kada se player pomjeri
+   
+
+char unos = _getch(); // uzima input unosa, bez cekanja scanf-a. Brze je od scanf-a jer scanf uzima input tek kada se pritisne enter, a _getch uzima input odmah, te scanf koristi puno vise funkcija
+//kao npr strlen (Vidio na ranodm youtube videu o gta 5 optimiziaciji loading online ).
+
+
+    // kalulise nove kordinate na osnovu unosa, pri tome deklarise u newY i newX; lokalne varijable.
+    switch (unos){
+        case 'w':
+            newY = player->y - 1;
+            newX = player->x;
+
+
+            
+            break;
+        case 's':
+            newY = player->y + 1;
+            newX = player->x;
+
+
+        
+            break;
+        case 'd':
+            newX = player->x + 1;
+            newY = player->y;
+
+            break;
+        case 'a':
+            newX = player->x - 1;
+            newY = player->y;
+
+           
+            break;
+        default:
+            return; // nemoj raditi nista, invalid input
+    }
+
+    //provjeri da li nove kordinate su validno mjesto za pokretanje
+    // ovo ne da playeru da ulazi u zidove ili u void
+
+
+    char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli provjeriti da li je validno mjesto za pokretanje
+
+
+
+    if (newArea == '.' || newArea == '=' || newArea == VRATA) {  // ' ' je void, '=' je hodnjik, VRATA su vrata :/
+       
+       
+
+
+       // ovo spasava karakter na koji player ide, da u sledecoj iteraciji loopa moze da ga vrati na staro mjesto
+        oldchar->oldChar = world->data[newY][newX];
+        // salje u player strukturu nove kordinate playera
+        player->y = newY;
+        player->x = newX;
+    }
 }
 
+// inicijalizira playera na mjesto deklarisano u funkciji movement
+void initPlayer(Player *player, World *world, Character *karakter) {
+  
+
+// postavlja world data na kordinatama playera u karakter koji je player izabro u funkciji kreator
+    world->data[player->y][player->x] = karakter->karakter;
 }
 
 
+// pocetna funkcija za deklarisanje imena playera i njegovog zeljenog znaka
 void kreator(Character *karakter) {
     printf("Unesite vase ime:\n");
     scanf("%19s", karakter->ime);
 
-    // Clear the input buffer to prevent issues with the following character input
+    // ukloni buffer da ne zeza sa konzolom
     while (getchar() != '\n');
 
     printf("Kako zelite izgledati? \nUnesite bilo koji ASCII karakter:\n");
     scanf(" %c", &karakter->karakter);
 }
 
-void initPlayer(Player *player, World *world, Character *karakter) {
-  
-
-
-    world->data[player->y][player->x] = karakter->karakter;
-}
 
 
 
-//regions
+
+
+//deklarisanje reegije u zavisnosti od kordinata
+//prima kordinate od arraya Regions, koji u sebi sadrzi tip Region, koji dalje ima svoje kordinate velicinu...
+
+
 
 void regionIntoWorld(Region *region, World *world) {
-    for (int i = 0; i < HEIGHT; i++) {
+    for (int i = 0; i < HEIGHT; i++) { // ide kroz citavu matricu world
         for (int j = 0; j < WIDTH; j++) {
+
+                // deklarise obim regije
+                
             if ((i >= region->startY && i <= region->startY + region->height) &&
                 (j >= region->startX && j <= region->startX + region->width)) {
-                // Check if on the right upper edge
+
+
+
+                // desni gronji cosak
                 if (i == region->startY && j == region->startX + region->width) {
                     world->data[i][j] = DESNIG;
                 }
-                // Check if on the left upper edge
+                // lijevi gornji cosak
                 else if (i == region->startY && j == region->startX) {
                     world->data[i][j] = LIJEVIG;
                 }
-                // Check if on the bottom right edge
+                // desni donji cosak
                 else if (i == region->startY + region->height && j == region->startX + region->width) {
                     world->data[i][j] = DESNID;
                 }
-                // Check if on the bottom left edge
+                // lijevi donji cosak
                 else if (i == region->startY + region->height && j == region->startX) {
                     world->data[i][j] = LIJEVID;
                 }
-                // Check if on the vertical lines not containing edges
+                // vertikalni zid
                 else if ((j == region->startX || j == region->startX + region->width) && (i != region->startY && i != region->startY + region->height)) {
                     world->data[i][j] = ZID;
                 }
-                // Check if on the horizontal lines not containing edges
+                // horizontalni zid
                 else if ((i == region->startY || i == region->startY + region->height) && (j != region->startX && j != region->startX + region->width)) {
                     world->data[i][j] = PLAFON;
                 }
                 else {
+                    //unutrasnjost regije 
                     world->data[i][j] = region->fillCharacter;
                 }
             }
@@ -173,15 +239,33 @@ void regionIntoWorld(Region *region, World *world) {
     }
 }
 
+
+
+// samo salje dobijene podatke u strukturu regije
+void regionInit(Region *region, int startY, int startX, int height, int width, char fillCharacter) {
+    region->startY = startY;
+    region->startX = startX;
+    region->height = height;
+    region->width = width;
+    region->fillCharacter = fillCharacter;
+}
+
+
+
+
+
+
+
+// salje regije preko regioninit, region arraya, region tipa i regionIntoWorld u world matrix
+
 void initializeRegions(World *world) {
-    regionInit(&regions[0], /* y*/30,   /* x*/ 60, /* height*/ 7,  /* width*/  21, '.');
-     regionInit(&regions[1], 30, 89, 5, 12, '1');
-     regionInit(&regions[2], 22, 90, 4, 20, '2');
-     regionInit(&regions[3], 22, 50, 4, 25, '3');
-     regionInit(&regions[4], 18, 17, 4, 8, '4');
-     regionInit(&regions[5], 25, 8, 5, 15, '5');
-     regionInit(&regions[6], 33, 12, 5, 5, '6');
-   
+    regionInit(&regions[0], /* y*/3,   /* x*/ 6, /* height*/ 5,  /* width*/  7, '.');
+    // regionInit(&regions[1], 3, 9, 2, 4, '1');
+    // regionInit(&regions[2], 2, 9, 2, 6, '2');
+    // regionInit(&regions[3], 2, 5, 2, 8, '3');
+    // regionInit(&regions[4], 1, 1, 2, 2, '4');
+    // regionInit(&regions[5], 2, 0, 2, 5, '5');
+    // regionInit(&regions[6], 3, 1, 2, 1, '6');
 
     for (int i = 0; i < 7; i++) {
         regionIntoWorld(&regions[i], world);
@@ -190,13 +274,7 @@ void initializeRegions(World *world) {
 
 
 
-void regionInit(Region *region, int startY, int startX, int height, int width, char fillCharacter) {
-    region->startY = startY;
-    region->startX = startX;
-    region->height = height;
-    region->width = width;
-    region->fillCharacter = fillCharacter;
-}
+
 
 
 
@@ -292,34 +370,6 @@ void initializeDoors(World *world, Region *region) {
   
 
 
-// regija 1
-    doorL(region, world, 1);
-    doorT(region, world, 1);
-
-//regija 2
-    doorB(region, world, 2);
-    doorL(region, world, 2);
-
-
-//regija 3
-doorR(region, world, 3);
-doorL(region, world, 3);
-
-
-
-//regija 4
-    doorR(region, world, 4);
-    doorB(region, world, 4);
-
-
-//regija 5
-doorT(region, world, 5);
-doorB(region, world, 5);
-
-
-//regia 6
-doorT(region, world, 6);
-
 
 }
 
@@ -339,7 +389,7 @@ hodnjikH(int x, int y, int z , World *world){
 for (int i=0; i<HEIGHT; i++){
     for (int j=0; j<WIDTH; j++){
        if (y==i && j>=x && j<=z+x){
-           world->data[i][j]=HODNJIK;
+           world->data[i][j]='=';
      
     
 
@@ -359,7 +409,7 @@ hodnjikV(int x, int y, int z , World *world){
 for (int i=0; i<HEIGHT; i++){
     for (int j=0; j<WIDTH; j++){
        if (x==j && i>=y && i<=z+y){
-           world->data[i][j]=HODNJIK;
+           world->data[i][j]='=';
      
     
 
@@ -372,38 +422,9 @@ for (int i=0; i<HEIGHT; i++){
 hodnjikInit(World *world){
 
 //x,y,z
-  //4 
-  hodnjikH(26,20,17,world);
-  hodnjikV(21,23,1,world);
 
-
-
-//5
-hodnjikH(15,24,5,world);
-hodnjikV(15,31,1,world);
-
-//6
-hodnjikH(14,32,1,world);
-
-
-//3
-hodnjikV(26+17,20,4,world);
-hodnjikH(43,24,6,world);
-
-
-//2
-hodnjikH(76,24,13,world);
-
-
-//1
-hodnjikV(95,28,1,world);
-hodnjikH(95,28,5,world);
-hodnjikV(95+5,27,1,world);
-
-
-//0
-hodnjikH(82,33,5,world);
-hodnjikV(82+6,32,1,world);
+hodnjikH(14,5,10,world);
+ 
 
 }
 
@@ -423,7 +444,7 @@ World world;
 Character karakter;
 Player player;
 Region region;
-
+oldChar oldchar;
 
 //region    
 //
@@ -448,7 +469,7 @@ while(1){
 
 
 
-movement(&player);
+movement(&player,&world,&oldchar);
 initPlayer(&player,&world,&karakter);
 
 ispis(&world);
