@@ -24,8 +24,14 @@
 
 typedef struct {
     int x,y;
+    char prevCell;
 
 }Player;
+
+
+typedef struct {
+    char oldChar;
+}oldChar;
 
 typedef struct {
     char karakter;
@@ -79,40 +85,58 @@ void ispis(World *world) {
 
 
 //player
-void initalPosition(Player *player){ // pocetna pozicija playera
 
-player->y= 0;
-player->x= 0;
+void movement(Player *player, World *world, oldChar *oldchar){ // player movement
+
+    char unos;
+    int newX, newY;
+
+    world->data[player->y][player->x] = oldchar->oldChar;
+    printf("Pomjeri se: \n");
+    scanf("%c",&unos);
+
+    // Calculate new position based on input
+    switch (unos){
+        case 'w':
+            newY = player->y - 1;
+            newX = player->x;
 
 
-}; 
-
-void movement(Player *player){ // player movement
-
-char unos;
-
-printf("Pomjeri se: \n");
-scanf("%c",&unos);
+            
+            break;
+        case 's':
+            newY = player->y + 1;
+            newX = player->x;
 
 
-switch (unos){
-    case 'w':
-    player->y--;
-    break;
-case 's':
-    player->y++;
-    break;
-case 'd':
-    player->x++;
-    break;
-case 'a':
-    player->x--;
-    break;
+        
+            break;
+        case 'd':
+            newX = player->x + 1;
+            newY = player->y;
 
+            break;
+        case 'a':
+            newX = player->x - 1;
+            newY = player->y;
+
+           
+            break;
+        default:
+            return; // Invalid input, do nothing
+    }
+
+    // Check if new position is within a valid area
+    char newArea = world->data[newY][newX];
+    if (newArea == '.' || newArea == '=' || newArea == VRATA) {
+        // Clear old position
+       
+        oldchar->oldChar = world->data[newY][newX];
+        // Update player's position
+        player->y = newY;
+        player->x = newX;
+    }
 }
-
-}
-
 
 void kreator(Character *karakter) {
     printf("Unesite vase ime:\n");
@@ -173,8 +197,22 @@ void regionIntoWorld(Region *region, World *world) {
     }
 }
 
+
+
+
+void initalPosition(Player *player){ // pocetna pozicija playera
+
+player->y= 4;
+player->x= 7;
+
+
+}; 
+
+
+
+
 void initializeRegions(World *world) {
-    regionInit(&regions[0], /* y*/3,   /* x*/ 6, /* height*/ 3,  /* width*/  7, '.');
+    regionInit(&regions[0], /* y*/3,   /* x*/ 6, /* height*/ 5,  /* width*/  7, '.');
     // regionInit(&regions[1], 3, 9, 2, 4, '1');
     // regionInit(&regions[2], 2, 9, 2, 6, '2');
     // regionInit(&regions[3], 2, 5, 2, 8, '3');
@@ -291,34 +329,6 @@ void initializeDoors(World *world, Region *region) {
   
 
 
-// regija 1
-    doorL(region, world, 1);
-    doorT(region, world, 1);
-
-//regija 2
-    doorB(region, world, 2);
-    doorL(region, world, 2);
-
-
-//regija 3
-doorR(region, world, 3);
-doorL(region, world, 3);
-
-
-
-//regija 4
-    doorR(region, world, 4);
-    doorB(region, world, 4);
-
-
-//regija 5
-doorT(region, world, 5);
-doorB(region, world, 5);
-
-
-//regia 6
-doorT(region, world, 6);
-
 
 }
 
@@ -338,7 +348,7 @@ hodnjikH(int x, int y, int z , World *world){
 for (int i=0; i<HEIGHT; i++){
     for (int j=0; j<WIDTH; j++){
        if (y==i && j>=x && j<=z+x){
-           world->data[i][j]=HODNJIK;
+           world->data[i][j]='=';
      
     
 
@@ -358,7 +368,7 @@ hodnjikV(int x, int y, int z , World *world){
 for (int i=0; i<HEIGHT; i++){
     for (int j=0; j<WIDTH; j++){
        if (x==j && i>=y && i<=z+y){
-           world->data[i][j]=HODNJIK;
+           world->data[i][j]='=';
      
     
 
@@ -371,6 +381,8 @@ for (int i=0; i<HEIGHT; i++){
 hodnjikInit(World *world){
 
 //x,y,z
+
+hodnjikH(14,5,10,world);
  
 
 }
@@ -391,7 +403,7 @@ World world;
 Character karakter;
 Player player;
 Region region;
-
+oldChar oldchar;
 
 //region    
 //
@@ -416,7 +428,7 @@ while(1){
 
 
 
-movement(&player);
+movement(&player,&world,&oldchar);
 initPlayer(&player,&world,&karakter);
 
 ispis(&world);
