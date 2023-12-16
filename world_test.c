@@ -16,8 +16,8 @@
 
 
 
-#define HEIGHT 40
-#define WIDTH 134
+#define HEIGHT 18
+#define WIDTH 80
 
 
 
@@ -81,8 +81,8 @@ void ispis(World *world) {
 //player
 void initalPosition(Player *player){ // pocetna pozicija playera
 
-player->y= 29;
-player->x= 66;
+player->y= 0;
+player->x= 0;
 
 
 }; 
@@ -174,14 +174,13 @@ void regionIntoWorld(Region *region, World *world) {
 }
 
 void initializeRegions(World *world) {
-    regionInit(&regions[0], /* y*/30,   /* x*/ 60, /* height*/ 7,  /* width*/  21, '.');
-     regionInit(&regions[1], 30, 89, 5, 12, '1');
-     regionInit(&regions[2], 22, 90, 4, 20, '2');
-     regionInit(&regions[3], 22, 50, 4, 25, '3');
-     regionInit(&regions[4], 18, 17, 4, 8, '4');
-     regionInit(&regions[5], 25, 8, 5, 15, '5');
-     regionInit(&regions[6], 33, 12, 5, 5, '6');
-   
+    regionInit(&regions[0], /* y*/3,   /* x*/ 6, /* height*/ 3,  /* width*/  7, '.');
+    // regionInit(&regions[1], 3, 9, 2, 4, '1');
+    // regionInit(&regions[2], 2, 9, 2, 6, '2');
+    // regionInit(&regions[3], 2, 5, 2, 8, '3');
+    // regionInit(&regions[4], 1, 1, 2, 2, '4');
+    // regionInit(&regions[5], 2, 0, 2, 5, '5');
+    // regionInit(&regions[6], 3, 1, 2, 1, '6');
 
     for (int i = 0; i < 7; i++) {
         regionIntoWorld(&regions[i], world);
@@ -372,38 +371,7 @@ for (int i=0; i<HEIGHT; i++){
 hodnjikInit(World *world){
 
 //x,y,z
-  //4 
-  hodnjikH(26,20,17,world);
-  hodnjikV(21,23,1,world);
-
-
-
-//5
-hodnjikH(15,24,5,world);
-hodnjikV(15,31,1,world);
-
-//6
-hodnjikH(14,32,1,world);
-
-
-//3
-hodnjikV(26+17,20,4,world);
-hodnjikH(43,24,6,world);
-
-
-//2
-hodnjikH(76,24,13,world);
-
-
-//1
-hodnjikV(95,28,1,world);
-hodnjikH(95,28,5,world);
-hodnjikV(95+5,27,1,world);
-
-
-//0
-hodnjikH(82,33,5,world);
-hodnjikV(82+6,32,1,world);
+ 
 
 }
 
