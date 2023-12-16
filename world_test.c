@@ -95,8 +95,9 @@
 
 //player funkcije
 
-    void initalPosition(Player *player){ // pocetna pozicija playera
+    void initalPosition(Player *player, oldChar *oldchar){ // pocetna pozicija playera
 
+    oldchar->oldChar = '.';
     player->y= 4;
     player->x= 7;
 
@@ -472,7 +473,7 @@ oldChar oldchar;
 
 // pocetne inicijalizacije
 kreator(&karakter);
-initalPosition(&player);
+initalPosition(&player,&oldchar);
 initWorld(&world);
 initializeRegions(&world);
 initializeDoors(&world, &region);
