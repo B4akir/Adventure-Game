@@ -1,7 +1,20 @@
 
 
-1. Resize the whole world for better rendering: branch Resize
-2. Improve/ add player movement restriction so player can only move on regions and hodnji: branch player_restriction
+Problemi:
+
+ 1. Player movement: 
+        - ostaje slovo v na pocetnoj poziciji
+        -HODNJIK value nije prepoznat
+
+2. Regions:
+        - nisu definisiane i mapa nije napralvjena
+
+
+
+Todo:
+
+ 1.Napraviti neprijatelje
+
 
 Future:
 
