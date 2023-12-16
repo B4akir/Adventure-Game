@@ -397,7 +397,7 @@
 
 
 
-    hodnjikH(int x, int y, int z , World *world){
+    void hodnjikH(int x, int y, int z , World *world){
 
     //x je pocetak hodnika
     //y je visina hodnjika
@@ -417,7 +417,7 @@
 
 
 
-    hodnjikV(int x, int y, int z , World *world){
+    void hodnjikV(int x, int y, int z , World *world){
 
     //x je pocetak hodnika
     //y je visina hodnjika
@@ -436,11 +436,11 @@
     }
 
 
-    hodnjikInit(World *world){
+    void hodnjikInit(World *world){
 
     //x,y,z
 
-    hodnjikH(14,5,10,world);
+    
     
 
     }
