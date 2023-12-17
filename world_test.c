@@ -23,6 +23,7 @@
 typedef struct{
     int x,y;
     char karakter;
+    char oldChar;
 
 } Enemy;
 
@@ -33,19 +34,12 @@ typedef struct{
 
     typedef struct {
     int x,y;
-    char prevCell;
+    char karakter;
+    char oldChar;
+    char ime[20];
 
         }Player;
 
-
-    typedef struct {
-    char oldChar;
-        }oldChar;
-
-    typedef struct {
-    char karakter;
-    char ime[20];
-        } Character;
 
     typedef struct {
         char data[HEIGHT][WIDTH];
@@ -99,9 +93,9 @@ typedef struct{
 
 //player funkcije
 
-    void initalPosition(Player *player, oldChar *oldchar){ // pocetna pozicija playera
+    void initalPosition(Player *player){ // pocetna pozicija playera
 
-    oldchar->oldChar = '.';
+    player->oldChar = '.';
     player->y= 4;
     player->x= 7;
 
@@ -114,12 +108,12 @@ typedef struct{
     // ceka da player unese w a s d, 
     // 
 
-    void movement(Player *player, World *world, oldChar *oldchar){ // player movement
+    void movement(Player *player, World *world){ // player movement
 
 
         int newX, newY;
 
-        world->data[player->y][player->x] = oldchar->oldChar;   //uzima podatke na trenuntim kordinatama playera da ih poslije moze zamijeniti kada se player pomjeri
+        world->data[player->y][player->x] = player->oldChar;   //uzima podatke na trenuntim kordinatama playera da ih poslije moze zamijeniti kada se player pomjeri
     
 
     char unos = _getch(); // uzima input unosa, bez cekanja scanf-a. Brze je od scanf-a jer scanf uzima input tek kada se pritisne enter, a _getch uzima input odmah, te scanf koristi puno vise funkcija
@@ -171,7 +165,7 @@ typedef struct{
 
 
         // ovo spasava karakter na koji player ide, da u sledecoj iteraciji loopa moze da ga vrati na staro mjesto
-            oldchar->oldChar = world->data[newY][newX];
+            player->oldChar = world->data[newY][newX];
             // salje u player strukturu nove kordinate playera
             player->y = newY;
             player->x = newX;
@@ -179,11 +173,11 @@ typedef struct{
     }
 
     // inicijalizira playera na mjesto deklarisano u funkciji movement
-    void initPlayer(Player *player, World *world, Character *karakter) {
+    void initPlayer(Player *player, World *world) {
     
 
     // postavlja world data na kordinatama playera u karakter koji je player izabro u funkciji kreator
-        world->data[player->y][player->x] = karakter->karakter;
+        world->data[player->y][player->x] = player->karakter;
     }
 
 
@@ -191,15 +185,15 @@ typedef struct{
 
 
     // pocetna funkcija za deklarisanje imena playera i njegovog zeljenog znaka
-    void kreator(Character *karakter) {
+    void kreator(Player *player) {
         printf("Unesite vase ime:\n");
-        scanf("%19s", karakter->ime);
+        scanf("%19s", player->ime);
 
         // ukloni buffer da ne zeza sa konzolom
         while (getchar() != '\n');
 
         printf("Kako zelite izgledati? \nUnesite bilo koji ASCII karakter:\n");
-        scanf(" %c", &karakter->karakter);
+        scanf(" %c", &player->karakter);
     }
 
 
@@ -455,11 +449,12 @@ void initialEnemy (Enemy *enemy){
     enemy->x = 7;
     enemy->y = 7;
     enemy->karakter = 'E';
+    enemy->oldChar = '.';
 }
 
-void enemyLogic(Enemy *enemy, World *world, oldChar *oldchar){
+void enemyLogic(Enemy *enemy, World *world){
 
-    world->data[enemy->y][enemy->x] = oldchar->oldChar;
+    world->data[enemy->y][enemy->x] = enemy->oldChar;
     int direction = rand() % 4; // Generate a random number between 0 and 3
 char newX, newY;
     switch (direction) {
@@ -500,8 +495,8 @@ char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli prov
 
 
 // enemy 
-     void enemyInit(Enemy *enemy, World *world, oldChar *oldchar) {
-     world->data[enemy->y][enemy->x] = oldchar->oldChar;
+     void enemyInit(Enemy *enemy, World *world) {
+     world->data[enemy->y][enemy->x] = enemy->oldChar;
 
     
         world->data[enemy->y][enemy->x] = enemy->karakter;
@@ -515,10 +510,8 @@ int main (){
 
 // deklaracija tipova i varijabli datih
 World world;
-Character karakter;
 Player player;
 Region region;
-oldChar oldchar;
 Enemy enemy;
 
 
@@ -528,22 +521,22 @@ Enemy enemy;
 
 
 // pocetne inicijalizacije
-kreator(&karakter);
-initalPosition(&player,&oldchar);
+kreator(&player);
+initalPosition(&player);
 initWorld(&world);
 initializeRegions(&world);
 initializeDoors(&world, &region);
 hodnjikInit(&world);
 initialEnemy(&enemy);
-enemyInit(&enemy, &world, &oldchar); 
+enemyInit(&enemy, &world); 
 
 //movement i ispis
 while(1){
 
-movement(&player,&world,&oldchar);
-initPlayer(&player,&world,&karakter);
-enemyLogic(&enemy, &world, &oldchar);
-enemyInit(&enemy, &world, &oldchar);
+movement(&player,&world);
+initPlayer(&player,&world);
+enemyLogic(&enemy, &world);
+enemyInit(&enemy, &world);
 
 ispis(&world);
 
