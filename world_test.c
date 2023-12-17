@@ -55,6 +55,9 @@ typedef struct{
             int width, height;
             char fillCharacter;
             int regionSize;
+            Position doors[4];
+
+
                 } Region;
 
         // array regija
@@ -300,7 +303,7 @@ typedef struct{
 
 
 //doors i hodnjiks
-    void doorL(Region *region, World *world,int index){
+    void doorL(Region *region, World *world,int index, int brVrata){
         Region *region0 = &regions[index];
 
         int y = region0->position.y;
@@ -314,12 +317,14 @@ typedef struct{
 
             
             world->data[i][x] = VRATA;
+            region0->doors[brVrata].y = i;
+            region0->doors[brVrata].x = x;
 
 
 
     }
 
-    void doorR(Region *region, World *world, int index ){
+    void doorR(Region *region, World *world, int index, int brVrata ){
 
     Region *region0 = &regions[index];
 
@@ -333,6 +338,8 @@ typedef struct{
             int j=x+width;
 
             world->data[i][j] = VRATA;
+            region0->doors[brVrata].y = i;
+            region0->doors[brVrata].x = j;
 
 
 
@@ -340,7 +347,7 @@ typedef struct{
 
     }
 
-    void doorT(Region *region, World *world, int index){
+    void doorT(Region *region, World *world, int index, int brVrata ){
 
     Region *region0 = &regions[index];
 
@@ -354,12 +361,14 @@ typedef struct{
 
 
         world->data[y][j] = VRATA;
+        region0->doors[brVrata].y = y;
+        region0->doors[brVrata].x = j;
 
 
 
     }
 
-    void doorB(Region *region, World *world, int index){
+    void doorB(Region *region, World *world, int index, int brVrata ){
 
     Region *region0 = &regions[index];
 
@@ -374,6 +383,8 @@ typedef struct{
         int i=y+height;
 
         world->data[i][j] = VRATA;
+        region0->doors[brVrata].y = i;
+        region0->doors[brVrata].x = j;
 
 
 
@@ -383,7 +394,18 @@ typedef struct{
         
         
         //regija 0
-        doorR(region, world, 0);
+        
+        doorR(region, world, 0, 0);
+         doorL(region, world, 0, 1);
+          doorB(region, world, 0, 2);
+           doorT(region, world, 0, 3);
+
+    Region *region0 = &regions[0];
+           for(int i=0; i<4; i++){
+
+            printf("%d %d\n", region0->doors[i].y, region0->doors[i].x);
+           }
+        
     
 
 
