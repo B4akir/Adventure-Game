@@ -56,12 +56,13 @@ typedef struct{
             char fillCharacter;
             int regionSize;
             Position doors[4];
+            Enemy enemy;
 
 
                 } Region;
 
         // array regija
-            Region regions[8];
+            Region regions[5];
 
 
 
@@ -279,13 +280,14 @@ typedef struct{
     // salje regije preko regioninit, region arraya, region tipa i regionIntoWorld u world matrix
 
     void initializeRegions(World *world) {
-        regionInit(&regions[0], /* y*/3,   /* x*/ 6, /* height*/ 5,  /* width*/  7, '.');
-        // regionInit(&regions[1], 3, 9, 2, 4, '1');
-        // regionInit(&regions[2], 2, 9, 2, 6, '2');
-        // regionInit(&regions[3], 2, 5, 2, 8, '3');
-        // regionInit(&regions[4], 1, 1, 2, 2, '4');
-        // regionInit(&regions[5], 2, 0, 2, 5, '5');
-        // regionInit(&regions[6], 3, 1, 2, 1, '6');
+
+        
+        regionInit(&regions[0], /* y*/1,   /* x*/ 1, /* height*/ 5,  /* width*/  7, '.');
+        regionInit(&regions[1], /* y*/1,   /* x*/ 18, /* height*/ 7,  /* width*/  9, '.');
+        regionInit(&regions[2], /* y*/ 10,   /* x*/ 12, /* height*/ 6,  /* width*/  25, '.');
+        regionInit(&regions[3], /* y*/ 5,   /* x*/ 37, /* height*/ 4,  /* width*/  15, '.');
+        regionInit(&regions[4], /* y*/ 1,   /* x*/62 , /* height*/ 15,  /* width*/  9, '.');
+
 
         for (int i = 0; i < 7; i++) {
             regionIntoWorld(&regions[i], world);
@@ -394,17 +396,51 @@ typedef struct{
         
         
         //regija 0
-        
-        doorR(region, world, 0, 0);
-         doorL(region, world, 0, 1);
+        doorL(region, world, 0, 0);
+        doorR(region, world, 0, 1);
           doorB(region, world, 0, 2);
-           doorT(region, world, 0, 3);
+
+
+
+        //regija 1
+        doorL(region, world, 1, 0);
+         doorR(region, world, 1, 1);
+         
+        
+
+         //regija 2
+         doorT(region, world, 2, 0);
+         doorR(region, world, 2, 1);
+
+
+         //regija 3
+          doorR(region, world, 3, 0);
+         doorB(region, world, 3, 1);
+        
+
+
+         //regija 4
+         doorL(region, world, 4, 0);
+         
+
 
     Region *region0 = &regions[0];
            for(int i=0; i<4; i++){
 
             printf("%d %d\n", region0->doors[i].y, region0->doors[i].x);
            }
+
+
+           //regija 1
+
+
+
+           //regija 2
+
+
+           //regija 3
+
+           //regija 4
         
     
 
@@ -412,91 +448,55 @@ typedef struct{
 
     }
 
+ void enemyInitialPos(Enemy *enemy, World *world, Region *region){
 
-
-
-
-
-
-
-    void hodnjikH(int x, int y, int z , World *world){
-
-    //x je pocetak hodnika
-    //y je visina hodnjika
-    //z je intezitet hodnjika (duzina)
-
-    for (int i=0; i<HEIGHT; i++){
-        for (int j=0; j<WIDTH; j++){
-        if (y==i && j>=x && j<=z+x){
-            world->data[i][j]='=';
-        
-        
-
-    }
-    }
-    }
-    }
-
-
-
-    void hodnjikV(int x, int y, int z , World *world){
-
-    //x je pocetak hodnika
-    //y je visina hodnjika
-    //z je intezitet hodnjika (duzina)
-
-    for (int i=0; i<HEIGHT; i++){
-        for (int j=0; j<WIDTH; j++){
-        if (x==j && i>=y && i<=z+y){
-            world->data[i][j]='=';
-        
-        
-
-    }
-    }
-    }
-    }
-
-
-    void hodnjikInit(World *world){
-
-    //x,y,z
-
-    
+Region *region0= &regions[0];
     
 
-    }
+    char names[2] = {'E', 'A'};
+
+    //random number
+
+
+        int random = rand()%4;
+    // initial enemy position
+    region0->enemy.position.x = region0->position.x + region0->width-random;
+    region0->enemy.position.y = region0->position.y + region0->height-random;
+    region0->enemy.karakter = names[random];
+    region0->enemy.oldChar = '.';
 
 
 
-void initialEnemy (Enemy *enemy){
-    enemy->position.x = 7;
-    enemy->position.y = 7;
-    enemy->karakter = 'E';
-    enemy->oldChar = '.';
 }
 
-void enemyLogic(Enemy *enemy, World *world){
 
-    world->data[enemy->position.y][enemy->position.x] = enemy->oldChar;
+
+
+void enemyLogic(Enemy *enemy, World *world, Region *region, int index){
+
+    Region *region0= &regions[index];
+    
+    
+
+    world->data[region0->enemy.position.y][region0->enemy.position.x] = region0->enemy.oldChar;
     int direction = rand() % 4; // Generate a random number between 0 and 3
 char newX, newY;
     switch (direction) {
         case 0: // Move up
-             newY=enemy->position.y-1;
-             newX=enemy->position.x;
+             newY=region0->enemy.position.y-1;
+             newX=region0->enemy.position.x;
             break;
         case 1: // Move down
-             newY=enemy->position.y+1;
-            newX=enemy->position.x;
+             newY=region0->enemy.position.y+1;
+            newX=region0->enemy.position.x;
             break;
         case 2: // Move left
-             newX=enemy->position.x-1;
-              newY=enemy->position.y;
+             newX=region0->enemy.position.x-1;
+              newY=region0->enemy.position.y;
             break;
         case 3: // Move right
-            newX=enemy->position.x+1;
-            newY=enemy->position.y;
+            newX=region0->enemy.position.x+1;
+            newY=region0->enemy.position.y;
             break;
     }
 char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli provjeriti da li je validno mjesto za pokretanje
@@ -507,11 +507,11 @@ char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli prov
         
         
 
-
+        region0->enemy.oldChar = world->data[newY][newX];
         // ovo spasava karakter na koji player ide, da u sledecoj iteraciji loopa moze da ga vrati na staro mjesto
             // salje u player strukturu nove kordinate playera
-            enemy->position.y = newY;
-            enemy->position.x = newX;
+            region0->enemy.position.y = newY;
+            region0->enemy.position.x = newX;
         }
     
 
@@ -519,13 +519,50 @@ char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli prov
 
 
 // enemy 
-     void enemyInit(Enemy *enemy, World *world) {
-     world->data[enemy->position.y][enemy->position.x] = enemy->oldChar;
+     void enemyInit(Enemy *enemy, World *world, Region *region) {
+
+        Region *region0 = &regions[0];
+
+     world->data[region0->enemy.position.y][region0->enemy.position.x] = region0->enemy.oldChar;
 
     
-        world->data[enemy->position.y][enemy->position.x] = enemy->karakter;
+        world->data[region0->enemy.position.y][region0->enemy.position.x] = region0->enemy.karakter;
     }
 
+void putXOnEdges(World *world) {
+    int rows = sizeof(world->data) / sizeof(world->data[0]);
+    int cols = sizeof(world->data[0]) / sizeof(world->data[0][0]);
+
+    // Put 'x' on the top and bottom edges
+    for (int i = 0; i < cols; i++) {
+        world->data[0][i] = 'x';
+        world->data[rows - 1][i] = 'x';
+    }
+
+    // Put 'x' on the left and right edges
+    for (int i = 0; i < rows; i++) {
+        world->data[i][0] = 'x';
+        world->data[i][cols - 1] = 'x';
+    }
+}
+
+
+
+void connectRegions(Region *region, World *world, int r1, int r2, int door1, int door2){
+    Region *region0 = &regions[r1];
+    Region *region1 = &regions[r2];
+
+    int y1, x1, y2, x2;
+
+    y1=region0->doors[0].y ;
+    x1=region0->doors[0].x ;
+
+     y2=region1->doors[door2].y;
+    x2=region1->doors[door2].x;
+
+    printf("Region 1 doors: y: %d    x:%d\n", y1, x1);
+    printf("Region 2 doors: y: %d    x:%d\n", y2, x2);
+}
 
 
 
@@ -550,17 +587,21 @@ initalPosition(&player);
 initWorld(&world);
 initializeRegions(&world);
 initializeDoors(&world, &region);
-hodnjikInit(&world);
-initialEnemy(&enemy);
-enemyInit(&enemy, &world); 
+enemyInit(&enemy, &world, &region); 
+putXOnEdges(&world);
+enemyInitialPos(&enemy, &world, &region);
+enemyInit(&enemy, &world, &region);
 
+connectRegions(&region, &world, 0, 1, 1, 1);
 //movement i ispis
 while(1){
 
 movement(&player,&world);
 initPlayer(&player,&world);
-enemyLogic(&enemy, &world);
-enemyInit(&enemy, &world);
+enemyLogic(&enemy, &world,&region, 0);
+enemyInit(&enemy, &world, &region);
+//enemyLogic(&enemy, &world,&region, 0);
+
 
 ispis(&world);
 
