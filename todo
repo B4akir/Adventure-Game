@@ -2,17 +2,20 @@
 
 Problemi:
 
- 1. Player movement: 
-        -HODNJIK value nije prepoznat
 
-2. Regions:
-        - nisu definisiane i mapa nije napralvjena
+
+1 Regions:
+        - napravi svijet
 
 
 
 Todo:
 
  1.Napraviti neprijatelje
+ 2. Napraviti iteme
+ 3. Napraviti combat sistem
+ 4. Napraviti inventory
+ 5. Napraviti efikasniji ispis
 
 
 Future:

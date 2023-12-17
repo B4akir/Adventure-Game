@@ -20,7 +20,11 @@
 
 
 
+typedef struct{
+    int x,y;
+    char karakter;
 
+} Enemy;
 
 
 
@@ -447,9 +451,61 @@
 
 
 
+void initialEnemy (Enemy *enemy){
+    enemy->x = 7;
+    enemy->y = 7;
+    enemy->karakter = 'E';
+}
+
+void enemyLogic(Enemy *enemy, World *world, oldChar *oldchar){
+
+    world->data[enemy->y][enemy->x] = oldchar->oldChar;
+    int direction = rand() % 4; // Generate a random number between 0 and 3
+char newX, newY;
+    switch (direction) {
+        case 0: // Move up
+             newY=enemy->y-1;
+             newX=enemy->x;
+            break;
+        case 1: // Move down
+             newY=enemy->y+1;
+            newX=enemy->x;
+            break;
+        case 2: // Move left
+             newX=enemy->x-1;
+              newY=enemy->y;
+            break;
+        case 3: // Move right
+            newX=enemy->x+1;
+            newY=enemy->y;
+            break;
+    }
+char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli provjeriti da li je validno mjesto za pokretanje
 
 
 
+        if (newArea == '.' || newArea == '=' || newArea == VRATA) {  // ' ' je void, '=' je hodnjik, VRATA su vrata :/
+        
+        
+
+
+        // ovo spasava karakter na koji player ide, da u sledecoj iteraciji loopa moze da ga vrati na staro mjesto
+            // salje u player strukturu nove kordinate playera
+            enemy->y = newY;
+            enemy->x = newX;
+        }
+    
+
+}
+
+
+// enemy 
+     void enemyInit(Enemy *enemy, World *world, oldChar *oldchar) {
+     world->data[enemy->y][enemy->x] = oldchar->oldChar;
+
+    
+        world->data[enemy->y][enemy->x] = enemy->karakter;
+    }
 
 
 
@@ -463,7 +519,7 @@ Character karakter;
 Player player;
 Region region;
 oldChar oldchar;
-
+Enemy enemy;
 
 
 
@@ -478,12 +534,16 @@ initWorld(&world);
 initializeRegions(&world);
 initializeDoors(&world, &region);
 hodnjikInit(&world);
+initialEnemy(&enemy);
+enemyInit(&enemy, &world, &oldchar); 
 
 //movement i ispis
 while(1){
 
 movement(&player,&world,&oldchar);
 initPlayer(&player,&world,&karakter);
+enemyLogic(&enemy, &world, &oldchar);
+enemyInit(&enemy, &world, &oldchar);
 
 ispis(&world);
 
