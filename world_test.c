@@ -17,11 +17,13 @@
     #define WIDTH 80
 
 
-
+typedef struct{
+    int x,y;
+}Position; 
 
 
 typedef struct{
-    int x,y;
+    Position position;
     char karakter;
     char oldChar;
 
@@ -33,7 +35,7 @@ typedef struct{
 
 
     typedef struct {
-    int x,y;
+    Position position;
     char karakter;
     char oldChar;
     char ime[20];
@@ -49,7 +51,7 @@ typedef struct{
 
         // krene od tacke x i y te se siri prema desno. 
         typedef struct {
-            int startX, startY; // Switched startX and startY
+            Position position; 
             int width, height;
             char fillCharacter;
             int regionSize;
@@ -96,8 +98,8 @@ typedef struct{
     void initalPosition(Player *player){ // pocetna pozicija playera
 
     player->oldChar = '.';
-    player->y= 4;
-    player->x= 7;
+    player->position.y= 4;
+    player->position.x= 7;
 
 
     }; 
@@ -113,7 +115,7 @@ typedef struct{
 
         int newX, newY;
 
-        world->data[player->y][player->x] = player->oldChar;   //uzima podatke na trenuntim kordinatama playera da ih poslije moze zamijeniti kada se player pomjeri
+        world->data[player->position.y][player->position.x] = player->oldChar;   //uzima podatke na trenuntim kordinatama playera da ih poslije moze zamijeniti kada se player pomjeri
     
 
     char unos = _getch(); // uzima input unosa, bez cekanja scanf-a. Brze je od scanf-a jer scanf uzima input tek kada se pritisne enter, a _getch uzima input odmah, te scanf koristi puno vise funkcija
@@ -123,27 +125,27 @@ typedef struct{
         // kalulise nove kordinate na osnovu unosa, pri tome deklarise u newY i newX; lokalne varijable.
         switch (unos){
             case 'w':
-                newY = player->y - 1;
-                newX = player->x;
+                newY = player->position.y - 1;
+                newX = player->position.x;
 
 
                 
                 break;
             case 's':
-                newY = player->y + 1;
-                newX = player->x;
+                newY = player->position.y + 1;
+                newX = player->position.x;
 
 
             
                 break;
             case 'd':
-                newX = player->x + 1;
-                newY = player->y;
+                newX = player->position.x + 1;
+                newY = player->position.y;
 
                 break;
             case 'a':
-                newX = player->x - 1;
-                newY = player->y;
+                newX = player->position.x - 1;
+                newY = player->position.y;
 
             
                 break;
@@ -167,8 +169,8 @@ typedef struct{
         // ovo spasava karakter na koji player ide, da u sledecoj iteraciji loopa moze da ga vrati na staro mjesto
             player->oldChar = world->data[newY][newX];
             // salje u player strukturu nove kordinate playera
-            player->y = newY;
-            player->x = newX;
+            player->position.y = newY;
+            player->position.x = newX;
         }
     }
 
@@ -177,7 +179,7 @@ typedef struct{
     
 
     // postavlja world data na kordinatama playera u karakter koji je player izabro u funkciji kreator
-        world->data[player->y][player->x] = player->karakter;
+        world->data[player->position.y][player->position.x] = player->karakter;
     }
 
 
@@ -216,33 +218,33 @@ typedef struct{
 
                     // deklarise obim regije
                     
-                if ((i >= region->startY && i <= region->startY + region->height) &&
-                    (j >= region->startX && j <= region->startX + region->width)) {
+                if ((i >= region->position.y && i <= region->position.y + region->height) &&
+                    (j >= region->position.x && j <= region->position.x + region->width)) {
 
 
 
                     // desni gronji cosak
-                    if (i == region->startY && j == region->startX + region->width) {
+                    if (i == region->position.y && j == region->position.x + region->width) {
                         world->data[i][j] = DESNIG;
                     }
                     // lijevi gornji cosak
-                    else if (i == region->startY && j == region->startX) {
+                    else if (i == region->position.y && j == region->position.x) {
                         world->data[i][j] = LIJEVIG;
                     }
                     // desni donji cosak
-                    else if (i == region->startY + region->height && j == region->startX + region->width) {
+                    else if (i == region->position.y + region->height && j == region->position.x + region->width) {
                         world->data[i][j] = DESNID;
                     }
                     // lijevi donji cosak
-                    else if (i == region->startY + region->height && j == region->startX) {
+                    else if (i == region->position.y + region->height && j == region->position.x) {
                         world->data[i][j] = LIJEVID;
                     }
                     // vertikalni zid
-                    else if ((j == region->startX || j == region->startX + region->width) && (i != region->startY && i != region->startY + region->height)) {
+                    else if ((j == region->position.x || j == region->position.x + region->width) && (i != region->position.y && i != region->position.y + region->height)) {
                         world->data[i][j] = ZID;
                     }
                     // horizontalni zid
-                    else if ((i == region->startY || i == region->startY + region->height) && (j != region->startX && j != region->startX + region->width)) {
+                    else if ((i == region->position.y || i == region->position.y + region->height) && (j != region->position.x && j != region->position.x + region->width)) {
                         world->data[i][j] = PLAFON;
                     }
                     else {
@@ -258,8 +260,8 @@ typedef struct{
 
     // samo salje dobijene podatke u strukturu regije
     void regionInit(Region *region, int startY, int startX, int height, int width, char fillCharacter) {
-        region->startY = startY;
-        region->startX = startX;
+        region->position.y = startY;
+        region->position.x = startX;
         region->height = height;
         region->width = width;
         region->fillCharacter = fillCharacter;
@@ -301,8 +303,8 @@ typedef struct{
     void doorL(Region *region, World *world,int index){
         Region *region0 = &regions[index];
 
-        int y = region0->startY;
-        int x = region0->startX;
+        int y = region0->position.y;
+        int x = region0->position.x;
         int height = region0->height;
 
     
@@ -321,8 +323,8 @@ typedef struct{
 
     Region *region0 = &regions[index];
 
-        int y = region0->startY;
-        int x = region0->startX;
+        int y = region0->position.y;
+        int x = region0->position.x;
         int height = region0->height;
         int width = region0->width;
 
@@ -342,8 +344,8 @@ typedef struct{
 
     Region *region0 = &regions[index];
 
-        int y = region0->startY;
-        int x = region0->startX;
+        int y = region0->position.y;
+        int x = region0->position.x;
         int width = region0->width;
 
 
@@ -361,8 +363,8 @@ typedef struct{
 
     Region *region0 = &regions[index];
 
-        int y = region0->startY;
-        int x = region0->startX;
+        int y = region0->position.y;
+        int x = region0->position.x;
         int height = region0->height;
         int width = region0->width;
     
@@ -446,33 +448,33 @@ typedef struct{
 
 
 void initialEnemy (Enemy *enemy){
-    enemy->x = 7;
-    enemy->y = 7;
+    enemy->position.x = 7;
+    enemy->position.y = 7;
     enemy->karakter = 'E';
     enemy->oldChar = '.';
 }
 
 void enemyLogic(Enemy *enemy, World *world){
 
-    world->data[enemy->y][enemy->x] = enemy->oldChar;
+    world->data[enemy->position.y][enemy->position.x] = enemy->oldChar;
     int direction = rand() % 4; // Generate a random number between 0 and 3
 char newX, newY;
     switch (direction) {
         case 0: // Move up
-             newY=enemy->y-1;
-             newX=enemy->x;
+             newY=enemy->position.y-1;
+             newX=enemy->position.x;
             break;
         case 1: // Move down
-             newY=enemy->y+1;
-            newX=enemy->x;
+             newY=enemy->position.y+1;
+            newX=enemy->position.x;
             break;
         case 2: // Move left
-             newX=enemy->x-1;
-              newY=enemy->y;
+             newX=enemy->position.x-1;
+              newY=enemy->position.y;
             break;
         case 3: // Move right
-            newX=enemy->x+1;
-            newY=enemy->y;
+            newX=enemy->position.x+1;
+            newY=enemy->position.y;
             break;
     }
 char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli provjeriti da li je validno mjesto za pokretanje
@@ -486,8 +488,8 @@ char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli prov
 
         // ovo spasava karakter na koji player ide, da u sledecoj iteraciji loopa moze da ga vrati na staro mjesto
             // salje u player strukturu nove kordinate playera
-            enemy->y = newY;
-            enemy->x = newX;
+            enemy->position.y = newY;
+            enemy->position.x = newX;
         }
     
 
@@ -496,10 +498,10 @@ char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli prov
 
 // enemy 
      void enemyInit(Enemy *enemy, World *world) {
-     world->data[enemy->y][enemy->x] = enemy->oldChar;
+     world->data[enemy->position.y][enemy->position.x] = enemy->oldChar;
 
     
-        world->data[enemy->y][enemy->x] = enemy->karakter;
+        world->data[enemy->position.y][enemy->position.x] = enemy->karakter;
     }
 
 
