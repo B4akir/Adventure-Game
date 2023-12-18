@@ -548,24 +548,50 @@ void putXOnEdges(World *world) {
 
 
 
-void connectRegions(Region *region, World *world, int r1, int r2, int door1, int door2){
+void connectRegions(World *world, int r1, int r2, int door1, int door2) {
     Region *region0 = &regions[r1];
     Region *region1 = &regions[r2];
 
-    int y1, x1, y2, x2;
+    Position start = region0->doors[door1];
+    Position end = region1->doors[door2];
 
-    y1=region0->doors[0].y ;
-    x1=region0->doors[0].x ;
+    // Prioritize horizontal movement
+    while (start.x != end.x) {
+        if (start.x >= 0 && start.x < WIDTH && start.y >= 0 && start.y < HEIGHT &&
+            world->data[start.y][start.x] == ' ') {
+            world->data[start.y][start.x] = '=';
+        }
 
-     y2=region1->doors[door2].y;
-    x2=region1->doors[door2].x;
+        if (start.x < end.x) {
+            start.x++;
+        } else {
+            start.x--;
+        }
+    }
 
-    printf("Region 1 doors: y: %d    x:%d\n", y1, x1);
-    printf("Region 2 doors: y: %d    x:%d\n", y2, x2);
+    // Then prioritize vertical movement
+    while (start.y != end.y) {
+        if (start.x >= 0 && start.x < WIDTH && start.y >= 0 && start.y < HEIGHT &&
+            world->data[start.y][start.x] == ' ') {
+            world->data[start.y][start.x] = '=';
+        }
+
+        if (start.y < end.y) {
+            start.y++;
+        } else {
+            start.y--;
+        }
+    }
+
+    // Ensure the final position is filled
+    if (start.x >= 0 && start.x < WIDTH && start.y >= 0 && start.y < HEIGHT &&
+        world->data[start.y][start.x] == ' ') {
+        world->data[start.y][start.x] = '=';
+    }
 }
 
 
-
+   
 
 int main (){
 
@@ -591,8 +617,9 @@ enemyInit(&enemy, &world, &region);
 putXOnEdges(&world);
 enemyInitialPos(&enemy, &world, &region);
 enemyInit(&enemy, &world, &region);
+connectRegions(&world, 0, 1, 1, 0);
 
-connectRegions(&region, &world, 0, 1, 1, 1);
+
 //movement i ispis
 while(1){
 
@@ -600,6 +627,7 @@ movement(&player,&world);
 initPlayer(&player,&world);
 enemyLogic(&enemy, &world,&region, 0);
 enemyInit(&enemy, &world, &region);
+
 //enemyLogic(&enemy, &world,&region, 0);
 
 
