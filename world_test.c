@@ -315,10 +315,10 @@ typedef struct{
     
 
     
-            int i=y+height/2-2;
+            int i=y+height/2-1;
 
             
-            world->data[i][x] = VRATA;
+            world->data[i][x] = '0';
             region0->doors[brVrata].y = i;
             region0->doors[brVrata].x = x;
 
@@ -339,7 +339,7 @@ typedef struct{
             int i=y+height/2;
             int j=x+width;
 
-            world->data[i][j] = VRATA;
+            world->data[i][j] = '1';
             region0->doors[brVrata].y = i;
             region0->doors[brVrata].x = j;
 
@@ -362,7 +362,7 @@ typedef struct{
         int j=x+width/2;
 
 
-        world->data[y][j] = VRATA;
+        world->data[y][j] ='1';
         region0->doors[brVrata].y = y;
         region0->doors[brVrata].x = j;
 
@@ -384,7 +384,7 @@ typedef struct{
         int j=x+width/2;
         int i=y+height;
 
-        world->data[i][j] = VRATA;
+        world->data[i][j] = '3';
         region0->doors[brVrata].y = i;
         region0->doors[brVrata].x = j;
 
@@ -397,25 +397,26 @@ typedef struct{
         
         //regija 0
         doorL(region, world, 0, 0);
-        doorR(region, world, 0, 1);
-          doorB(region, world, 0, 2);
+        doorR(region, world, 0, 2);
+        doorB(region, world, 0, 3);
 
 
 
         //regija 1
         doorL(region, world, 1, 0);
-         doorR(region, world, 1, 1);
+        doorR(region, world, 1, 2);
          
         
 
          //regija 2
-         doorT(region, world, 2, 0);
-         doorR(region, world, 2, 1);
+         doorL(region, world, 2, 0);
+         doorT(region, world, 2, 1);
+         doorR(region, world, 2, 2);
 
 
          //regija 3
-          doorR(region, world, 3, 0);
-         doorB(region, world, 3, 1);
+         doorR(region, world, 3, 0);
+         doorB(region, world, 3, 2);
         
 
 
@@ -638,7 +639,9 @@ enemyInit(&enemy, &world, &region);
 putXOnEdges(&world);
 enemyInitialPos(&enemy, &world, &region);
 enemyInit(&enemy, &world, &region);
-connectRegions(&world, 0, 1, 1, 0);
+connectRegions(&world, 0, 1, 2, 0);
+connectRegions(&world, 0, 2, 3, 1);
+//void connectRegions(World *world, int r1, int r2, int door1, int door2)
 
 
 //movement i ispis
