@@ -5,7 +5,7 @@
     #include <stdlib.h>
     #include <Windows.h>
     #include <conio.h>
-    #define HODNJIK 176
+    #define HODNJIK 35
     #define VRATA 15
     #define ZID 186
     #define PLAFON 205
@@ -165,7 +165,7 @@ typedef struct{
 
 
 
-        if (newArea == '.' || newArea == '=' || newArea == VRATA) {  // ' ' je void, '=' je hodnjik, VRATA su vrata :/
+        if (newArea == '.' || newArea == HODNJIK || newArea == VRATA) {  // ' ' je void, '=' je hodnjik, VRATA su vrata :/
         
         
 
@@ -315,7 +315,7 @@ typedef struct{
     
 
     
-            int i=y+height/2;
+            int i=y+height/2-2;
 
             
             world->data[i][x] = VRATA;
@@ -424,11 +424,7 @@ typedef struct{
          
 
 
-    Region *region0 = &regions[0];
-           for(int i=0; i<4; i++){
-
-            printf("%d %d\n", region0->doors[i].y, region0->doors[i].x);
-           }
+ 
 
 
            //regija 1
@@ -555,39 +551,64 @@ void connectRegions(World *world, int r1, int r2, int door1, int door2) {
     Position start = region0->doors[door1];
     Position end = region1->doors[door2];
 
-    // Prioritize horizontal movement
-    while (start.x != end.x) {
-        if (start.x >= 0 && start.x < WIDTH && start.y >= 0 && start.y < HEIGHT &&
-            world->data[start.y][start.x] == ' ') {
-            world->data[start.y][start.x] = '=';
+    int movex=start.x;
+    int movey=start.y;
+
+printf("Start x %d    Start y%d\n", start.x, start.y);
+printf("End  x %d     End y%d\n", end.x, end.y);
+
+   
+
+while (movex!=end.x || movey!=end.y){
+//desno dole
+      if (movex < end.x && movey < end.y) {
+
+    movex++;
+    printf("Desno dodle: x++ \n");
+    world->data[movey][movex] = HODNJIK;
+    movey++;
+    printf("Desno dodle: y++ \n");
+     world->data[movey][movex] = HODNJIK;
+ 
+}
+
+
+//desno gore
+  if (movex<end.x && movey>end.y){
+            movex++;
+             world->data[movey][movex] = HODNJIK;
+               printf("Desno gore: x++\n");
+            movey--;
+            printf("Desno gore: y--\n");
+            world->data[movey][movex] = HODNJIK;
+         
+
+            
         }
 
-        if (start.x < end.x) {
-            start.x++;
-        } else {
-            start.x--;
+
+//pravac horizontalno
+    if (movey==end.y){
+            movex++;
+            printf("Pravac:  x++ \n");
+            world->data[movey][movex] = HODNJIK;
+       
+
+            
         }
+
+//pravac vertikalno
+
+
+//gore
+
+//dole
+
+
+
     }
 
-    // Then prioritize vertical movement
-    while (start.y != end.y) {
-        if (start.x >= 0 && start.x < WIDTH && start.y >= 0 && start.y < HEIGHT &&
-            world->data[start.y][start.x] == ' ') {
-            world->data[start.y][start.x] = '=';
-        }
 
-        if (start.y < end.y) {
-            start.y++;
-        } else {
-            start.y--;
-        }
-    }
-
-    // Ensure the final position is filled
-    if (start.x >= 0 && start.x < WIDTH && start.y >= 0 && start.y < HEIGHT &&
-        world->data[start.y][start.x] == ' ') {
-        world->data[start.y][start.x] = '=';
-    }
 }
 
 
