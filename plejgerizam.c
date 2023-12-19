@@ -546,115 +546,76 @@ void putXOnEdges(World *world) {
 
 
 
-void connectRegions(World *world, int r1, int r2, int door1, int door2) {
+int connectDoors(World *world, int r1, int r2, int door1, int door2)
+{
+
     Region *region0 = &regions[r1];
     Region *region1 = &regions[r2];
 
-    Position start = region0->doors[door1];
-    Position end = region1->doors[door2];
 
-    int movex=start.x;
-    int movey=start.y;
+  
+    Position temp;
+    Position end;
+    Position previous;
 
-printf("Start x %d    Start y%d\n", start.x, start.y);
-printf("End  x %d     End y%d\n", end.x, end.y);
+    int count = 0;
 
-   
+    temp.x =region0->doors[door1].x;
+    temp.y = region0->doors[door1].y;
 
-//cisto desno
+    end.x= region1->doors[door2].x;
+    end.y= region1->doors[door2].y;
 
-// gura hodnjik izvan vrata
-switch (door1){
-    case 0:
-    
-    movex--;
-    world->data[movey][movex] = '=';
-    break;
-    case 1:
 
-    movey--;
-    world->data[movey][movex] = '=';
-    break;
+    previous = temp;
 
-    case 2:
-    movex++;
-    world->data[movey][movex] = '=';
-    break;
+    while (temp.x!= end.x || temp.y != end.y)
+    {
+        /* step left */
+        if ((abs((temp.x - 1) - end.x) < abs(temp.x - end.x)) && (world->data[temp.y][temp.x-1] == ' '))
+        {
+            previous.x = temp.x;
+            temp.x = temp.x - 1;
+               world->data[temp.y][temp.x] = '=';
+        /* step right */
+        } else if ((abs((temp.x + 1) - end.x) < abs(temp.x - end.x)) && (world->data[temp.y][temp.x + 1] == ' '))
+        {
+            previous.x = temp.x;
+            temp.x = temp.x + 1;
+               world->data[temp.y][temp.x] = '=';
+        /* step down */
+        } else if ((abs((temp.y + 1) - end.y) < abs(temp.y - end.y)) && (world->data[temp.y + 1][temp.x]  == ' '))
+        {
+            previous.y = temp.y;
+            temp.y = temp.y + 1;
+               world->data[temp.y][temp.x] = '=';
+        /* step up */
+        } else if ((abs((temp.y - 1) - end.y) < abs(temp.y - end.y)) && (world->data[temp.y - 1][temp.x]  == ' '))
+        {
+            previous.y = temp.y;
+            temp.y = temp.y - 1;
+               world->data[temp.y][temp.x] = '=';
+        } else
+        {
+            if (count == 0)
+            {
+                temp = previous;
+                count++;
+                continue;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
-    case 3:
-    movey++;
-    world->data[movey][movex] = '=';
-    break;
+     
+
+
+    }
+
+    return 1;
 }
-
-switch (door2){
-    case 0:
-    
-    end.x--;
-    world->data[end.y][end.x] = '=';
-    break;
-    case 1:
-
-    end.y--;
-    world->data[end.y][end.x] = '=';
-    break;
-
-    case 2:
-    end.x++;
-    world->data[end.y][end.x] = '=';
-    break;
-
-    case 3:
-    end.y++;
-    world->data[end.y][end.x] = '=';
-    break;
-}
-
-
-// regija 0 na regiju 2. Testirano da regija 2 ide u desno opet radi. Trenutno clippa sa regijom 1 ako rpevsie udesno ide regija 2.
-
-
-// Odozgo prema dole desno
-    while (movex!=end.x || movey!=end.y){
-
- if ((movey<end.y && movex==end.x) && world->data[movex][movey+1]==' '){
-        movey++;
-        world->data[movey][movex] = '=';
-    }
-
-   else if (movex<end.x){
-        movex++;
-        world->data[movey][movex] = '=';
-    }
-   // odozgo prema dole lijevo
- if (movey<end.y && movex==end.x ){
-        movey++;
-        world->data[movey][movex] = '=';
-    }
-
-   else if (movex>end.x ){
-        movex--;
-        world->data[movey][movex] = '=';
-    }
-   
- if (movey>end.y && movex==end.x ){
-        movey--;
-        world->data[movey][movex] = '=';
-    }
-
-   else if (movex<end.x){
-        movex++;
-        world->data[movey][movex] = '=';
-    }
-   
-
-    }
-
-// odozdo prema gore desno
-
-
-
-    }
 
 
 
@@ -692,7 +653,7 @@ enemyInit(&enemy, &world, &region);
 putXOnEdges(&world);
 enemyInitialPos(&enemy, &world, &region);
 enemyInit(&enemy, &world, &region);
-connectRegions(&world, 0, 2, 2, 1);
+connectDoors(&world, 0, 1, 2, 1);
 //void connectRegions(World *world, int r1, int r2, int door1, int door2)
 
 
