@@ -17,6 +17,7 @@
     #define WIDTH 80
 
 
+
 typedef struct{
     int x,y;
 }Position; 
@@ -339,7 +340,7 @@ typedef struct{
             int i=y+height/2;
             int j=x+width;
 
-            world->data[i][j] = '1';
+            world->data[i][j] = '2';
             region0->doors[brVrata].y = i;
             region0->doors[brVrata].x = j;
 
@@ -416,7 +417,7 @@ typedef struct{
 
          //regija 3
          doorR(region, world, 3, 0);
-         doorB(region, world, 3, 2);
+         doorB(region, world, 3, 3);
         
 
 
@@ -588,9 +589,46 @@ while (movex!=end.x || movey!=end.y){
         }
 
 
+// lijevo dole
+
+if (movex > end.x && movey < end.y) {
+
+    movex--;
+    printf("Desno dodle: x++ \n");
+    world->data[movey][movex] = HODNJIK;
+    movey++;
+    printf("Desno dodle: y++ \n");
+     world->data[movey][movex] = HODNJIK;
+ 
+}
+
+
+
+// lijevo gore
+
+if (movex < end.x && movey > end.y) {
+
+    movex++;
+    printf("Desno dodle: x++ \n");
+    world->data[movey][movex] = HODNJIK;
+    movey--;
+    printf("Desno dodle: y++ \n");
+     world->data[movey][movex] = HODNJIK;
+ 
+}
+
+
 //pravac horizontalno
-    if (movey==end.y){
+    if (movey==end.y && movex<end.x){
             movex++;
+            printf("Pravac:  x++ \n");
+            world->data[movey][movex] = HODNJIK;
+       
+
+            
+        }
+         if (movey==end.y && movex>end.x){
+            movex--;
             printf("Pravac:  x++ \n");
             world->data[movey][movex] = HODNJIK;
        
@@ -640,7 +678,6 @@ putXOnEdges(&world);
 enemyInitialPos(&enemy, &world, &region);
 enemyInit(&enemy, &world, &region);
 connectRegions(&world, 0, 1, 2, 0);
-connectRegions(&world, 0, 2, 3, 1);
 //void connectRegions(World *world, int r1, int r2, int door1, int door2)
 
 

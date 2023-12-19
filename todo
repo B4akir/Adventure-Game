@@ -2,10 +2,11 @@
 
 Problemi:
 
-
-
-1 Regions:
-        - napravi svijet
+ - Spajanje regija:
+      - Ne mogu spojiti regiju 2 sa regijom 1
+      - Koristim write varijable, koje trebaju biti read only
+      - Hodnjici idu dijagonalno
+      - Hodnjici klipaju zidove i vrata
 
 
 
