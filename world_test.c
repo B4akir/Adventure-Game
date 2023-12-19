@@ -166,7 +166,7 @@ typedef struct{
 
 
 
-        if (newArea == '.' || newArea == HODNJIK || newArea == VRATA) {  // ' ' je void, '=' je hodnjik, VRATA su vrata :/
+        if (newArea == '.' || newArea == '=' || newArea == VRATA) {  // ' ' je void, '=' je hodnjik, VRATA su vrata :/
         
         
 
@@ -283,9 +283,9 @@ typedef struct{
     void initializeRegions(World *world) {
 
         
-        regionInit(&regions[0], /* y*/1,   /* x*/ 1, /* height*/ 5,  /* width*/  7, '.');
+       regionInit(&regions[0], /* y*/1,   /* x*/ 1, /* height*/ 5,  /* width*/  7, '.');
         regionInit(&regions[1], /* y*/1,   /* x*/ 18, /* height*/ 7,  /* width*/  9, '.');
-        regionInit(&regions[2], /* y*/ 10,   /* x*/ 12, /* height*/ 6,  /* width*/  25, '.');
+        regionInit(&regions[2], /* y*/ 10,   /* x*/ 3, /* height*/ 4,  /* width*/  7, '.');
         regionInit(&regions[3], /* y*/ 5,   /* x*/ 37, /* height*/ 4,  /* width*/  15, '.');
         regionInit(&regions[4], /* y*/ 1,   /* x*/62 , /* height*/ 15,  /* width*/  9, '.');
 
@@ -561,97 +561,112 @@ printf("End  x %d     End y%d\n", end.x, end.y);
 
    
 
-while (movex!=end.x || movey!=end.y){
-//desno dole
-      if (movex < end.x && movey < end.y) {
+//cisto desno
 
-    movex++;
-    printf("Desno dodle: x++ \n");
-    world->data[movey][movex] = HODNJIK;
-    movey++;
-    printf("Desno dodle: y++ \n");
-     world->data[movey][movex] = HODNJIK;
- 
-}
-
-
-//desno gore
-  if (movex<end.x && movey>end.y){
-            movex++;
-             world->data[movey][movex] = HODNJIK;
-               printf("Desno gore: x++\n");
-            movey--;
-            printf("Desno gore: y--\n");
-            world->data[movey][movex] = HODNJIK;
-         
-
-            
-        }
-
-
-// lijevo dole
-
-if (movex > end.x && movey < end.y) {
-
+// gura hodnjik izvan vrata
+switch (door1){
+    case 0:
+    
     movex--;
-    printf("Desno dodle: x++ \n");
-    world->data[movey][movex] = HODNJIK;
-    movey++;
-    printf("Desno dodle: y++ \n");
-     world->data[movey][movex] = HODNJIK;
- 
-}
+    world->data[movey][movex] = '=';
+    break;
+    case 1:
 
-
-
-// lijevo gore
-
-if (movex < end.x && movey > end.y) {
-
-    movex++;
-    printf("Desno dodle: x++ \n");
-    world->data[movey][movex] = HODNJIK;
     movey--;
-    printf("Desno dodle: y++ \n");
-     world->data[movey][movex] = HODNJIK;
- 
+    world->data[movey][movex] = '=';
+    break;
+
+    case 2:
+    movex++;
+    world->data[movey][movex] = '=';
+    break;
+
+    case 3:
+    movey++;
+    world->data[movey][movex] = '=';
+    break;
+}
+
+switch (door2){
+    case 0:
+    
+    end.x--;
+    world->data[end.y][end.x] = '=';
+    break;
+    case 1:
+
+    end.y--;
+    world->data[end.y][end.x] = '=';
+    break;
+
+    case 2:
+    end.x++;
+    world->data[end.y][end.x] = '=';
+    break;
+
+    case 3:
+    end.y++;
+    world->data[end.y][end.x] = '=';
+    break;
 }
 
 
-//pravac horizontalno
-    if (movey==end.y && movex<end.x){
-            movex++;
-            printf("Pravac:  x++ \n");
-            world->data[movey][movex] = HODNJIK;
-       
-
-            
-        }
-         if (movey==end.y && movex>end.x){
-            movex--;
-            printf("Pravac:  x++ \n");
-            world->data[movey][movex] = HODNJIK;
-       
-
-            
-        }
-
-//pravac vertikalno
+// regija 0 na regiju 2. Testirano da regija 2 ide u desno opet radi. Trenutno clippa sa regijom 1 ako rpevsie udesno ide regija 2.
 
 
-//gore
+// Odozgo prema dole desno
+    while (movex!=end.x || movey!=end.y){
 
-//dole
+ if (movey<end.y && movex==end.x ){
+        movey++;
+        world->data[movey][movex] = '=';
+    }
+
+   else if (movex<end.x){
+        movex++;
+        world->data[movey][movex] = '=';
+    }
+   // odozgo prema dole lijevo
+ if (movey<end.y && movex==end.x ){
+        movey++;
+        world->data[movey][movex] = '=';
+    }
+
+   else if (movex>end.x){
+        movex--;
+        world->data[movey][movex] = '=';
+    }
+   
+ if (movey>end.y && movex==end.x ){
+        movey--;
+        world->data[movey][movex] = '=';
+    }
+
+   else if (movex<end.x){
+        movex++;
+        world->data[movey][movex] = '=';
+    }
+   
+
+    }
+
+// odozdo prema gore desno
 
 
 
     }
 
 
-}
+
+ 
 
 
    
+
+
+
+
+
 
 int main (){
 
@@ -677,7 +692,7 @@ enemyInit(&enemy, &world, &region);
 putXOnEdges(&world);
 enemyInitialPos(&enemy, &world, &region);
 enemyInit(&enemy, &world, &region);
-connectRegions(&world, 0, 1, 2, 0);
+connectRegions(&world, 0, 2, 2, 1);
 //void connectRegions(World *world, int r1, int r2, int door1, int door2)
 
 
