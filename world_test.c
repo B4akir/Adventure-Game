@@ -177,6 +177,9 @@ typedef struct{
             player->position.y = newY;
             player->position.x = newX;
         }
+
+        //make wait for 1 second
+        Sleep(100);
     }
 
     // inicijalizira playera na mjesto deklarisano u funkciji movement
@@ -285,7 +288,7 @@ typedef struct{
         
        regionInit(&regions[0], /* y*/1,   /* x*/ 1, /* height*/ 5,  /* width*/  7, '.');
         regionInit(&regions[1], /* y*/1,   /* x*/ 18, /* height*/ 7,  /* width*/  9, '.');
-        regionInit(&regions[2], /* y*/ 10,   /* x*/ 3, /* height*/ 4,  /* width*/  7, '.');
+        regionInit(&regions[2], /* y*/ 10,   /* x*/ 5, /* height*/ 4,  /* width*/  20, '.');
         regionInit(&regions[3], /* y*/ 5,   /* x*/ 37, /* height*/ 4,  /* width*/  15, '.');
         regionInit(&regions[4], /* y*/ 1,   /* x*/62 , /* height*/ 15,  /* width*/  9, '.');
 
@@ -319,7 +322,7 @@ typedef struct{
             int i=y+height/2-1;
 
             
-            world->data[i][x] = '0';
+            world->data[i][x] = VRATA;
             region0->doors[brVrata].y = i;
             region0->doors[brVrata].x = x;
 
@@ -340,7 +343,7 @@ typedef struct{
             int i=y+height/2;
             int j=x+width;
 
-            world->data[i][j] = '2';
+            world->data[i][j] = VRATA;
             region0->doors[brVrata].y = i;
             region0->doors[brVrata].x = j;
 
@@ -363,7 +366,7 @@ typedef struct{
         int j=x+width/2;
 
 
-        world->data[y][j] ='1';
+        world->data[y][j] =VRATA;
         region0->doors[brVrata].y = y;
         region0->doors[brVrata].x = j;
 
@@ -385,7 +388,7 @@ typedef struct{
         int j=x+width/2;
         int i=y+height;
 
-        world->data[i][j] = '3';
+        world->data[i][j] = VRATA;
         region0->doors[brVrata].y = i;
         region0->doors[brVrata].x = j;
 
@@ -397,7 +400,7 @@ typedef struct{
         
         
         //regija 0
-        doorL(region, world, 0, 0);
+        
         doorR(region, world, 0, 2);
         doorB(region, world, 0, 3);
 
@@ -405,18 +408,20 @@ typedef struct{
 
         //regija 1
         doorL(region, world, 1, 0);
-        doorR(region, world, 1, 2);
-         
+        
+        doorB(region, world, 1, 3);
+
         
 
          //regija 2
-         doorL(region, world, 2, 0);
+         
          doorT(region, world, 2, 1);
          doorR(region, world, 2, 2);
 
 
          //regija 3
-         doorR(region, world, 3, 0);
+         doorT(region, world, 2, 1);
+         doorR(region, world, 3, 2);
          doorB(region, world, 3, 3);
         
 
@@ -619,7 +624,30 @@ int connectDoors(World *world, int r1, int r2, int door1, int door2)
 }
 
 
+void initHallways(World *world) {
+   
 
+   // Regija 0 sa regijom 1
+    connectDoors(world, 0, 1, 2, 0);
+
+
+    // regija 0 sa regijom 3
+    connectDoors(world, 0, 2, 3, 1);
+
+    // regija 1 sa regijom 2
+    connectDoors(world, 1, 2, 3, 1);
+
+
+    //regija 2 sa regijom 3
+    connectDoors(world, 2, 3, 2, 3);
+
+
+    // regija 3 sa regijom 4
+    connectDoors(world, 3, 4, 2, 0); 
+
+    
+   
+}
  
 
 
@@ -654,7 +682,7 @@ enemyInit(&enemy, &world, &region);
 putXOnEdges(&world);
 enemyInitialPos(&enemy, &world, &region);
 enemyInit(&enemy, &world, &region);
-connectDoors(&world, 1, 2, 0, 1);
+initHallways(&world);
 //void connectRegions(World *world, int r1, int r2, int door1, int door2)
 
 
