@@ -5,6 +5,7 @@
     #include <stdlib.h>
     #include <Windows.h>
     #include <conio.h>
+    #include <time.h>
     #define HODNJIK 35
     #define VRATA 15
     #define ZID 186
@@ -63,9 +64,9 @@ typedef struct{
                 } Region;
 
         // array regija
-            Region regions[5];
+       
 
-
+     Region regions[5];
 
 // world 
     void initWorld(World *world) {
@@ -100,11 +101,12 @@ typedef struct{
 
 //player funkcije
 
-    void initalPosition(Player *player){ // pocetna pozicija playera
+    void initalPosition(Player *player, Region *region){ // pocetna pozicija playera
 
+    Region *region0 = &regions[0];
     player->oldChar = '.';
-    player->position.y= 4;
-    player->position.x= 7;
+    player->position.y= region0->position.y+1;
+    player->position.x= region0->position.x+1;
 
 
     }; 
@@ -285,12 +287,16 @@ typedef struct{
 
     void initializeRegions(World *world) {
 
-        
-       regionInit(&regions[0], /* y*/1,   /* x*/ 1, /* height*/ 5,  /* width*/  7, '.');
-        regionInit(&regions[1], /* y*/1,   /* x*/ 18, /* height*/ 7,  /* width*/  9, '.');
-        regionInit(&regions[2], /* y*/ 10,   /* x*/ 5, /* height*/ 4,  /* width*/  20, '.');
-        regionInit(&regions[3], /* y*/ 5,   /* x*/ 37, /* height*/ 4,  /* width*/  15, '.');
-        regionInit(&regions[4], /* y*/ 1,   /* x*/62 , /* height*/ 15,  /* width*/  9, '.');
+
+        srand(time(0));
+        int randomNumber = 5+rand()%10;
+
+      
+       regionInit(&regions[0], /* y*/1,   /* x*/ 1, /* height*/  3+rand()%(6-3),  /* width*/  4+rand()%(8-4), '.');
+        regionInit(&regions[1], /* y*/1,   /* x*/ 18, /* height*/ 7,  /* width*/  14, '.');
+        regionInit(&regions[2], /* y*/ 12,   /* x*/ 5, /* height*/ 4,  /* width*/  20+rand()%(30-20), '.');
+        regionInit(&regions[3], /* y*/ 2+rand()%(9-2),   /* x*/ 37, /* height*/ 4,  /* width*/  15, '.');
+        regionInit(&regions[4], /* y*/ 1,   /* x*/62 , /* height*/ 5+rand()%(15-5),  /* width*/  9, '.');
 
 
         for (int i = 0; i < 7; i++) {
@@ -674,15 +680,15 @@ Enemy enemy;
 
 // pocetne inicijalizacije
 kreator(&player);
-initalPosition(&player);
 initWorld(&world);
 initializeRegions(&world);
 initializeDoors(&world, &region);
 enemyInit(&enemy, &world, &region); 
 putXOnEdges(&world);
-enemyInitialPos(&enemy, &world, &region);
-enemyInit(&enemy, &world, &region);
+//enemyInitialPos(&enemy, &world, &region);
+//enemyInit(&enemy, &world, &region);
 initHallways(&world);
+initalPosition(&player, &region);
 //void connectRegions(World *world, int r1, int r2, int door1, int door2)
 
 
@@ -691,8 +697,8 @@ while(1){
 
 movement(&player,&world);
 initPlayer(&player,&world);
-enemyLogic(&enemy, &world,&region, 0);
-enemyInit(&enemy, &world, &region);
+//enemyLogic(&enemy, &world,&region, 0);
+//enemyInit(&enemy, &world, &region);
 
 //enemyLogic(&enemy, &world,&region, 0);
 

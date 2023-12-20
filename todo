@@ -3,11 +3,9 @@
 Problemi:
 
  - Spajanje regija:
-      - Ne mogu spojiti regiju 2 sa regijom 1
-      - Koristim write varijable, koje trebaju biti read only
-      - Hodnjici idu dijagonalno
-      - Hodnjici klipaju zidove i vrata
+     - Treba jos malo modifikacije
 
+- Laggy af
 
 
 Todo:
@@ -16,7 +14,7 @@ Todo:
  2. Napraviti iteme
  3. Napraviti combat sistem
  4. Napraviti inventory
- 5. Napraviti efikasniji ispis
+
 
 
 Future:
