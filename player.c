@@ -9,7 +9,7 @@ void initalPosition(Player *player, Region *region){ // pocetna pozicija playera
 
 
     }; 
-void movement(Player *player, World *world){ // player movement
+void movement(Player *player, World *world, Region *region){ // player movement
 
 
         int newX, newY;
@@ -72,6 +72,16 @@ void movement(Player *player, World *world){ // player movement
             player->position.x = newX;
         }
 
+
+    else if ( newArea=='B'){
+
+       initiateCombat(player, &region);
+
+
+    }
+
+
+    
         //make wait for 1 second
         Sleep(100);
     }

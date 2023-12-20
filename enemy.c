@@ -30,7 +30,7 @@ region0->enemy.oldChar = '.';
        
         int randomNumber = rand() % 3;
        
-        region0->enemy.constKarakter = array[randomNumber];
+        region0->enemy.constKarakter = 'B';
 
 
 

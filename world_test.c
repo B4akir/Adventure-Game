@@ -37,7 +37,7 @@
     }
     *p = '\0'; // null terminate the string
     printf("%s", buffer);
-    printf("Health: %d                     Attack: %d                Adventurer:%s      \n", player->stats.health, player->stats.attack, player->ime);
+    printf("Health: %d(%d)                     Attack: %d(%d)                Adventurer:%s(%c)      \n", player->stats.health, player->stats.constHealth, player->stats.attack,player->stats.constAttack, player->ime, player->karakter);
 }
 
 
@@ -207,7 +207,7 @@ initalStatsEnemy(&region);
 
 while(1){
 
-movement(&player,&world);
+movement(&player,&world, &region);
 initPlayer(&player,&world);
 enemySpawnActivation(&player, &region,&world);
 
