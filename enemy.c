@@ -18,8 +18,19 @@ Region *region0 = &regions[i];
 
 region0->enemy.position.y = region0->position.y + region0->height / 2;
 region0->enemy.position.x = region0->position.x + region0->width / 2;
-region0->enemy.karakter='.';
 
+
+
+// make it fully random
+
+
+region0->enemy.oldChar = '.';
+
+ char array[3] = {'S', 'O', 'W'};
+       
+        int randomNumber = rand() % 3;
+       
+        region0->enemy.constKarakter = array[randomNumber];
 
 
 
@@ -27,6 +38,52 @@ region0->enemy.karakter='.';
 
 }
    }
+
+
+void enemyLogic(Enemy *enemy, World *world, Region *region, int index){
+
+    Region *region0= &regions[index];
+    
+    
+
+    world->data[region0->enemy.position.y][region0->enemy.position.x] = region0->enemy.oldChar;
+    int direction = rand() % 4; // Generate a random number between 0 and 3
+char newX, newY;
+    switch (direction) {
+        case 0: // Move up
+             newY=region0->enemy.position.y-1;
+             newX=region0->enemy.position.x;
+            break;
+        case 1: // Move down
+             newY=region0->enemy.position.y+1;
+            newX=region0->enemy.position.x;
+            break;
+        case 2: // Move left
+             newX=region0->enemy.position.x-1;
+              newY=region0->enemy.position.y;
+            break;
+        case 3: // Move right
+            newX=region0->enemy.position.x+1;
+            newY=region0->enemy.position.y;
+            break;
+    }
+char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli provjeriti da li je validno mjesto za pokretanje
+
+
+
+        if (newArea == '.') {  
+        
+        
+
+        region0->enemy.oldChar = world->data[newY][newX];
+        // ovo spasava karakter na koji player ide, da u sledecoj iteraciji loopa moze da ga vrati na staro mjesto
+            // salje u player strukturu nove kordinate playera
+            region0->enemy.position.y = newY;
+            region0->enemy.position.x = newX;
+        }
+    
+
+}
 
 
 
@@ -48,7 +105,17 @@ Region *region0 = &regions[i];
         (player->position.x >= region0->position.x && player->position.x <= region0->position.x + region0->width)) {
             //spawn enemy in this region
        region0->enemy.active = 1;
-       region0->enemy.karakter='E';
+       
+      region0->enemy.oldChar='.';
+       
+        //make array of random characters and pick one out of 3
+
+        region0->enemy.karakter = region0->enemy.constKarakter;
+        enemyLogic(&region0->enemy, world, region, i);
+    
+
+
+
     }
     else {
 

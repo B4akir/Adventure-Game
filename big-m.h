@@ -38,6 +38,7 @@ typedef struct{
 typedef struct{
     Position position;
     char karakter;
+    char constKarakter;
     char oldChar;
     Stats stats;
     int active;

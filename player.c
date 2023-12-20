@@ -5,7 +5,7 @@ void initalPosition(Player *player, Region *region){ // pocetna pozicija playera
     Region *region0 = &regions[0];
     player->oldChar = '.';
     player->position.y= region0->position.y+1;
-    player->position.x= region0->position.x+1;
+    player->position.x= region0->position.x+2;
 
 
     }; 
