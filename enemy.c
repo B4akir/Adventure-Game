@@ -87,5 +87,5 @@ Region *region0 = &regions[i];
 
 }
  
-
+//move enemy if enemy is active
 
