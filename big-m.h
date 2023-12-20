@@ -99,11 +99,12 @@ typedef struct{
           void doorT(Region *region, World *world, int index, int brVrata );
           void doorB(Region *region, World *world, int index, int brVrata );
            void initializeDoors(World *world, Region *region);
-      
+           void enemyInit( Region *region, World *world);
             void enemySpawnActivation(Player *player, Region *region, World *world);
             void putXOnEdges(World *world);
             int connectDoors(World *world, int r1, int r2, int door1, int door2);
             void initHallways(World *world);
              void playerHealth(Player *player);
+             void enemiesIntoWorld(World *world, Region *region);
 
      #endif

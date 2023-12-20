@@ -38,60 +38,6 @@
     }
 
 
-
-
-
-
-
-//player funkcije
-
-    
-
-
-
-    // ceka da player unese w a s d, 
-    // 
-
-    
-
-//karakter funkcije
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // salje regije preko regioninit, region arraya, region tipa i regionIntoWorld u world matrix
-
-  
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
 void putXOnEdges(World *world) {
     int rows = sizeof(world->data) / sizeof(world->data[0]);
     int cols = sizeof(world->data[0]) / sizeof(world->data[0][0]);
@@ -240,17 +186,21 @@ putXOnEdges(&world);
 
 initHallways(&world);
 initalPosition(&player, &region);
-//void connectRegions(World *world, int r1, int r2, int door1, int door2)
 
 
-//movement i ispis
+enemyInit(&region, &world);
+
+
+
+
+
 while(1){
-enemySpawnActivation(&player, &region, &world);
+
 movement(&player,&world);
 initPlayer(&player,&world);
+enemySpawnActivation(&player, &region,&world);
 
-
-
+enemiesIntoWorld(&world, &region);
 
 ispis(&world, &player);
 
