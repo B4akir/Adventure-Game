@@ -107,5 +107,8 @@ typedef struct{
             void initHallways(World *world);
              void playerHealth(Player *player);
              void enemiesIntoWorld(World *world, Region *region);
+void initalStatsEnemy(Region *region);
+
+        void initalStatsPlayer(Player *player);
 
      #endif

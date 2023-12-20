@@ -8,6 +8,7 @@
     #include "enemy.c"
     #include "regions.c"
     #include "player.c"
+    #include "combat.c"
 
 // world 
     void initWorld(World *world) {
@@ -25,17 +26,23 @@
 
     // ispisuje world
     void ispis(World *world, Player *player) {
-        system("cls");
-        for (int i = 0; i < HEIGHT; i++) {
-            for (int j = 0; j < WIDTH; j++) {
-                printf("%c", world->data[i][j]);
-            }
-            printf("\n");
+    system("cls");
+    char buffer[HEIGHT * (WIDTH + 1) + 1]; // +1 for each newline and +1 for null terminator
+    char *p = buffer;
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            *p++ = world->data[i][j];
         }
-    //print player name
-        printf("Health: %d                     Attack: %d                Adventurer:%s      \n", player->stats.health, player->stats.attack, player->ime);
-
+        *p++ = '\n';
     }
+    *p = '\0'; // null terminate the string
+    printf("%s", buffer);
+    printf("Health: %d                     Attack: %d                Adventurer:%s      \n", player->stats.health, player->stats.attack, player->ime);
+}
+
+
+
+
 
 
 void putXOnEdges(World *world) {
@@ -184,12 +191,16 @@ initializeRegions(&world);
 initializeDoors(&world, &region);
 putXOnEdges(&world);
 
+
+initalStatsPlayer(&player);
+
+
 initHallways(&world);
 initalPosition(&player, &region);
 
 
 enemyInit(&region, &world);
-
+initalStatsEnemy(&region);
 
 
 
