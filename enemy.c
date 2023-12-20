@@ -34,13 +34,15 @@ Region *region0 = &regions[i];
 
         world->data[region0->enemy.position.y][region0->enemy.position.x] = region0->enemy.karakter;
         
-
+        enemyMovement();
 
     }
     else {
+
+        //delete enemy in this region
+        
        region0->enemy.active = 0;
-        region0->enemy.karakter='.';
-        world->data[region0->enemy.position.y][region0->enemy.position.x] = region0->enemy.karakter;
+        world->data[region0->enemy.position.y][region0->enemy.position.x] = '.';
 
 
     }
@@ -52,9 +54,6 @@ Region *region0 = &regions[i];
 }
 }
 
-
-
-void enemyMovemeny();
 
 
 
