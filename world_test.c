@@ -32,8 +32,8 @@
             }
             printf("\n");
         }
-
-        printf("Health: %d                     Attack: %d                      ", player->stats.health, player->stats.attack);
+    //print player name
+        printf("Health: %d                     Attack: %d                Adventurer:%s      \n", player->stats.health, player->stats.attack, player->ime);
 
     }
 
@@ -236,10 +236,8 @@ kreator(&player);
 initWorld(&world);
 initializeRegions(&world);
 initializeDoors(&world, &region);
-enemyInit(&enemy, &world, &region); 
 putXOnEdges(&world);
-//enemyInitialPos(&enemy, &world, &region);
-//enemyInit(&enemy, &world, &region);
+
 initHallways(&world);
 initalPosition(&player, &region);
 //void connectRegions(World *world, int r1, int r2, int door1, int door2)
@@ -250,10 +248,8 @@ while(1){
 
 movement(&player,&world);
 initPlayer(&player,&world);
-//enemyLogic(&enemy, &world,&region, 0);
-//enemyInit(&enemy, &world, &region);
 
-//enemyLogic(&enemy, &world,&region, 0);
+
 
 
 ispis(&world, &player);

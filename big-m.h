@@ -97,9 +97,8 @@ typedef struct{
           void doorT(Region *region, World *world, int index, int brVrata );
           void doorB(Region *region, World *world, int index, int brVrata );
            void initializeDoors(World *world, Region *region);
-            void enemyInitialPos(Enemy *enemy, World *world, Region *region);
-            void enemyLogic(Enemy *enemy, World *world, Region *region, int index);
-            void enemyInit(Enemy *enemy, World *world, Region *region) ;
+      
+           
             void putXOnEdges(World *world);
             int connectDoors(World *world, int r1, int r2, int door1, int door2);
             void initHallways(World *world);
