@@ -25,6 +25,14 @@ typedef struct{
 
 
 typedef struct{
+
+    int health;
+    int attack;
+
+
+}Stats;
+
+typedef struct{
     Position position;
     char karakter;
     char oldChar;
@@ -41,6 +49,7 @@ typedef struct{
     char karakter;
     char oldChar;
     char ime[20];
+    Stats stats;
 
         }Player;
 
@@ -83,7 +92,7 @@ typedef struct{
 
 
     // ispisuje world
-    void ispis(World *world) {
+    void ispis(World *world, Player *player) {
         system("cls");
         for (int i = 0; i < HEIGHT; i++) {
             for (int j = 0; j < WIDTH; j++) {
@@ -91,6 +100,9 @@ typedef struct{
             }
             printf("\n");
         }
+
+        printf("Health: %d                     Attack: %d                      ", player->stats.health, player->stats.attack);
+
     }
 
 
@@ -651,13 +663,19 @@ void initHallways(World *world) {
     // regija 3 sa regijom 4
     connectDoors(world, 3, 4, 2, 0); 
 
-    
+     
    
 }
  
 
 
-   
+   void playerHealth(Player *player){
+
+    player->stats.health = 100;
+    player->stats.attack = 10;
+
+
+   }
 
 
 
@@ -703,7 +721,7 @@ initPlayer(&player,&world);
 //enemyLogic(&enemy, &world,&region, 0);
 
 
-ispis(&world);
+ispis(&world, &player);
 
 
 
