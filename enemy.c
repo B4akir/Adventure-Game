@@ -40,7 +40,7 @@ region0->enemy.oldChar = '.';
    }
 
 
-void enemyLogic(Enemy *enemy, World *world, Region *region, int index){
+void enemyLogic(Enemy *enemy, World *world, Region *region, int index, Player *player){
 
     Region *region0= &regions[index];
     
@@ -81,10 +81,13 @@ char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli prov
             region0->enemy.position.y = newY;
             region0->enemy.position.x = newX;
         }
-    
+    else if (newArea==player->karakter){
+        initiateCombat(player, &region);
+
 
 }
 
+}
 
 
 void enemySpawnActivation(Player *player, Region *region, World *world){
@@ -111,7 +114,7 @@ Region *region0 = &regions[i];
         //make array of random characters and pick one out of 3
 
         region0->enemy.karakter = region0->enemy.constKarakter;
-        enemyLogic(&region0->enemy, world, region, i);
+        enemyLogic(&region0->enemy, world, region, i, player);
     
 
 

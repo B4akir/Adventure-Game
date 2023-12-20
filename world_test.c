@@ -25,7 +25,11 @@
 
 
     // ispisuje world
-    void ispis(World *world, Player *player) {
+    void ispis(World *world, Player *player, Region *region) {
+
+Region *region0 = &regions[0];
+
+
     system("cls");
     char buffer[HEIGHT * (WIDTH + 1) + 1]; // +1 for each newline and +1 for null terminator
     char *p = buffer;
@@ -38,6 +42,8 @@
     *p = '\0'; // null terminate the string
     printf("%s", buffer);
     printf("Health: %d(%d)                     Attack: %d(%d)                Adventurer:%s(%c)      \n", player->stats.health, player->stats.constHealth, player->stats.attack,player->stats.constAttack, player->ime, player->karakter);
+    printf("Enemy: Health: %d                     Attack: %d \n", region0->enemy.stats.health, region0->enemy.stats.attack);
+
 }
 
 
@@ -213,7 +219,7 @@ enemySpawnActivation(&player, &region,&world);
 
 enemiesIntoWorld(&world, &region);
 
-ispis(&world, &player);
+ispis(&world, &player,&region);
 
 
 
