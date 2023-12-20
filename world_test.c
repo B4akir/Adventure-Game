@@ -245,7 +245,7 @@ initalPosition(&player, &region);
 
 //movement i ispis
 while(1){
-
+enemySpawnActivation(&player, &region, &world);
 movement(&player,&world);
 initPlayer(&player,&world);
 
