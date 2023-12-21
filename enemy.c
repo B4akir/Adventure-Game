@@ -31,7 +31,7 @@ region0->enemy.oldChar = '.';
         int randomNumber = rand() % 3;
        
         region0->enemy.constKarakter = 'B';
-
+        region0->enemy.alive=1;
 
 
 
@@ -107,23 +107,31 @@ Region *region0 = &regions[i];
     if ((player->position.y >= region0->position.y && player->position.y <= region0->position.y + region0->height) &&
         (player->position.x >= region0->position.x && player->position.x <= region0->position.x + region0->width)) {
             //spawn enemy in this region
-       region0->enemy.active = 1;
+     
        
       region0->enemy.oldChar='.';
        
         //make array of random characters and pick one out of 3
-
+        if (region0->enemy.alive==1){
         region0->enemy.karakter = region0->enemy.constKarakter;
         enemyLogic(&region0->enemy, world, region, i, player);
     
 
 
+        }
+
+        else if (region0->enemy.alive==0){
+            region0->enemy.karakter='.';
+        }
+       
+
+
 
     }
-    else {
+    else  {
 
         //delete enemy in this region
-       region0->enemy.active = 0;
+      
        region0->enemy.karakter='.';
       
 

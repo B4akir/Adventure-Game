@@ -44,7 +44,7 @@ typedef struct{
     char constKarakter;
     char oldChar;
     Stats stats;
-    int active;
+    int alive;
 
 } Enemy;
 

@@ -109,10 +109,3 @@ void movement(Player *player, World *world, Region *region){ // player movement
 
 
 
-void playerHealth(Player *player){
-
-    player->stats.health = 100;
-    player->stats.attack = 10;
-
-
-   }

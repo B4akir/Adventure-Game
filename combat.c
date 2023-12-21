@@ -37,60 +37,42 @@ void initiateCombat(Player *player, Region *region){
 
 int num1= rand() % player->stats.attack;
 
+
+
 int num2= rand() % region0->enemy.stats.attack;
 
 
-   
+   //enemy
+  if (region0->enemy.stats.health<=0){
+    region0->enemy.alive=0;
+
+  }
 
 
-    //player udari zivotinju
-if (num1!=0){
+if (player->stats.health<=0){
+    //dead
 
-    region->enemy.stats.health= region->enemy.stats.health - num1;
-
-
-}
-
-     else if(num1<=0){
-        
-        //miss
-
-     }
-
-if (num2!=0){
-
-
-player->stats.health= player->stats.health - num2;
-
-}
-
-
-else if (num2!=0){
-
-//miss
-
-}
+  }
 
 
 
-    if (region0->enemy.stats.health<=0){
+region0->enemy.stats.health=region0->enemy.stats.health-num1;
+player->stats.health=player->stats.health-num2;
 
-        region0->enemy.karakter='.';
 
-    }
 
-    if (player->stats.health<=0){
 
-        player->karakter='X';
 
-    }
-
-    
-    //
-    
-    
-    
 
 
 
 }
+
+
+
+
+    
+
+    
+    
+
