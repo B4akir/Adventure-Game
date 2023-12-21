@@ -171,7 +171,7 @@ else if (region0->enemy.alive==1) {
 
 
 
-    }
+    
     else {
 
         // vanjska if petlja, ako enemy nije dio regije, stavi enemy karakter kao .
@@ -185,7 +185,7 @@ else if (region0->enemy.alive==1) {
 
  
 
-
+}
 }
 }
 
