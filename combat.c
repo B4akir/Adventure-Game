@@ -1,7 +1,25 @@
 #include "big-m.h"
 
 
+void checkHealth(Region *region0){
+  if (region0->enemy.stats.health<=0){
+    region0->enemy.alive=0;
+    printf("Dead");
 
+
+  }
+
+  else if (region0->enemy.stats.health>0){
+     printf("Alive");
+
+    region0->enemy.alive=1;
+  }
+
+
+}
+
+
+// pocetne statse playera
 void initalStatsPlayer(Player *player){
 
 
@@ -13,6 +31,9 @@ void initalStatsPlayer(Player *player){
 
 
 }
+
+
+//pocetne statse enemya
 
 void initalStatsEnemy(Region *region){
 
@@ -29,33 +50,24 @@ void initalStatsEnemy(Region *region){
 }
 
 
-void initiateCombat(Player *player, Region *region){
 
 
-    Region *region0=&regions[0];
 
 
+
+// pozvana kada player ili enemy zeli doci na mjesto enemya ili playera
+
+// povezana sa enemyMovement i playerMovement
+
+void initiateCombat(Player *player, Region *region0){
+
+// uzima random broj od 0 do max napada playera
 int num1= rand() % player->stats.attack;
 
-
-
+// uzima random broj od 0 do max napada enemya
 int num2= rand() % region0->enemy.stats.attack;
 
-
-   //enemy
-  if (region0->enemy.stats.health<=0){
-    region0->enemy.alive=0;
-
-  }
-
-
-if (player->stats.health<=0){
-    player->alive=0;
-
-  }
-
-
-
+// odradi napade i player i enemy
 region0->enemy.stats.health=region0->enemy.stats.health-num1;
 player->stats.health=player->stats.health-num2;
 

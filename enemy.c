@@ -11,7 +11,7 @@
 
 //put coordinates of enemies in each region in the middle of the region
 
-
+// uzme svaku regiju i stavi enemya u sredinu regije
 for (int i=0; i<5; i++){
 
 Region *region0 = &regions[i];
@@ -21,16 +21,25 @@ region0->enemy.position.x = region0->position.x + region0->width / 2;
 
 
 
-// make it fully random
 
 
+// deklarise stari char svih enemya kao ., kada se enemy pomjeri prvi put, prosla pozicija ce biti tacka
 region0->enemy.oldChar = '.';
 
+
+
+// tipovi enemya. Ovo je temporary
  char array[3] = {'S', 'O', 'W'};
        
+
+       // uzme random broj od 0 do 3. Poslije cu implementirati random enemy selection
         int randomNumber = rand() % 3;
-       
+
+
+ //Hardcodea enemya kao B
         region0->enemy.constKarakter = 'B';
+        
+// stavlja enemya kao alive. Svi su na pocetku alive
         region0->enemy.alive=1;
 
 
@@ -40,13 +49,33 @@ region0->enemy.oldChar = '.';
    }
 
 
-void enemyLogic(Enemy *enemy, World *world, Region *region, int index, Player *player){
 
-    Region *region0= &regions[index];
+// pomjeranje enemya
+//pozvano je u enemySpawnActivation
+
+
+
+
+// sve varijable dobija od enemySpawnActivation
+
+void enemyLogic(World *world, Region *region, int index /* POTENCIJALNA GRESKA*/, Player *player){
+
+
+
+
+// uzima regiju, sa indexom koji je dobio od enemyspawnActivation.
+
+
+
+    Region *region0= &regions[index]; 
+    // index se salje iz enemySpawnActivation, kako bi se znalo u kojoj je regiji player
     
     
 
+// deklarise oldchar da ne bi ostavljo breadcrumbs
     world->data[region0->enemy.position.y][region0->enemy.position.x] = region0->enemy.oldChar;
+
+
     int direction = rand() % 4; // Generate a random number between 0 and 3
 char newX, newY;
     switch (direction) {
@@ -71,7 +100,7 @@ char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli prov
 
 
 
-        if (newArea == '.') {  
+        if (newArea == '.') {   //enemy se moze samo pomjerati unutar regije /* POTENCIJALNA GRESKA  */
         
         
 
@@ -81,8 +110,12 @@ char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli prov
             region0->enemy.position.y = newY;
             region0->enemy.position.x = newX;
         }
+
+
+        // Ako enemy zeli ici u poziciju playera, pozovi combat.
     else if (newArea==player->karakter){
-        initiateCombat(player, &region);
+        initiateCombat(player, region0);
+        
 
 
 }
@@ -94,44 +127,54 @@ void enemySpawnActivation(Player *player, Region *region, World *world){
 
 //detect in which region the player is
 
-for(int i=0; i<5; i++){
+for(int i=0; i<5; i++){ // ova salje indexe svima
 
 
 
 
 Region *region0 = &regions[i];
 
-// dadne 1 ako je player u regiji, dadne 0 ako je player izvan regije. Isptia svaku regiju, tkd zna u kojoj je regiji player.
+checkHealth(region0);
+
+if (region0->enemy.alive==0){
+    region0->enemy.karakter='.';
+}
 
 
+else if (region0->enemy.alive==1) {
+
+// ispita da li je player u trenutnoj regiji. Regija ima index i. 
+
+
+
+// ako je player u regiji 0, odradi akcije
     if ((player->position.y >= region0->position.y && player->position.y <= region0->position.y + region0->height) &&
         (player->position.x >= region0->position.x && player->position.x <= region0->position.x + region0->width)) {
-            //spawn enemy in this region
+           
      
-       
+       // stavi enemyOldChar da ne ostavlja za sobom breadcrumbs
       region0->enemy.oldChar='.';
        
-        //make array of random characters and pick one out of 3
-        if (region0->enemy.alive==1){
+
+ // pita da li je enemyAlive. Ako jeste, pokrece enemyLogic.
+ // deklarisano je na enemyInit da je svaki enemy na pocetku alive.
+
         region0->enemy.karakter = region0->enemy.constKarakter;
-        enemyLogic(&region0->enemy, world, region, i, player);
-    
-
-
-        }
-
-        else if (region0->enemy.alive==0){
-            //delete enemy from array
-            region0->enemy.karakter='.';
-        }
+        
+        // pokrene pokretanje enemya
+        enemyLogic( world, region, i, player);
+    }
+          
        
+ 
+     
 
 
 
     }
-    else  {
+    else {
 
-        //delete enemy in this region
+        // vanjska if petlja, ako enemy nije dio regije, stavi enemy karakter kao .
       
        region0->enemy.karakter='.';
       
@@ -147,13 +190,21 @@ Region *region0 = &regions[i];
 }
 
 
+// deklarise enemije u svijet
+
 void enemiesIntoWorld(World *world, Region *region){
 
 
+
+//pokupi sve regije
 for (int i=0;i<5;i++){
+
+
 
 Region *region0 = &regions[i];
 
+
+// stavlja enemya u svijet
     world->data[region0->enemy.position.y][region0->enemy.position.x] = region0->enemy.karakter;
 
 
@@ -165,6 +216,5 @@ Region *region0 = &regions[i];
 
 
 }
- 
-//move enemy if enemy is active
+
 

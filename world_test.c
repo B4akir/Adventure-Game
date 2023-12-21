@@ -1,6 +1,6 @@
 
 
-//includes i defines
+// pozovi sve potrebne funckije
     #include "big-m.h"
 
 
@@ -10,7 +10,7 @@
     #include "player.c"
     #include "combat.c"
 
-// world 
+// stavi u matricu world prazna polja
     void initWorld(World *world) {
         for (int i = 0; i < HEIGHT; i++) {
             for (int j = 0; j < WIDTH; j++) {
@@ -24,13 +24,20 @@
 
 
 
-    // ispisuje world
+    // ispisi world. 
+
+
     void ispis(World *world, Player *player, Region *region) {
 
-Region *region0 = &regions[0];
+
+// Ovo je samo za prvu regiju, treba napraviti za sve regije
 
 
+
+// izbrise prosli ispis
     system("cls");
+
+    // isprinta world
     char buffer[HEIGHT * (WIDTH + 1) + 1]; // +1 for each newline and +1 for null terminator
     char *p = buffer;
     for (int i = 0; i < HEIGHT; i++) {
@@ -40,16 +47,23 @@ Region *region0 = &regions[0];
         *p++ = '\n';
     }
     *p = '\0'; // null terminate the string
+    
+    
+    // ispise statse playera i enemya
     printf("%s", buffer);
     printf("Health: %d(%d)                     Attack: %d(%d)                Adventurer:%s(%c)      \n", player->stats.health, player->stats.constHealth, player->stats.attack,player->stats.constAttack, player->ime, player->karakter);
-    printf("Enemy: Health: %d                     Attack: %d \n", region0->enemy.stats.health, region0->enemy.stats.attack);
+
+
+
+
+
 
 }
 
 
 
 
-
+// stavi regiju na svijet
 
 void putXOnEdges(World *world) {
     int rows = sizeof(world->data) / sizeof(world->data[0]);
@@ -69,6 +83,7 @@ void putXOnEdges(World *world) {
 }
 
 
+// spaja vrata regija
 
 int connectDoors(World *world, int r1, int r2, int door1, int door2)
 {
@@ -191,6 +206,9 @@ Enemy enemy;
 
 
 // pocetne inicijalizacije
+
+
+
 kreator(&player);
 initWorld(&world);
 initializeRegions(&world);
@@ -204,9 +222,9 @@ initalStatsPlayer(&player);
 initHallways(&world);
 initalPosition(&player, &region);
 
-
-enemyInit(&region, &world);
 initalStatsEnemy(&region);
+enemyInit(&region, &world);
+
 
 
 

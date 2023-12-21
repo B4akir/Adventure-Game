@@ -2,13 +2,21 @@
 
 void initalPosition(Player *player, Region *region){ // pocetna pozicija playera
 
-    Region *region0 = &regions[0];
-    player->oldChar = '.';
+    Region *region0 = &regions[0]; // stavlja ga u regiju 0
+    player->oldChar = '.'; // deklarise prvo proslo mjesto, kada se player pomjeri da ostane tacka 
+
+
+    // stavlja pocetne kordinate playera
     player->position.y= region0->position.y+1;
     player->position.x= region0->position.x+2;
 
 
     }; 
+
+
+
+
+
 void movement(Player *player, World *world, Region *region){ // player movement
 
 
@@ -60,29 +68,42 @@ void movement(Player *player, World *world, Region *region){ // player movement
 
 
 
-        if (newArea == '.' || newArea == '=' || newArea == VRATA) {  // ' ' je void, '=' je hodnjik, VRATA su vrata :/
+        if (newArea == '.' || newArea == '=' || newArea == VRATA) {  // ' ' je void, '=' je hodnjik, VRATA su vrata 
         
         
 
 
         // ovo spasava karakter na koji player ide, da u sledecoj iteraciji loopa moze da ga vrati na staro mjesto
             player->oldChar = world->data[newY][newX];
+
+
             // salje u player strukturu nove kordinate playera
+
             player->position.y = newY;
             player->position.x = newX;
         }
 
 
-    else if ( newArea=='B'){
 
-       initiateCombat(player, &region);
+        // ako player zeli ici na poziciju trenutnog enemya, pokrece combatSistem. 
+
+
+    else if ( newArea=='B'){ // pita da li je na novim kordinatama enemy, ako jeste pokrece combat sistem
+
+
+
+        // salje u combat sistem trenutnog playera i globalnu regiju??
+
+
+       initiateCombat(player, &region); //GRESKA
 
 
     }
 
 
     
-        //make wait for 1 second
+        
+        //ceka 100ms
         Sleep(100);
     }
 
