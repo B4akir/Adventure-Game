@@ -59,6 +59,7 @@ typedef struct{
     char oldChar;
     char ime[20];
     Stats stats;
+    int alive;
 
         }Player;
 

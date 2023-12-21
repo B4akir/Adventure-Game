@@ -50,7 +50,7 @@ int num2= rand() % region0->enemy.stats.attack;
 
 
 if (player->stats.health<=0){
-    //dead
+    player->alive=0;
 
   }
 

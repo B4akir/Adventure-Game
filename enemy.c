@@ -121,6 +121,7 @@ Region *region0 = &regions[i];
         }
 
         else if (region0->enemy.alive==0){
+            //delete enemy from array
             region0->enemy.karakter='.';
         }
        

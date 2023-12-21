@@ -213,11 +213,12 @@ initalStatsEnemy(&region);
 
 while(1){
 
-movement(&player,&world, &region);
-initPlayer(&player,&world);
+
 enemySpawnActivation(&player, &region,&world);
 
 enemiesIntoWorld(&world, &region);
+movement(&player,&world, &region);
+initPlayer(&player,&world);
 
 ispis(&world, &player,&region);
 
