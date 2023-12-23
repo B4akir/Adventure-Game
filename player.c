@@ -87,7 +87,9 @@ void movement(Player *player, World *world, Region *region){ // player movement
 
         // ako player zeli ici na poziciju trenutnog enemya, pokrece combatSistem. 
 
-
+       if (newArea == region->enemy.karakter) {
+               initiateCombat(player, region);
+        }
 
 
     

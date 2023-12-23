@@ -127,6 +127,11 @@ char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli prov
             region0->enemy.position.x = newX;
         }
 
+        else if (newArea==player->karakter){
+
+            initiateCombat(player, region);
+        }
+
 
         // Ako enemy zeli ici u poziciju playera, pozovi combat.
   
@@ -144,7 +149,7 @@ void enemySpawnActivation(Player *player, Region *region, World *world){
         }
         else if (region0->enemy.alive==1) {
             // Call isInRegion to check if player is in the region
-            isInRegion(region, player);
+           
             // If player is in the region
             if (player->inRegion == i) {
                 region0->enemy.oldChar='.';

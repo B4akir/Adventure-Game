@@ -60,17 +60,30 @@ void initalStatsEnemy(Region *region){
 
 // povezana sa enemyMovement i playerMovement
 
-void initiateCombat(Player *player, Region *region0){
+void initiateCombat(Player *player, Region *region){
 
-// uzima random broj od 0 do max napada playera
-int num1= rand() % player->stats.attack;
+for (int i=0; i<5; i++){
 
-// uzima random broj od 0 do max napada enemya
-int num2= rand() % region0->enemy.stats.attack;
+  Region *region0=&regions[i];
 
-// odradi napade i player i enemy
-region0->enemy.stats.health=region0->enemy.stats.health-num1;
-player->stats.health=player->stats.health-num2;
+  if (player->inRegion==i){
+          // uzima random broj od 0 do max napada playera
+        int num1= rand() % player->stats.attack;
+
+      // uzima random broj od 0 do max napada enemya
+      int num2= rand() % region0->enemy.stats.attack;
+
+      // odradi napade i player i enemy
+      region0->enemy.stats.health=region0->enemy.stats.health-num1;
+      player->stats.health=player->stats.health-num2;
+
+
+  }
+
+
+}
+
+
 
 
 
