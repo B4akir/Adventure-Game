@@ -52,7 +52,7 @@
     // ispise statse playera i enemya
     printf("%s", buffer);
     printf("Health: %d(%d)                     Attack: %d(%d)                Adventurer:%s(%c)      \n", player->stats.health, player->stats.constHealth, player->stats.attack,player->stats.constAttack, player->ime, player->karakter);
-
+    printf("Region: %d\n", player->inRegion);
 
 
 
@@ -237,6 +237,7 @@ enemySpawnActivation(&player, &region,&world);
 enemiesIntoWorld(&world, &region);
 movement(&player,&world, &region);
 initPlayer(&player,&world);
+isInRegion(&region, &player);
 
 ispis(&world, &player,&region);
 

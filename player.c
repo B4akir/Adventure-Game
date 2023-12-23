@@ -127,6 +127,21 @@ void movement(Player *player, World *world, Region *region){ // player movement
         scanf(" %c", &player->karakter);
     }
 
+void isInRegion (Region *region, Player *player){
 
+
+
+for (int i=0; i<5; i++){
+ 
+ Region *region0 = &regions[i];
+  if ((player->position.y >= region0->position.y && player->position.y <= region0->position.y + region0->height) &&
+        (player->position.x >= region0->position.x && player->position.x <= region0->position.x + region0->width)) {
+            player->inRegion=i;
+        
+        }
+
+
+}
+}
 
 

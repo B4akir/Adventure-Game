@@ -61,6 +61,7 @@ typedef struct{
     char ime[20];
     Stats stats;
     int alive;
+    int inRegion;
 
         }Player;
 
