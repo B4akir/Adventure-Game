@@ -1,6 +1,22 @@
 #include "big-m.h"
 
 
+void isInRegion (Region *region, Player *player){
+
+
+
+for (int i=0; i<5; i++){
+ 
+ Region *region0 = &regions[i];
+  if ((player->position.y >= region0->position.y && player->position.y <= region0->position.y + region0->height) &&
+        (player->position.x >= region0->position.x && player->position.x <= region0->position.x + region0->width)) {
+            player->inRegion=i;
+        
+        }
+
+
+}
+}
 
 // Kada player udje u regiju enemy se aktivira, kada player izadje iz regije, enemy se deaktivira
 
@@ -113,80 +129,34 @@ char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli prov
 
 
         // Ako enemy zeli ici u poziciju playera, pozovi combat.
-    else if (newArea==player->karakter){
-        initiateCombat(player, region0);
-        
-
-
-}
+  
 
 }
 
 
 void enemySpawnActivation(Player *player, Region *region, World *world){
-
-//detect in which region the player is
-
-for(int i=0; i<5; i++){ // ova salje indexe svima
-
-
-
-
-Region *region0 = &regions[i];
-
-checkHealth(region0);
-
-if (region0->enemy.alive==0){
-    region0->enemy.karakter='.';
-}
-
-
-else if (region0->enemy.alive==1) {
-
-// ispita da li je player u trenutnoj regiji. Regija ima index i. 
-
-
-
-// ako je player u regiji 0, odradi akcije
-    if ((player->position.y >= region0->position.y && player->position.y <= region0->position.y + region0->height) &&
-        (player->position.x >= region0->position.x && player->position.x <= region0->position.x + region0->width)) {
-           
-     
-       // stavi enemyOldChar da ne ostavlja za sobom breadcrumbs
-      region0->enemy.oldChar='.';
-       
-
- // pita da li je enemyAlive. Ako jeste, pokrece enemyLogic.
- // deklarisano je na enemyInit da je svaki enemy na pocetku alive.
-
-        region0->enemy.karakter = region0->enemy.constKarakter;
-        
-        // pokrene pokretanje enemya
-        enemyLogic( world, region, i, player);
+    //detect in which region the player is
+    for(int i=0; i<5; i++){ // ova salje indexe svima
+        Region *region0 = &regions[i];
+        checkHealth(region0);
+        if (region0->enemy.alive==0){
+            region0->enemy.karakter='.';
+        }
+        else if (region0->enemy.alive==1) {
+            // Call isInRegion to check if player is in the region
+            isInRegion(region, player);
+            // If player is in the region
+            if (player->inRegion == i) {
+                region0->enemy.oldChar='.';
+                region0->enemy.karakter = region0->enemy.constKarakter;
+                // pokrene pokretanje enemya
+                enemyLogic( world, region, player->inRegion, player);
+            }
+            else {
+                region0->enemy.karakter='.';
+            }
+        }
     }
-          
-       
- 
-     
-
-
-
-    
-    else {
-
-        // vanjska if petlja, ako enemy nije dio regije, stavi enemy karakter kao .
-      
-       region0->enemy.karakter='.';
-      
-
-
-    }
-
-
- 
-
-}
-}
 }
 
 
@@ -216,5 +186,4 @@ Region *region0 = &regions[i];
 
 
 }
-
 

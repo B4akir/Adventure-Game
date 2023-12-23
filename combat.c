@@ -1,16 +1,17 @@
 #include "big-m.h"
 
 
+
 void checkHealth(Region *region0){
   if (region0->enemy.stats.health<=0){
     region0->enemy.alive=0;
-    printf("Dead");
+  
 
 
   }
 
   else if (region0->enemy.stats.health>0){
-     printf("Alive");
+  
 
     region0->enemy.alive=1;
   }
