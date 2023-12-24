@@ -75,15 +75,36 @@
 
     
             int i=y+height/2-1;
-
+            
             
             world->data[i][x] = VRATA;
-            region0->doors[brVrata].y = i;
-            region0->doors[brVrata].x = x;
+
+      
+
+
+    }
+
+  void doorLcord(Region *region, World *world,int index, int brVrata){
+        Region *region0 = &regions[index];
+
+        int y = region0->position.y;
+        int x = region0->position.x;
+        int height = region0->height;
+        int i=y+height/2-1;
+
+        region0->doors[brVrata].y = i;
+        region0->doors[brVrata].x = x;
 
 
 
     }
+
+
+  
+
+
+
+
 
     void doorR(Region *region, World *world, int index, int brVrata ){
 
@@ -99,6 +120,28 @@
             int j=x+width;
 
             world->data[i][j] = VRATA;
+           
+
+
+
+
+
+    } 
+
+ void doorRcord(Region *region, World *world, int index, int brVrata ){
+
+    Region *region0 = &regions[index];
+
+        int y = region0->position.y;
+        int x = region0->position.x;
+        int height = region0->height;
+        int width = region0->width;
+
+    
+            int i=y+height/2;
+            int j=x+width;
+
+       
             region0->doors[brVrata].y = i;
             region0->doors[brVrata].x = j;
 
@@ -106,7 +149,12 @@
 
 
 
-    }
+    } 
+
+
+
+
+
 
     void doorT(Region *region, World *world, int index, int brVrata ){
 
@@ -122,6 +170,26 @@
 
 
         world->data[y][j] =VRATA;
+      
+
+
+
+    }
+
+     void doorTcord(Region *region, World *world, int index, int brVrata ){
+
+    Region *region0 = &regions[index];
+
+        int y = region0->position.y;
+        int x = region0->position.x;
+        int width = region0->width;
+
+
+    
+        int j=x+width/2;
+
+
+        
         region0->doors[brVrata].y = y;
         region0->doors[brVrata].x = j;
 
@@ -129,7 +197,34 @@
 
     }
 
+
+
+
+
     void doorB(Region *region, World *world, int index, int brVrata ){
+
+    Region *region0 = &regions[index];
+
+        int y = region0->position.y;
+        int x = region0->position.x;
+        int height = region0->height;
+        int width = region0->width;
+    
+
+    
+        int j=x+width/2;
+        int i=y+height;
+
+        world->data[i][j] = VRATA;
+      
+
+
+
+    }
+
+
+
+    void doorBcord(Region *region, World *world, int index, int brVrata ){
 
     Region *region0 = &regions[index];
 
@@ -151,6 +246,9 @@
 
     }
 
+
+
+
  
 
 
@@ -164,7 +262,12 @@
                 case 1:
                   doorL(&regions[i], world, 1, 0);
                   doorB(&regions[i], world, 1, 3);
+
+
+
+
                   break;
+
 
                 case 2:
                     doorT(&regions[i], world, 2, 1);
@@ -181,9 +284,14 @@
                       doorL(&regions[i], world, 4, 0);
                       break;
             }
+
+        
+
+
         }
     }
 }
+
 
 
 
@@ -207,7 +315,7 @@
         srand(time(0));
         int randomNumber = 5+rand()%10;
 
-      
+        
     
 
        
@@ -218,7 +326,7 @@
             regionIntoWorld(&regions[0], world);
              doorR(&regions[0], world, 0, 2);
             doorB(&regions[0], world, 0, 3);
-  
+            
           
 
 
@@ -232,7 +340,30 @@
          regionInit(&regions[4], /* y*/ 1,   /* x*/62 , /* height*/ 5+rand()%(15-5),  /* width*/  9, '.');
 
 
+
+//region0
+
+    doorRcord(&regions[0], world, 0, 2);
+            doorBcord(&regions[0], world, 0, 3);
+
  
+        // region 1
+          doorLcord(&regions[1], world, 1, 0);
+          doorBcord(&regions[1], world, 1, 3);
 
 
+        //region 2
+        doorTcord(&regions[2], world, 2, 1);
+        doorRcord(&regions[2], world, 2, 2);
+
+
+        //region3 
+                doorTcord(&regions[3], world, 2, 1);
+                 doorRcord(&regions[3], world, 3, 2);
+                 doorBcord(&regions[3], world, 3, 3);
+
+
+
+    //region 4
+     doorLcord(&regions[4], world, 4, 0);
     }

@@ -94,9 +94,9 @@ int connectDoors(World *world, int r1, int r2, int door1, int door2)
 {
 
     Region *region0 = &regions[r1];
+
     Region *region1 = &regions[r2];
-
-
+ 
   
     Position temp;
     Position end;
@@ -105,7 +105,12 @@ int connectDoors(World *world, int r1, int r2, int door1, int door2)
     int count = 0;
 
     temp.x =region0->doors[door1].x;
+    printf ("Tempx %d\n", temp.x);
+
     temp.y = region0->doors[door1].y;
+    printf ("Tempy %d\n", temp.y);
+
+
 
     end.x= region1->doors[door2].x;
     end.y= region1->doors[door2].y;
@@ -120,7 +125,7 @@ int connectDoors(World *world, int r1, int r2, int door1, int door2)
         {
             previous.x = temp.x;
             temp.x = temp.x - 1;
-               world->data[temp.y][temp.x] = '=';
+            world->data[temp.y][temp.x] = '=';
 
         /* step right */
         } else if ((abs((temp.x + 1) - end.x) < abs(temp.x - end.x)) && (world->data[temp.y][temp.x + 1] == ' '))
@@ -163,11 +168,14 @@ int connectDoors(World *world, int r1, int r2, int door1, int door2)
 }
 
 
+//make a function that determines if this position is in a region
+
+
 void initHallways(World *world) {
    
 
    // Regija 0 sa regijom 1
-    connectDoors(world, 0, 1, 2, 0);
+   connectDoors(world, 0, 1, 2, 0);
 
 
     // regija 0 sa regijom 3
