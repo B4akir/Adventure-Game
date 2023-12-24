@@ -45,7 +45,7 @@ region0->enemy.oldChar = '.';
 
 
 // tipovi enemya. Ovo je temporary
- char array[3] = {'S', 'O', 'W'};
+ char array[3] = {'R', 'B', 'G'};
        
 
        // uzme random broj od 0 do 3. Poslije cu implementirati random enemy selection

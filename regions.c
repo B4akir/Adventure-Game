@@ -62,13 +62,17 @@
     }
 
 
-      void initializeRegions(World *world) {
+      void initializeRegions(World *world, Player *player) {
 
 
         srand(time(0));
         int randomNumber = 5+rand()%10;
 
       
+    
+
+        switch ()
+
        regionInit(&regions[0], /* y*/1,   /* x*/ 1, /* height*/  3+rand()%(6-3),  /* width*/  4+rand()%(8-4), '.');
         regionInit(&regions[1], /* y*/1,   /* x*/ 18, /* height*/ 7,  /* width*/  14, '.');
         regionInit(&regions[2], /* y*/ 12,   /* x*/ 5, /* height*/ 4,  /* width*/  20+rand()%(30-20), '.');

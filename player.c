@@ -107,16 +107,42 @@ void movement(Player *player, World *world, Region *region){ // player movement
     }
 
 // pocetna funkcija za deklarisanje imena playera i njegovog zeljenog znaka
-    void kreator (Player *player) {
-        printf("Unesite vase ime:\n");
-        scanf("%19s", player->ime);
+   void kreator (Player *player) {
+    printf("Unesite vase ime:\n");
+    scanf("%19s", player->ime);
 
-        // ukloni buffer da ne zeza sa konzolom
-        while (getchar() != '\n');
+    // ukloni buffer da ne zeza sa konzolom
+    while (getchar() != '\n');
 
-        printf("Kako zelite izgledati? \nUnesite bilo koji ASCII karakter:\n");
-        scanf(" %c", &player->karakter);
+    printf("Izaberite vasu klasu: \n");
+    printf("1. Knight: W,  15 hp, 5 attack \n");
+    printf("2. Mage:   M,  5 hp, 14 attack \n");
+    printf("3. Archer: A,  10 hp, 10 attack \n");
+
+    int odabir;
+    printf("Unesite 1, 2, ili 3\n");
+    scanf("%d", &odabir);
+
+    while(odabir!=1 && odabir!=2 && odabir!=3){
+        printf("Unesite 1,2, ili 3\n");
+        scanf("%d", &odabir);
     }
 
+    switch (odabir)
+    {
+        case 1:
+            player->karakter = 'W';
+            initalStatsPlayer(player,odabir);
+            break;
+        case 2:
+            player->karakter = 'M';
+            initalStatsPlayer(player,odabir);
+            break;
+        case 3:
+            player->karakter = 'A';
+            initalStatsPlayer(player,odabir);
+            break;
+    }
+}
 
 

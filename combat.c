@@ -21,14 +21,41 @@ void checkHealth(Region *region0){
 
 
 // pocetne statse playera
-void initalStatsPlayer(Player *player){
+void initalStatsPlayer(Player *player ,int odabir){
 
 
+
+switch (odabir){
+
+case 1:
     player->stats.health=15;
     player->stats.attack=5;
 
     player->stats.constHealth=15;
     player->stats.constAttack=5;
+
+    break;
+
+  case 2:
+    player->stats.health=5;
+    player->stats.attack=14;
+
+    player->stats.constHealth=5;
+    player->stats.constAttack=14;
+
+    break;
+
+case 3:
+    player->stats.health=10;
+    player->stats.attack=10;
+
+    player->stats.constHealth=10;
+    player->stats.constAttack=10;
+
+    break;
+
+}
+
 
 
 }

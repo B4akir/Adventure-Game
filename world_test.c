@@ -217,8 +217,6 @@ initializeDoors(&world, &region);
 putXOnEdges(&world);
 
 
-initalStatsPlayer(&player);
-
 
 initHallways(&world);
 initalPosition(&player, &region);
