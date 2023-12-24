@@ -62,7 +62,7 @@
     }
 
 
-      void initializeRegions(World *world, Player *player) {
+      void initializeRegions(World *world) {
 
 
         srand(time(0));
@@ -71,7 +71,7 @@
       
     
 
-        switch ()
+       
 
        regionInit(&regions[0], /* y*/1,   /* x*/ 1, /* height*/  3+rand()%(6-3),  /* width*/  4+rand()%(8-4), '.');
         regionInit(&regions[1], /* y*/1,   /* x*/ 18, /* height*/ 7,  /* width*/  14, '.');
