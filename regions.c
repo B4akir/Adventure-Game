@@ -51,39 +51,16 @@
         }
     }
 
-    
-    // samo salje dobijene podatke u strukturu regije
-    void regionInit(Region *region, int startY, int startX, int height, int width, char fillCharacter) {
-        region->position.y = startY;
-        region->position.x = startX;
-        region->height = height;
-        region->width = width;
-        region->fillCharacter = fillCharacter;
-    }
 
 
-      void initializeRegions(World *world) {
 
 
-        srand(time(0));
-        int randomNumber = 5+rand()%10;
 
-      
     
 
-       
 
-       regionInit(&regions[0], /* y*/1,   /* x*/ 1, /* height*/  3+rand()%(6-3),  /* width*/  4+rand()%(8-4), '.');
-        regionInit(&regions[1], /* y*/1,   /* x*/ 18, /* height*/ 7,  /* width*/  14, '.');
-        regionInit(&regions[2], /* y*/ 12,   /* x*/ 5, /* height*/ 4,  /* width*/  20+rand()%(30-20), '.');
-        regionInit(&regions[3], /* y*/ 2+rand()%(9-2),   /* x*/ 37, /* height*/ 4,  /* width*/  15, '.');
-        regionInit(&regions[4], /* y*/ 1,   /* x*/62 , /* height*/ 5+rand()%(15-5),  /* width*/  9, '.');
-
-
-        for (int i = 0; i < 7; i++) {
-            regionIntoWorld(&regions[i], world);
-        }
-    }
+  
+  
 
 
 //doors i hodnjiks
@@ -174,57 +151,88 @@
 
     }
 
-    void initializeDoors(World *world, Region *region) {
-        
-        
-        //regija 0
-        
-        doorR(region, world, 0, 2);
-        doorB(region, world, 0, 3);
-
-
-
-        //regija 1
-        doorL(region, world, 1, 0);
-        
-        doorB(region, world, 1, 3);
-
-        
-
-         //regija 2
-         
-         doorT(region, world, 2, 1);
-         doorR(region, world, 2, 2);
-
-
-         //regija 3
-         doorT(region, world, 2, 1);
-         doorR(region, world, 3, 2);
-         doorB(region, world, 3, 3);
-        
-
-
-         //regija 4
-         doorL(region, world, 4, 0);
-         
-
-
  
 
 
-           //regija 1
+   void populateWorldWithRegions(Region regions[], int regionCount, World *world, Player *player, Region *region) {
+    for (int i = 1; i < regionCount; i++) {
+        if (player->inRegion==i && regions[i].populated==0){
+            regionIntoWorld(&regions[i], world);
+            regions[i].populated=1;
+
+            switch (i){
+                case 1:
+                  doorL(&regions[i], world, 1, 0);
+                  doorB(&regions[i], world, 1, 3);
+                  break;
+
+                case 2:
+                    doorT(&regions[i], world, 2, 1);
+                    doorR(&regions[i], world, 2, 2);
+                    break;
+
+                case 3:
+                 doorT(&regions[i], world, 2, 1);
+                 doorR(&regions[i], world, 3, 2);
+                 doorB(&regions[i], world, 3, 3);
+                 break;
+
+                 case 4:
+                      doorL(&regions[i], world, 4, 0);
+                      break;
+            }
+        }
+    }
+}
 
 
 
-           //regija 2
 
 
-           //regija 3
 
-           //regija 4
-        
+    
+    // samo salje dobijene podatke u strukturu regije
+    void regionInit(Region *region, int startY, int startX, int height, int width, char fillCharacter) {
+        region->position.y = startY;
+        region->position.x = startX;
+        region->height = height;
+        region->width = width;
+        region->fillCharacter = fillCharacter;
+    }
+
+
+      void initializeRegions(World *world, Player *player) {
+
+
+        srand(time(0));
+        int randomNumber = 5+rand()%10;
+
+      
     
 
+       
+
+
+            
+             regionInit(&regions[0], /* y*/1,   /* x*/ 1, /* height*/  3+rand()%(6-3),  /* width*/  4+rand()%(8-4), '.');
+            regionIntoWorld(&regions[0], world);
+             doorR(&regions[0], world, 0, 2);
+            doorB(&regions[0], world, 0, 3);
+  
+          
+
+
+
+           
+         regionInit(&regions[1], /* y*/1,   /* x*/ 18, /* height*/ 7,  /* width*/  14, '.');
+
+          
+         regionInit(&regions[2], /* y*/ 12,   /* x*/ 5, /* height*/ 4,  /* width*/  20+rand()%(30-20), '.');
+         regionInit(&regions[3], /* y*/ 2+rand()%(9-2),   /* x*/ 37, /* height*/ 4,  /* width*/  15, '.');
+         regionInit(&regions[4], /* y*/ 1,   /* x*/62 , /* height*/ 5+rand()%(15-5),  /* width*/  9, '.');
+
+
+ 
 
 
     }

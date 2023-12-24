@@ -57,7 +57,11 @@
     printf (" In region: %d\n", player->inRegion);
     printf (" Player health: %d(%d)       Player attack: %d(%d)\n", player->stats.health, player->stats.constHealth, player->stats.attack, player->stats.constAttack);
     printf("Enemy hp: %d      Enemy attack: %d\n", region0->enemy.stats.health, region0->enemy.stats.attack);
-
+    for (int i=0; i<5; i++){
+    printf ("Region %d  is %d \n",i,regions[i].populated);
+        
+    }
+    
 
 }
 
@@ -212,8 +216,7 @@ Enemy enemy;
 
 kreator(&player);
 initWorld(&world);
-initializeRegions(&world);
-initializeDoors(&world, &region);
+initializeRegions(&world, &player);
 putXOnEdges(&world);
 
 
@@ -230,13 +233,14 @@ enemyInit(&region, &world);
 
 while(1){
 
-
+populateWorldWithRegions(regions, 5, &world, &player, &region);
 enemySpawnActivation(&player, &region,&world);
 
 enemiesIntoWorld(&world, &region);
 movement(&player,&world, &region);
 initPlayer(&player,&world);
  isInRegion(&region, &player);
+
 
 ispis(&world, &player,&region);
 

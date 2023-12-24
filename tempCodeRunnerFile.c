@@ -51,11 +51,12 @@
     
     // ispise statse playera i enemya
     printf("%s", buffer);
-    printf("Health: %d(%d)                     Attack: %d(%d)                Adventurer:%s(%c)      \n", player->stats.health, player->stats.constHealth, player->stats.attack,player->stats.constAttack, player->ime, player->karakter);
+    
 
-
-
-
+    Region *region0=&regions[player->inRegion];
+    printf (" In region: %d\n", player->inRegion);
+    printf (" Player health: %d(%d)       Player attack: %d(%d)\n", player->stats.health, player->stats.constHealth, player->stats.attack, player->stats.constAttack);
+    printf("Enemy hp: %d      Enemy attack: %d\n", region0->enemy.stats.health, region0->enemy.stats.attack);
 
 
 }
@@ -216,15 +217,13 @@ initializeDoors(&world, &region);
 putXOnEdges(&world);
 
 
-initalStatsPlayer(&player);
-
 
 initHallways(&world);
 initalPosition(&player, &region);
 
 initalStatsEnemy(&region);
 enemyInit(&region, &world);
-
+ isInRegion(&region, &player);
 
 
 
@@ -237,6 +236,7 @@ enemySpawnActivation(&player, &region,&world);
 enemiesIntoWorld(&world, &region);
 movement(&player,&world, &region);
 initPlayer(&player,&world);
+ isInRegion(&region, &player);
 
 ispis(&world, &player,&region);
 
