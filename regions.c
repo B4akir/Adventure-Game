@@ -262,6 +262,7 @@
                 case 1:
                   doorL(&regions[i], world, 1, 0);
                   doorB(&regions[i], world, 1, 3);
+                    connectDoors(world, 1, 2, 3, 1);
 
 
 
@@ -272,12 +273,15 @@
                 case 2:
                     doorT(&regions[i], world, 2, 1);
                     doorR(&regions[i], world, 2, 2);
+                        connectDoors(world, 2, 3, 2, 3);
                     break;
 
                 case 3:
                  doorT(&regions[i], world, 2, 1);
                  doorR(&regions[i], world, 3, 2);
                  doorB(&regions[i], world, 3, 3);
+                 connectDoors(world, 3, 4, 2, 0); 
+
                  break;
 
                  case 4:
@@ -294,7 +298,13 @@
 
 
 
+void hallways(){
 
+
+
+
+
+}
 
 
 
@@ -326,7 +336,7 @@
             regionIntoWorld(&regions[0], world);
              doorR(&regions[0], world, 0, 2);
             doorB(&regions[0], world, 0, 3);
-            
+         
           
 
 
@@ -336,7 +346,7 @@
 
           
          regionInit(&regions[2], /* y*/ 12,   /* x*/ 5, /* height*/ 4,  /* width*/  20+rand()%(30-20), '.');
-         regionInit(&regions[3], /* y*/ 2+rand()%(9-2),   /* x*/ 37, /* height*/ 4,  /* width*/  15, '.');
+         regionInit(&regions[3], /* y*/ 1,   /* x*/ 37, /* height*/ 4,  /* width*/  15, '.');
          regionInit(&regions[4], /* y*/ 1,   /* x*/62 , /* height*/ 5+rand()%(15-5),  /* width*/  9, '.');
 
 
@@ -366,4 +376,9 @@
 
     //region 4
      doorLcord(&regions[4], world, 4, 0);
+
+
+
+         connectDoors(world, 0, 1, 2, 0);
+            
     }

@@ -1,25 +1,8 @@
 
-
-Problemi:
-
- - Spajanje regija:
-     - Treba jos malo modifikacije
-
-- Laggy af
-
-
 Todo:
 
- 1.Napraviti neprijatelje
- 2. Napraviti iteme
- 3. Napraviti combat sistem
- 4. Napraviti inventory
+
+ 1. Modificiraj algoritam za hallways da ne clippa kroz regije. Zbog dinamickog spawnanja regija, ne obracuna gdje se nalaze, samo gleda gdje je prazno mjesto
+ 2. 
 
 
-
-Future:
-
-- Enemies
-- Hp
-- Items
-- Pickups

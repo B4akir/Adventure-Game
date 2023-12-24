@@ -118,33 +118,37 @@ int connectDoors(World *world, int r1, int r2, int door1, int door2)
 
     previous = temp;
 
-    while (temp.x!= end.x || temp.y != end.y)
+    while (1)
     {
         /* step left */
+
+
+
+
         if ((abs((temp.x - 1) - end.x) < abs(temp.x - end.x)) && (world->data[temp.y][temp.x-1] == ' '))
         {
             previous.x = temp.x;
             temp.x = temp.x - 1;
-            world->data[temp.y][temp.x] = '=';
+        
 
         /* step right */
         } else if ((abs((temp.x + 1) - end.x) < abs(temp.x - end.x)) && (world->data[temp.y][temp.x + 1] == ' '))
         {
             previous.x = temp.x;
             temp.x = temp.x + 1;
-               world->data[temp.y][temp.x] = '=';
+          
         /* step down */
         } else if ((abs((temp.y + 1) - end.y) < abs(temp.y - end.y)) && (world->data[temp.y + 1][temp.x]  == ' '))
         {
             previous.y = temp.y;
             temp.y = temp.y + 1;
-               world->data[temp.y][temp.x] = '=';
+             
         /* step up */
         } else if ((abs((temp.y - 1) - end.y) < abs(temp.y - end.y)) && (world->data[temp.y - 1][temp.x]  == ' '))
         {
             previous.y = temp.y;
             temp.y = temp.y - 1;
-               world->data[temp.y][temp.x] = '=';
+           
         } else
         {
             if (count == 0)
@@ -159,7 +163,9 @@ int connectDoors(World *world, int r1, int r2, int door1, int door2)
             }
         }
 
-     
+      
+
+         world->data[temp.y][temp.x] = '=';
 
 
     }
@@ -168,33 +174,34 @@ int connectDoors(World *world, int r1, int r2, int door1, int door2)
 }
 
 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //make a function that determines if this position is in a region
 
 
-void initHallways(World *world) {
-   
 
-   // Regija 0 sa regijom 1
-   connectDoors(world, 0, 1, 2, 0);
-
-
-    // regija 0 sa regijom 3
-    connectDoors(world, 0, 2, 3, 1);
-
-    // regija 1 sa regijom 2
-    connectDoors(world, 1, 2, 3, 1);
-
-
-    //regija 2 sa regijom 3
-    connectDoors(world, 2, 3, 2, 3);
-
-
-    // regija 3 sa regijom 4
-    connectDoors(world, 3, 4, 2, 0); 
-
-     
-   
-}
  
 
 
@@ -218,6 +225,9 @@ Enemy enemy;
 
 
 
+
+
+
 // pocetne inicijalizacije
 
 
@@ -229,7 +239,6 @@ putXOnEdges(&world);
 
 
 
-initHallways(&world);
 initalPosition(&player, &region);
 
 initalStatsEnemy(&region);
