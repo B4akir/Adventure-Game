@@ -107,7 +107,7 @@ typedef struct{
          void kreator(Player *player);
          void regionIntoWorld(Region *region, World *world);
          void regionInit(Region *region, int startY, int startX, int height, int width, char fillCharacter);
-         void initializeRegions(World *world, Player *player);
+         void initializeRegions(World *world, Player *player, RandomNumbers *numbers);
           void doorL(Region *region, World *world,int index, int brVrata);
           void doorR(Region *region, World *world, int index, int brVrata );
           void doorT(Region *region, World *world, int index, int brVrata );

@@ -319,11 +319,24 @@ void hallways(){
     }
 
 
-      void initializeRegions(World *world, Player *player) {
+
+ void generateRandomNumbers(RandomNumbers *numbers) {
+    srand(time(0));
+
+    numbers->br1 = 3 + rand() % (6 - 3);
+    numbers->br2 = 4 + rand() % (8 - 4);
+    numbers->br3 = 20 + rand() % (30 - 20);
+    numbers->br4 = 2 + rand() % (9 - 2);
+    numbers->br5 = 5 + rand() % (15 - 5);
+ 
+}
 
 
-        srand(time(0));
-        int randomNumber = 5+rand()%10;
+
+      void initializeRegions(World *world, Player *player, RandomNumbers *numbers) {
+
+
+     
 
         
     
@@ -332,7 +345,7 @@ void hallways(){
 
 
             
-             regionInit(&regions[0], /* y*/1,   /* x*/ 1, /* height*/  3+rand()%(6-3),  /* width*/  4+rand()%(8-4), '.');
+             regionInit(&regions[0], /* y*/1,   /* x*/ 1, /* height*/  numbers->br1,  /* width*/  numbers->br2, '.');
             regionIntoWorld(&regions[0], world);
              doorR(&regions[0], world, 0, 2);
             doorB(&regions[0], world, 0, 3);

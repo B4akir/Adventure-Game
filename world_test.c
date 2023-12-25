@@ -219,23 +219,23 @@ Player player;
 Region region;
 Enemy enemy;
 World world2;
-randomNumbers numbers;
+RandomNumbers numbers;
 
 
 
 
 
-
+generateRandomNumbers(&numbers);
 
 
 
 // pocetne inicijalizacije
 
-
+generateRandomNumbers(&numbers);
 
 kreator(&player);
 initWorld(&world);
-initializeRegions(&world, &player);
+initializeRegions(&world, &player, &numbers);
 putXOnEdges(&world);
 
 
