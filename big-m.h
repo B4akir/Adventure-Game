@@ -107,7 +107,7 @@ typedef struct{
          void kreator(Player *player);
          void regionIntoWorld(Region *region, World *world);
          void regionInit(Region *region, int startY, int startX, int height, int width, char fillCharacter);
-         void initializeRegions(World *world, Player *player, RandomNumbers *numbers);
+         void initializeRegions(World *world, Player *player, RandomNumbers *numbers, World *world2);
           void doorL(Region *region, World *world,int index, int brVrata);
           void doorR(Region *region, World *world, int index, int brVrata );
           void doorT(Region *region, World *world, int index, int brVrata );
@@ -116,7 +116,7 @@ typedef struct{
            void enemyInit( Region *region, World *world);
             void enemySpawnActivation(Player *player, Region *region, World *world);
             void putXOnEdges(World *world);
-            int connectDoors(World *world, int r1, int r2, int door1, int door2);
+            int connectDoors(World *world, int r1, int r2, int door1, int door2, World *world2);
             void initHallways(World *world);
              void playerHealth(Player *player);
              void enemiesIntoWorld(World *world, Region *region);

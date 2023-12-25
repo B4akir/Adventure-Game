@@ -252,7 +252,7 @@
  
 
 
-   void populateWorldWithRegions(Region regions[], int regionCount, World *world, Player *player, Region *region) {
+   void populateWorldWithRegions(Region regions[], int regionCount, World *world, Player *player, Region *region, World *world2) {
     for (int i = 1; i < regionCount; i++) {
         if (player->inRegion==i && regions[i].populated==0){
             regionIntoWorld(&regions[i], world);
@@ -262,7 +262,7 @@
                 case 1:
                   doorL(&regions[i], world, 1, 0);
                   doorB(&regions[i], world, 1, 3);
-                    connectDoors(world, 1, 2, 3, 1);
+                    connectDoors(world, 1, 2, 3, 1, world2);
 
 
 
@@ -273,14 +273,14 @@
                 case 2:
                     doorT(&regions[i], world, 2, 1);
                     doorR(&regions[i], world, 2, 2);
-                        connectDoors(world, 2, 3, 2, 3);
+                        connectDoors(world, 2, 3, 2, 3, world2);
                     break;
 
                 case 3:
                  doorT(&regions[i], world, 2, 1);
                  doorR(&regions[i], world, 3, 2);
                  doorB(&regions[i], world, 3, 3);
-                 connectDoors(world, 3, 4, 2, 0); 
+                 connectDoors(world, 3, 4, 2, 0, world2); 
 
                  break;
 
@@ -327,13 +327,13 @@
 
 
 
-      void initializeRegions(World *world, Player *player, RandomNumbers *numbers) {
+      void initializeRegions(World *world, Player *player, RandomNumbers *numbers, World *world2) {
 
 
      
 
         
-    
+
 
        
 
@@ -386,21 +386,21 @@
 
 
 
-         connectDoors(world, 0, 1, 2, 0);
+         connectDoors(world, 0, 1, 2, 0, world2);
+         connectDoors(world, 0, 2, 3, 1, world2);
             
     }
 
 
-    void fakeRegion (World *world2, Region *region ){
-
-        for (int i=0;i<5;i++){
-
-            Region *region0 = &regions[i];
 
 
-            regionIntoWorld(&regions[i], world2);
 
-        }
 
-        
-    }
+
+
+
+
+
+
+
+
