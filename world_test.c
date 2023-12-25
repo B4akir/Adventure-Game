@@ -58,7 +58,7 @@
     printf (" Player health: %d(%d)       Player attack: %d(%d)\n", player->stats.health, player->stats.constHealth, player->stats.attack, player->stats.constAttack);
     printf("Enemy hp: %d      Enemy attack: %d\n", region0->enemy.stats.health, region0->enemy.stats.attack);
     for (int i=0; i<5; i++){
-    printf ("Region %d  is %d \n",i,regions[i].populated);
+  
         
     }
     

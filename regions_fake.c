@@ -178,49 +178,39 @@
         
         //regija 0
         
-        doorR(region, world2, 0, 2);
-        doorB(region, world2, 0, 3);
+        doorR2(region, world2, 0, 2);
+        doorB2(region, world2, 0, 3);
 
 
 
         //regija 1
-        doorL(region, world2, 1, 0);
+        doorL2(region, world2, 1, 0);
         
-        doorB(region, world2, 1, 3);
+        doorB2(region, world2, 1, 3);
 
         
 
          //regija 2
          
-         doorT(region, world2, 2, 1);
-         doorR(region, world2, 2, 2);
+         doorT2(region, world2, 2, 1);
+         doorR2(region, world2, 2, 2);
 
 
          //regija 3
-         doorT(region, world2, 2, 1);
-         doorR(region, world2, 3, 2);
-         doorB(region, world2, 3, 3);
+         doorT2(region, world2, 2, 1);
+         doorR2(region, world2, 3, 2);
+         doorB2(region, world2, 3, 3);
         
 
 
          //regija 4
-         doorL(region, world2, 4, 0);
+         doorL2(region, world2, 4, 0);
          
 
 
  
 
 
-           //regija 1
-
-
-
-           //regija 2
-
-
-           //regija 3
-
-           //regija 4
         
     
 

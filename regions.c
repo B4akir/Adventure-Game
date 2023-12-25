@@ -238,7 +238,7 @@
         int j=x+width/2;
         int i=y+height;
 
-        world->data[i][j] = VRATA;
+       
         region0->doors[brVrata].y = i;
         region0->doors[brVrata].x = j;
 
@@ -273,19 +273,20 @@
                 case 2:
                     doorT(&regions[i], world, 2, 1);
                     doorR(&regions[i], world, 2, 2);
-                        connectDoors(world, 2, 3, 2, 3, world2);
+                    connectDoors(world, 2, 3, 2, 3, world2);
                     break;
 
                 case 3:
-                 doorT(&regions[i], world, 2, 1);
-                 doorR(&regions[i], world, 3, 2);
-                 doorB(&regions[i], world, 3, 3);
-                 connectDoors(world, 3, 4, 2, 0, world2); 
-
-                 break;
+                    doorT(&regions[i], world, 2, 1);
+                    doorR(&regions[i], world, 3, 2);
+                    doorB(&regions[i], world, 3, 3);
+                    
+                    connectDoors(world, 3, 4, 2, 0, world2); 
+                    break;
 
                  case 4:
                       doorL(&regions[i], world, 4, 0);
+                      
                       break;
             }
 
@@ -337,7 +338,7 @@
 
        
 
-
+            regions[0].populated=1;
             
              regionInit(&regions[0], /* y*/1,   /* x*/ 1, /* height*/  numbers->br1,  /* width*/  numbers->br2, '.');
             regionIntoWorld(&regions[0], world);
