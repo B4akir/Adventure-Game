@@ -2,7 +2,7 @@
 Todo:
 
 
- 1. Modificiraj algoritam za hallways da ne clippa kroz regije. Zbog dinamickog spawnanja regija, ne obracuna gdje se nalaze, samo gleda gdje je prazno mjesto
+ 1. Dodaj funccionalnosti fejk worlda da mozes implementirati hallway system
  2. 
 
 

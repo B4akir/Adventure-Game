@@ -18,7 +18,13 @@
     #define HEIGHT 18
     #define WIDTH 80
 
-
+typedef struct {
+    int br1;
+    int br2;
+    int br3;
+    int br4;
+    int br5;
+} RandomNumbers;
 
 
 
