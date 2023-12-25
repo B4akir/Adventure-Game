@@ -298,13 +298,7 @@
 
 
 
-void hallways(){
 
-
-
-
-
-}
 
 
 
@@ -366,7 +360,7 @@ void hallways(){
 
 //region0
 
-    doorRcord(&regions[0], world, 0, 2);
+            doorRcord(&regions[0], world, 0, 2);
             doorBcord(&regions[0], world, 0, 3);
 
  
