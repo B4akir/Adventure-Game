@@ -358,9 +358,9 @@ void hallways(){
          regionInit(&regions[1], /* y*/1,   /* x*/ 18, /* height*/ 7,  /* width*/  14, '.');
 
           
-         regionInit(&regions[2], /* y*/ 12,   /* x*/ 5, /* height*/ 4,  /* width*/  20+rand()%(30-20), '.');
-         regionInit(&regions[3], /* y*/ 1,   /* x*/ 37, /* height*/ 4,  /* width*/  15, '.');
-         regionInit(&regions[4], /* y*/ 1,   /* x*/62 , /* height*/ 5+rand()%(15-5),  /* width*/  9, '.');
+         regionInit(&regions[2], /* y*/ 12,   /* x*/ 5, /* height*/ 4,  /* width*/  numbers->br3, '.');
+         regionInit(&regions[3], /* y*/ numbers->br4,   /* x*/ 37, /* height*/ 4,  /* width*/  15, '.');
+         regionInit(&regions[4], /* y*/ 1,   /* x*/62 , /* height*/ numbers->br5,  /* width*/  9, '.');
 
 
 
