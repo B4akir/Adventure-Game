@@ -221,7 +221,18 @@ Enemy enemy;
 World world2;
 RandomNumbers numbers;
 
+initWorld(&world2);
 
+
+
+
+
+
+
+
+
+initializeRegions2(&world2, &numbers);
+initializeDoors2(&world2, &region);
 
 
 

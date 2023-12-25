@@ -389,3 +389,18 @@
          connectDoors(world, 0, 1, 2, 0);
             
     }
+
+
+    void fakeRegion (World *world2, Region *region ){
+
+        for (int i=0;i<5;i++){
+
+            Region *region0 = &regions[i];
+
+
+            regionIntoWorld(&regions[i], world2);
+
+        }
+
+        
+    }
