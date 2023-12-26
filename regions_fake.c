@@ -76,7 +76,7 @@
           
          regionInit2(&regions[2], /* y*/ 12,   /* x*/ 5, /* height*/ 4,  /* width*/  numbers->br3, '.');
          regionInit2(&regions[3], /* y*/ numbers->br4,   /* x*/ 37, /* height*/ 4,  /* width*/  15, '.');
-         regionInit2(&regions[4], /* y*/ 1,   /* x*/62 , /* height*/ numbers->br5,  /* width*/  9, '.');
+         regionInit2(&regions[4], /* y*/ 1,   /* x*/62 , /* height*/ 13,  /* width*/  9, '.');
 
 
         for (int i = 0; i < 7; i++) {

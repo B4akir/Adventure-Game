@@ -68,10 +68,33 @@ void initalStatsEnemy(Region *region){
 
     for (int i=0;i<5;i++){
 
-        Region *region0=&regions[i];
 
+        Region *region0=&regions[i];
+      switch(region0->enemy.constKarakter){
+        case 'B':
         region0->enemy.stats.health=5;
         region0->enemy.stats.attack=3;
+
+        break;
+         case 'T':
+             region0->enemy.stats.health=100;
+             region0->enemy.stats.attack=30;
+
+        break;
+         case 'R':
+             region0->enemy.stats.health=3;
+             region0->enemy.stats.attack=10;
+
+        break;
+      }
+
+
+
+
+
+        
+
+     
 
     }
 

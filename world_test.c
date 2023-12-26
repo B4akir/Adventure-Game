@@ -247,9 +247,9 @@ putXOnEdges(&world2);
 
 
 initalPosition(&player, &region);
-
-initalStatsEnemy(&region);
 enemyInit(&region, &world);
+initalStatsEnemy(&region);
+
  isInRegion(&region, &player);
 
 

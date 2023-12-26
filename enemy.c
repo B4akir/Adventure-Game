@@ -40,7 +40,7 @@ void enemyInit(Region *region, World *world){
         }
       else if (i==2){
 
-        region0->enemy.constKarakter = 'G';
+        region0->enemy.constKarakter = 'T';
 
       } 
       else if (i>=3){
@@ -62,7 +62,7 @@ void enemyInit(Region *region, World *world){
 
 // sve varijable dobija od enemySpawnActivation
 
-void enemyLogic(World *world, Region *region, int index /* POTENCIJALNA GRESKA*/, Player *player){
+void enemyLogic(World *world, Region *region, int index , Player *player){
     Region *region0= &regions[index]; 
 
     world->data[region0->enemy.position.y][region0->enemy.position.x] = region0->enemy.oldChar;
@@ -101,11 +101,14 @@ int newX, newY;
     
     }
     }
-    else if (region0->enemy.constKarakter=='G'){
+    else if (region0->enemy.constKarakter=='T'){
 
 
-        
+        int sleep;
+        sleep = rand() % 4;
 
+
+    if (sleep==0){
             printf("Aktivirano");
         //make enemy track player
         //if player is on the right side of the enemy
@@ -131,6 +134,13 @@ int newX, newY;
 
     }
 
+    else if (sleep>0){
+        newX=region0->enemy.position.x;
+        newY=region0->enemy.position.y;
+    }
+    }
+   
+    
 
     else if (region0->enemy.constKarakter=='R'){
         newY=region0->enemy.position.y;
@@ -146,6 +156,7 @@ int newX, newY;
     else if (newArea==player->karakter){
         initiateCombat(player, region);
     }
+}
 
 
 
@@ -189,8 +200,6 @@ int newX, newY;
 
 
 
-
-   }
 
 void enemySpawnActivation(Player *player, Region *region, World *world){
     //detect in which region the player is
