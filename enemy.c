@@ -44,7 +44,7 @@ void enemyInit(Region *region, World *world){
 
       } 
       else if (i>=3){
-        region0->enemy.constKarakter = 'G';
+        region0->enemy.constKarakter = 'R';
       }
         
         // Set enemy as alive
@@ -67,8 +67,16 @@ void enemyLogic(World *world, Region *region, int index /* POTENCIJALNA GRESKA*/
 
     world->data[region0->enemy.position.y][region0->enemy.position.x] = region0->enemy.oldChar;
 
+int newX, newY;
+
+//bat movement
+    if (region0->enemy.constKarakter=='B'){
+
+
+
+ 
     int direction = rand() % 5; // Generate a random number between 0 and 3
-    char newX, newY;
+
     switch (direction) {
         case 0: // Move up
              newY=region0->enemy.position.y-1;
@@ -92,9 +100,42 @@ void enemyLogic(World *world, Region *region, int index /* POTENCIJALNA GRESKA*/
             newY=region0->enemy.position.y;
     
     }
+    }
+    else if (region0->enemy.constKarakter=='G'){
+
+            printf("Aktivirano");
+        //make enemy track player
+        //if player is on the right side of the enemy
+        if (player->position.x > region0->enemy.position.x) {
+            newX=region0->enemy.position.x++;
+            newY=region0->enemy.position.y;
+        }
+        //if player is on the left side of the enemy
+        else if (player->position.x < region0->enemy.position.x) {
+            newX=region0->enemy.position.x--;
+            newY=region0->enemy.position.y;
+        }
+        //if player is on the bottom side of the enemy
+        else if (player->position.y > region0->enemy.position.y) {
+           newY= region0->enemy.position.y++;
+           newX=region0->enemy.position.x;
+        }
+        //if player is on the top side of the enemy
+        else if (player->position.y < region0->enemy.position.y) {
+           newY= region0->enemy.position.y--;
+           newX=region0->enemy.position.x;
+        }
+
+    }
+
+
+    else if (region0->enemy.constKarakter=='R'){
+        newY=region0->enemy.position.y;
+        newX=region0->enemy.position.x;
+    }
     char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli provjeriti da li je validno mjesto za pokretanje
 
-    if (newArea == '.') {   //enemy se moze samo pomjerati unutar regije /* POTENCIJALNA GRESKA  */
+    if (newArea == '.') {   //enemy se moze samo pomjerati unutar regije 
         region0->enemy.oldChar = '.';
         region0->enemy.position.y = newY;
         region0->enemy.position.x = newX;
@@ -102,8 +143,51 @@ void enemyLogic(World *world, Region *region, int index /* POTENCIJALNA GRESKA*/
     else if (newArea==player->karakter){
         initiateCombat(player, region);
     }
-}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   }
 
 void enemySpawnActivation(Player *player, Region *region, World *world){
     //detect in which region the player is
