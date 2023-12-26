@@ -273,6 +273,10 @@
                 case 2:
                     doorT(&regions[i], world, 2, 1);
                     doorR(&regions[i], world, 2, 2);
+                    doorL(&regions[i], world, 2, 0);
+                    world->data[regions[i].doors[0].y][regions[i].doors[0].x-1] = '#';
+                    world->data[regions[i].doors[0].y-1][regions[i].doors[0].x-1] = '%';
+                     world->data[regions[i].doors[0].y-2][regions[i].doors[0].x-1] = '&';
                     connectDoors(world, 2, 3, 2, 3, world2);
                     break;
 
@@ -373,6 +377,9 @@
         //region 2
         doorTcord(&regions[2], world, 2, 1);
         doorRcord(&regions[2], world, 2, 2);
+        doorLcord(&regions[2], world, 2, 0);
+
+
 
 
         //region3 
@@ -389,6 +396,7 @@
 
          connectDoors(world, 0, 1, 2, 0, world2);
          connectDoors(world, 0, 2, 3, 1, world2);
+         connectDoors(world, 0, 2, 3, 0, world2);
             
     }
 

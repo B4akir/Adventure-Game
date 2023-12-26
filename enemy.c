@@ -31,8 +31,8 @@ void enemyInit(Region *region, World *world){
         region0->enemy.oldChar = '.';
 
         // Temporary enemy types
-        char array[3] = {'R', 'B', 'G'};
-        int randomNumber = rand() % 3; // Random enemy selection
+        
+       
 
         if (i>=0 && i<=1 ){
               region0->enemy.constKarakter = 'B';
@@ -103,26 +103,29 @@ int newX, newY;
     }
     else if (region0->enemy.constKarakter=='G'){
 
+
+        
+
             printf("Aktivirano");
         //make enemy track player
         //if player is on the right side of the enemy
         if (player->position.x > region0->enemy.position.x) {
-            newX=region0->enemy.position.x++;
+            newX=region0->enemy.position.x+1;
             newY=region0->enemy.position.y;
         }
         //if player is on the left side of the enemy
         else if (player->position.x < region0->enemy.position.x) {
-            newX=region0->enemy.position.x--;
+            newX=region0->enemy.position.x-1;
             newY=region0->enemy.position.y;
         }
         //if player is on the bottom side of the enemy
         else if (player->position.y > region0->enemy.position.y) {
-           newY= region0->enemy.position.y++;
+           newY= region0->enemy.position.y+1;
            newX=region0->enemy.position.x;
         }
         //if player is on the top side of the enemy
         else if (player->position.y < region0->enemy.position.y) {
-           newY= region0->enemy.position.y--;
+           newY= region0->enemy.position.y-1;
            newX=region0->enemy.position.x;
         }
 

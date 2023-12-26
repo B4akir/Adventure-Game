@@ -194,6 +194,8 @@
          
          doorT2(region, world2, 2, 1);
          doorR2(region, world2, 2, 2);
+         doorL2(region, world2, 2, 0);
+
 
 
          //regija 3
