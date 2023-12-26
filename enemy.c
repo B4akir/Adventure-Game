@@ -34,8 +34,18 @@ void enemyInit(Region *region, World *world){
         char array[3] = {'R', 'B', 'G'};
         int randomNumber = rand() % 3; // Random enemy selection
 
-        //Hardcode enemy as B
-        region0->enemy.constKarakter = 'B';
+        if (i>=0 && i<=1 ){
+              region0->enemy.constKarakter = 'B';
+
+        }
+      else if (i==2){
+
+        region0->enemy.constKarakter = 'G';
+
+      } 
+      else if (i>=3){
+        region0->enemy.constKarakter = 'G';
+      }
         
         // Set enemy as alive
         region0->enemy.alive=1;
@@ -57,7 +67,7 @@ void enemyLogic(World *world, Region *region, int index /* POTENCIJALNA GRESKA*/
 
     world->data[region0->enemy.position.y][region0->enemy.position.x] = region0->enemy.oldChar;
 
-    int direction = rand() % 4; // Generate a random number between 0 and 3
+    int direction = rand() % 5; // Generate a random number between 0 and 3
     char newX, newY;
     switch (direction) {
         case 0: // Move up
@@ -76,6 +86,11 @@ void enemyLogic(World *world, Region *region, int index /* POTENCIJALNA GRESKA*/
             newX=region0->enemy.position.x+1;
             newY=region0->enemy.position.y;
             break;
+
+        case 4:
+            newX=region0->enemy.position.x;
+            newY=region0->enemy.position.y;
+    
     }
     char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli provjeriti da li je validno mjesto za pokretanje
 

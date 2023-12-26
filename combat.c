@@ -102,7 +102,9 @@ for (int i=0; i<5; i++){
 
       // odradi napade i player i enemy
       region0->enemy.stats.health=region0->enemy.stats.health-num1;
+      printf("Enemy je napadnut za %d\n", num1);
       player->stats.health=player->stats.health-num2;
+      printf("Player je napadnut za %d\n", num2);
 
 
   }

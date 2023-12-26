@@ -25,7 +25,7 @@
 
 
     // ispisi world. 
-
+//oh yeah
 
     void ispis(World *world, Player *player, Region *region) {
 

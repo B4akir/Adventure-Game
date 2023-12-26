@@ -66,7 +66,7 @@ void movement(Player *player, World *world, Region *region){ // player movement
 
         char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli provjeriti da li je validno mjesto za pokretanje
 
-
+    
 
         if (newArea == '.' || newArea == '=' || newArea == VRATA) {  // ' ' je void, '=' je hodnjik, VRATA su vrata 
         
@@ -81,14 +81,17 @@ void movement(Player *player, World *world, Region *region){ // player movement
 
             player->position.y = newY;
             player->position.x = newX;
+          
         }
 
 
 
         // ako player zeli ici na poziciju trenutnog enemya, pokrece combatSistem. 
 
-       if (newArea == region->enemy.karakter) {
+   
+       else if (newArea == regions[player->inRegion].enemy.constKarakter) {
                initiateCombat(player, region);
+               printf("Pozvan combat");
         }
 
 
@@ -115,12 +118,12 @@ void movement(Player *player, World *world, Region *region){ // player movement
     while (getchar() != '\n');
 
     printf("Izaberite vasu klasu: \n");
-    printf("1. Knight: W,  15 hp, 5 attack \n");
-    printf("2. Mage:   M,  5 hp, 14 attack \n");
-    printf("3. Archer: A,  10 hp, 10 attack \n");
+    printf("1. Knight: \nIzgled: K, \n15 hp, \n5 attack \n\n");
+    printf("2. Mage:   \nIzgled: M,  \n5 hp, \n14 attack \n\n");
+    printf("3. Archer: \nIzgled: A,  \n10 hp, \n10 attack \n\n");
 
     int odabir;
-    printf("Unesite 1, 2, ili 3\n");
+    printf("Unesite 1, 2 ili 3\n");
     scanf("%d", &odabir);
 
     while(odabir!=1 && odabir!=2 && odabir!=3){
