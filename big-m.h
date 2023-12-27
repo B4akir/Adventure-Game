@@ -7,6 +7,7 @@
     #include <Windows.h>
     #include <conio.h>
     #include <time.h>
+    #include <unistd.h>
     #define HODNJIK 35
     #define VRATA 15
     #define ZID 186
@@ -17,6 +18,9 @@
     #define DESNID 188
     #define HEIGHT 18
     #define WIDTH 80
+
+     #define INTROHEIGHT 20
+    #define INTROWIDTH 20
 
 typedef struct {
     int br1;

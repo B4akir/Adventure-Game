@@ -21,6 +21,16 @@
         }
     }
 
+     void initWorldIntro(World *world) {
+        for (int i = 0; i < HEIGHT; i++) {
+            for (int j = 0; j < WIDTH; j++) {
+            
+          
+            world->data[i][j] = ' ';
+            }
+        }
+    }
+
 
 
 
@@ -64,6 +74,16 @@
     
 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -202,6 +222,12 @@ int connectDoors(World *world, int r1, int r2, int door1, int door2, World *worl
 
 
 int main (){
+
+
+
+
+
+
 
 // deklaracija tipova i varijabli datih
 World world;

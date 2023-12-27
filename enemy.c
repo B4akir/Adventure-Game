@@ -109,7 +109,7 @@ int newX, newY;
 
 
     if (sleep==0){
-            printf("Aktivirano");
+            
         //make enemy track player
         //if player is on the right side of the enemy
         if (player->position.x > region0->enemy.position.x) {

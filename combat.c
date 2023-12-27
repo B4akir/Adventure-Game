@@ -114,6 +114,8 @@ void initiateCombat(Player *player, Region *region){
 
 for (int i=0; i<5; i++){
 
+
+
   Region *region0=&regions[i];
 
   if (player->inRegion==i){
@@ -131,7 +133,7 @@ for (int i=0; i<5; i++){
 
 
   }
-
+sleep (0.5);
 
 }
 
