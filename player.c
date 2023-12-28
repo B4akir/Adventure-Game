@@ -187,7 +187,16 @@ void movement(Player *player, World *world, Region *region, char unos){ // playe
                initiateCombat(player, region);
                
         }
+//end goal
 
+else if (newArea=='^'){
+    printf("Pobjedio si!");
+    
+}
+
+
+
+// item pickup
     else if (newArea=='A' || newArea=='D' || newArea=='H'){
 
 
