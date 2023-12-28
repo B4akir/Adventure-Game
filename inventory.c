@@ -12,7 +12,7 @@ void initialInventory(Player *player){
     for (int i=0; i<5; i++){
 
         strcpy(player->inventory.items[i], ".");
-
+        player->inventory.itemAssigned[i]=0;
 
     }
 

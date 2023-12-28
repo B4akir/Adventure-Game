@@ -34,6 +34,44 @@ void checkInventory(Player *player,char unos) {
                   
                   if (broj==i){
 
+                if (strcmp(player->inventory.items[broj], "+Attack") == 0) {
+
+                    player->stats.attack=player->stats.attack-5;
+                    printf("Player hp attack\n");
+                    sleep(2);
+                  
+                  
+                }
+
+                 else if (strcmp(player->inventory.items[broj], "+HealthUp") == 0) {
+
+                    player->stats.health=player->stats.health-5;
+                    printf("Player hp lowered\n");
+                    sleep(2);
+                  
+                  
+                }
+
+                    else if (strcmp(player->inventory.items[broj], "Staff") == 0) {
+                        player->stats.attack=player->stats.attack-13;
+
+                    }
+                    else if (strcmp(player->inventory.items[broj], "Sword") == 0) {
+                             player->stats.attack=player->stats.attack-4;
+                    }
+                    else if (strcmp(player->inventory.items[broj], "Bow") == 0) {
+                             player->stats.attack=player->stats.attack-9;
+                    }
+
+
+
+
+              
+
+
+
+
+
                         strcpy(player->inventory.items[broj], ".");
                   }
 
@@ -194,7 +232,7 @@ for (int i=0; i<5; i++){
         case 'D':
             for (int j=0; j<5; j++) {
                 if (strcmp(player->inventory.items[j], ".") == 0) {
-                    strcpy(player->inventory.items[j], "+Ukupan hp ");
+                    strcpy(player->inventory.items[j], "+UkupanHp ");
                     player->stats.constHealth=player->stats.constHealth+5;
                     itemAssigned = 1;
                     break;

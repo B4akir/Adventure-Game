@@ -65,6 +65,7 @@ typedef struct{
 typedef struct {
 
     char items[5][20];
+    int itemAssigned[5];
    
 
 
