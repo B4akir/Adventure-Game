@@ -408,9 +408,15 @@
         for (int i=0; i<5; i++){
 
             Region *region0= &regions[i];
-            region0->item.karakter='A';
+
+            char myCharArray[] = {'A', 'D', 'H'};  // attack . defense . health  
+
+            int r = rand() % 3;
+            region0->item.karakter=myCharArray[r];
             region0->item.position.x=region0->position.x+1;
             region0->item.position.y=region0->position.y+1; 
+            region0->item.pickedUp=0;
+            region0->item.activated=0;
 
         }
         
@@ -427,6 +433,7 @@ void itemsIntoWorld(Region *region, World *world){
 
         
             Region *region0= &regions[i];
+            if (region0->item.activated==1 && region0->item.pickedUp==0){
                   world->data[region0->item.position.y][region0->item.position.x] = region0->item.karakter;
     }
 
@@ -436,8 +443,32 @@ void itemsIntoWorld(Region *region, World *world){
 }
 
 
+}
+
+void spawnItem(Player *player, Region *region){
 
 
+    for (int i=0;i<5;i++){
+
+        Region *region0= &regions[i];   
+
+    
+
+        if (player->inRegion==i){
+
+            region0->item.activated=1;
+
+
+
+
+        }
+
+
+    }
+    
+
+
+}
 
 
 

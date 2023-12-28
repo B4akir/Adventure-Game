@@ -94,6 +94,8 @@ typedef struct {
 
     Position position;
     char karakter;
+    int pickedUp;
+    int activated;
 
 }Item;
 

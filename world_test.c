@@ -238,10 +238,15 @@ generateRandomNumbers(&numbers);
 initWorld(&world);
 initializeRegions(&world, &player, &numbers, &world2);
 putXOnEdges(&world);
-initItems(&region);
-itemsIntoWorld(&region, &world);
-ispis(&world, &player, &region);
+initalPosition(&player, &region);
 
+initPlayer(&player,&world);
+initItems(&region);
+isInRegion(&region, &player);
+spawnItem(&player,&region);
+itemsIntoWorld(&region, &world);
+
+ispis(&world, &player, &region);
 
 
 

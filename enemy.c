@@ -165,42 +165,6 @@ int newX, newY;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void enemySpawnActivation(Player *player, Region *region, World *world){
     //detect in which region the player is
     for(int i=0; i<5; i++){ // this sends indexes to all

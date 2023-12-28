@@ -40,6 +40,7 @@ void initalPosition(Player *player, Region *region){ // pocetna pozicija playera
     // stavlja pocetne kordinate playera
     player->position.y= region0->position.y+1;
     player->position.x= region0->position.x+2;
+    player->karakter='W';
     player->inRegion=0; // stavlja ga u regiju 0
 
     }; 
