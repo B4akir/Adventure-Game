@@ -436,6 +436,12 @@ void itemsIntoWorld(Region *region, World *world){
             if (region0->item.activated==1 && region0->item.pickedUp==0){
                   world->data[region0->item.position.y][region0->item.position.x] = region0->item.karakter;
     }
+    else if  (region0->item.activated==0){
+
+        world->data[region0->item.position.y][region0->item.position.x] = '.';
+    }
+
+    }
 
 
    
@@ -443,7 +449,7 @@ void itemsIntoWorld(Region *region, World *world){
 }
 
 
-}
+
 
 void spawnItem(Player *player, Region *region){
 
@@ -462,6 +468,11 @@ void spawnItem(Player *player, Region *region){
 
 
         }
+
+        else {
+            region0->item.activated=0;
+        }
+        
 
 
     }
