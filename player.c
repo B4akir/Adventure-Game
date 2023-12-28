@@ -17,12 +17,36 @@ void checkInventory(Player *player,char unos) {
         }
 
         printf("Q je izlaz iz inventorya\n");
+        printf("D je izbacivanje itema\n");
         unos = _getch();
 
         switch (unos) {
             case 'q':
                 // Exit the inventory loop
                 return;
+
+            case 'd':
+                printf("Unesite broj itema koji zelite da izbacite\n");
+                int broj;
+                scanf("%d", &broj);
+              
+                for (int i=0; i<5; i++){
+                  
+                  if (broj==i){
+
+                        strcpy(player->inventory.items[broj], ".");
+                  }
+
+
+                      
+                            
+                           
+                   
+                }
+
+            
+
+
         }
     } while (1); // Continue looping until the player exits the inventory
 }
