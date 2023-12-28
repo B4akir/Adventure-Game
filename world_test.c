@@ -292,7 +292,7 @@ initalStatsEnemy(&region);
 
 itemsIntoWorld(&region, &world);
 
-
+sleep(2);
 int br=0;
 
 
@@ -304,8 +304,19 @@ while(1){
 
         populateWorldWithRegions(regions, 5, &world, &player, &region, &world2);
         enemySpawnActivation(&player, &region,&world);
-
+        
         enemiesIntoWorld(&world, &region);
+
+        if (br==0){
+            initPlayer(&player,&world);
+            ispis(&world, &player,&region);
+        }
+
+
+
+
+
+
         char unos = _getch();
 
         if (unos=='i'){
@@ -313,9 +324,10 @@ while(1){
 
         }
         else {
+            
         movement(&player,&world, &region, unos);
         }
-spawnItem(&player,&region); //provjeri da li je player u regiji
+        spawnItem(&player,&region); //provjeri da li je player u regiji
         itemsIntoWorld(&region, &world);
 
         initPlayer(&player,&world);
@@ -331,6 +343,10 @@ spawnItem(&player,&region); //provjeri da li je player u regiji
 
 
         br++;
+        if (player.stats.health<=0){
+            printf("Umro si\n");
+            break;
+        }
 
 
 }

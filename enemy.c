@@ -34,17 +34,26 @@ void enemyInit(Region *region, World *world){
         
        
 
-        if (i>=0 && i<=1 ){
+        if (i==0 ){
               region0->enemy.constKarakter = 'B';
 
+        }
+
+
+        else if (i==1){
+            region0->enemy.constKarakter = 'R';
         }
       else if (i==2){
 
         region0->enemy.constKarakter = 'T';
 
       } 
-      else if (i>=3){
-        region0->enemy.constKarakter = 'R';
+      else if (i==3){
+        region0->enemy.constKarakter = 'B';
+      }
+
+      else if (i==4){
+        region0->enemy.constKarakter = 'B';
       }
         
         // Set enemy as alive
@@ -142,10 +151,39 @@ int newX, newY;
    
     
 
-    else if (region0->enemy.constKarakter=='R'){
-        newY=region0->enemy.position.y;
-        newX=region0->enemy.position.x;
+                    else if (region0->enemy.constKarakter=='R'){
+
+
+ int random = rand() % 3;
+            
+        //make enemy track player
+        //if player is on the right side of the enemy
+        if (player->position.x > region0->enemy.position.x) {
+            newX=region0->enemy.position.x+random;
+            newY=region0->enemy.position.y;
+        }
+        //if player is on the left side of the enemy
+        else if (player->position.x < region0->enemy.position.x) {
+            newX=region0->enemy.position.x-random;
+            newY=region0->enemy.position.y;
+        }
+        //if player is on the bottom side of the enemy
+        else if (player->position.y > region0->enemy.position.y) {
+           newY= region0->enemy.position.y+random;
+           newX=region0->enemy.position.x;
+        }
+        //if player is on the top side of the enemy
+        else if (player->position.y < region0->enemy.position.y) {
+           newY= region0->enemy.position.y-random;
+           newX=region0->enemy.position.x;
+        }
+
     }
+
+   
+    
+
+
     char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli provjeriti da li je validno mjesto za pokretanje
 
     if (newArea == '.') {   //enemy se moze samo pomjerati unutar regije 
@@ -154,10 +192,29 @@ int newX, newY;
         region0->enemy.position.x = newX;
     }
     else if (newArea==player->karakter){
-        initiateCombat(player, region);
-    }
-}
+        if (region0->enemy.karakter=='R'){
+                 
+                 int random = rand() % 2;
 
+                 if (random==0){
+                    initiateCombat(player, region);
+                 }
+                 else if (random==1){
+                    region0->enemy.position.y = newY;
+                    region0->enemy.position.x = newX;
+                 }
+        }
+
+        else {
+         initiateCombat(player, region);
+        region0->enemy.position.y = newY;
+        region0->enemy.position.x = newX;
+
+        }
+       
+    }
+
+}
 
 
 

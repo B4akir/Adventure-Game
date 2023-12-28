@@ -34,41 +34,30 @@ void checkInventory(Player *player,char unos) {
                   
                   if (broj==i){
 
-                if (strcmp(player->inventory.items[broj], "+Attack") == 0) {
+                if (strcmp(player->inventory.itemTypes[broj], "+Attack") == 0) {
 
                     player->stats.attack=player->stats.attack-5;
-                    printf("Player hp attack\n");
-                    sleep(2);
+                 
+                 
                   
                   
                 }
 
-                 else if (strcmp(player->inventory.items[broj], "+HealthUp") == 0) {
+                 else if (strcmp(player->inventory.itemTypes[broj], "+UkupanHp") == 0) {
 
-                    player->stats.health=player->stats.health-5;
-                    printf("Player hp lowered\n");
-                    sleep(2);
+                    player->stats.constHealth=player->stats.constHealth-5;
+                 
+             
                   
                   
                 }
 
-                    else if (strcmp(player->inventory.items[broj], "Staff") == 0) {
-                        player->stats.attack=player->stats.attack-13;
-
-                    }
-                    else if (strcmp(player->inventory.items[broj], "Sword") == 0) {
-                             player->stats.attack=player->stats.attack-4;
-                    }
-                    else if (strcmp(player->inventory.items[broj], "Bow") == 0) {
-                             player->stats.attack=player->stats.attack-9;
-                    }
+                   
 
 
 
 
-              
-
-
+    
 
 
 
@@ -201,9 +190,21 @@ void movement(Player *player, World *world, Region *region, char unos){ // playe
 
     else if (newArea=='A' || newArea=='D' || newArea=='H'){
 
+
+char *arrayOfStrings[] = {"Razbijeno Staklo", "Sumljiva Igla", "Zub Krokodila"};
+char *arrayOfStrings2[] = {"Kartonski stit", "Perfektno ocuvana jakna", "Stakorska kapa"};
+
+
+int randomIndex = rand() % 3;
+char *randomString = arrayOfStrings[randomIndex];
+char *randomString2 = arrayOfStrings2[randomIndex];
+
+
+
+
         regions[player->inRegion].item.pickedUp=1;
-        printf("Pokupio si: %c \n" , regions[player->inRegion].item.karakter);
-        sleep (2);
+       
+       
             player->position.y = newY;
             player->position.x = newX;
 
@@ -222,7 +223,10 @@ for (int i=0; i<5; i++){
         case 'A':
             for (int j=0; j<5; j++) {
                 if (strcmp(player->inventory.items[j], ".") == 0) {
-                    strcpy(player->inventory.items[j], "+Attack");
+                    strcpy(player->inventory.items[j], randomString);
+                     printf("Pokupio si: %s \n",randomString);
+                      sleep (2);
+                    strcpy(player->inventory.itemTypes[j], "+Attack");
                     player->stats.attack=player->stats.attack+5;
                     itemAssigned = 1;
                     break;
@@ -232,7 +236,10 @@ for (int i=0; i<5; i++){
         case 'D':
             for (int j=0; j<5; j++) {
                 if (strcmp(player->inventory.items[j], ".") == 0) {
-                    strcpy(player->inventory.items[j], "+UkupanHp ");
+                    strcpy(player->inventory.items[j], randomString2);
+                     printf("Pokupio si: %s \n",randomString2);
+                      sleep (2);
+                    strcpy(player->inventory.itemTypes[j], "+UkupanHp");
                     player->stats.constHealth=player->stats.constHealth+5;
                     itemAssigned = 1;
                     break;

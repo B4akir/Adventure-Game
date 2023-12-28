@@ -66,7 +66,7 @@ typedef struct {
 
     char items[5][20];
     int itemAssigned[5];
-   
+    char itemTypes[5][10];
 
 
 }Inventory;

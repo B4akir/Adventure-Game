@@ -260,10 +260,12 @@
 
             switch (i){
                 case 1:
+             
+
                   doorL(&regions[i], world, 1, 0);
                   doorB(&regions[i], world, 1, 3);
                     connectDoors(world, 1, 2, 3, 1, world2);
-
+                 
 
 
 
@@ -289,7 +291,12 @@
                     break;
 
                  case 4:
+
+                world->data[regions[4].position.y+1][regions[4].position.x+regions[4].width-1] = '^';
+                world->data[regions[4].position.y+2][regions[4].position.x+regions[4].width-1] = '^';
+                world->data[regions[4].position.y+3][regions[4].position.x+regions[4].width-1] = '^';
                       doorL(&regions[i], world, 4, 0);
+                      
                       
                       break;
             }
@@ -355,6 +362,8 @@
 
            
          regionInit(&regions[1], /* y*/1,   /* x*/ 18, /* height*/ 7,  /* width*/  14, '.');
+
+         
 
           
          regionInit(&regions[2], /* y*/ 12,   /* x*/ 5, /* height*/ 4,  /* width*/  numbers->br3, '.');

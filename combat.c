@@ -125,20 +125,53 @@ for (int i=0; i<5; i++){
       // uzima random broj od 0 do max napada enemya
       int num2= rand() % region0->enemy.stats.attack;
 
-      // odradi napade i player i enemy
-      region0->enemy.stats.health=region0->enemy.stats.health-num1;
+
+      if (num1==0){
+        printf("Player je promasio napad\n");
+      }
+
+
+      else if (num1>0){
+   region0->enemy.stats.health=region0->enemy.stats.health-num1;
       printf("Enemy je napadnut za %d\n", num1);
+
+      }
+     
+
+    if (num2==0){
+        printf("Enemy je masio\n ");
+
+    }
+
+    else if (num2>0){
       player->stats.health=player->stats.health-num2;
       printf("Player je napadnut za %d\n", num2);
+
+    }
+     
       sleep (2);
 
-        if (player->stats.health<=0){
-    //umro player
-  }
+      
 
   if (regions[player->inRegion].enemy.stats.health<=0){
-    printf("Ubili ste enemya\n ");
-    sleep(3);
+
+
+    char enemy[20];
+    if (regions[player->inRegion].enemy.constKarakter=='B'){
+      strcpy(enemy, "Bata");
+    }
+
+    else if (regions[player->inRegion].enemy.constKarakter=='T'){
+      strcpy(enemy, "Trolla");
+    }
+
+    else if (regions[player->inRegion].enemy.constKarakter=='R'){
+      strcpy(enemy, "Rata");
+    }
+
+    printf("Ubili ste %s \n ",enemy);
+    
+    sleep(1);
   }
 
   }
