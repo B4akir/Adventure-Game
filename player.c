@@ -131,20 +131,61 @@ void movement(Player *player, World *world, Region *region, char unos){ // playe
 
    
        else if (newArea == regions[player->inRegion].enemy.constKarakter) {
+
+
                initiateCombat(player, region);
                
         }
 
+    else if (newArea=='A' || newArea=='D' || newArea=='H'){
 
-       
+        regions[player->inRegion].item.pickedUp=1;
+        printf("Pokupio si: %c \n" , regions[player->inRegion].item.karakter);
+        sleep (2);
+            player->position.y = newY;
+            player->position.x = newX;
 
+        
+
+
+ 
 
     
-        
-        //ceka 100ms
-        Sleep(100);
-    }
+int itemAssigned;
 
+for (int i=0; i<5; i++){
+    itemAssigned = 0;
+    switch (regions[player->inRegion].item.karakter)
+    {
+        case 'A':
+            for (int j=0; j<5; j++) {
+                if (strcmp(player->inventory.items[j], ".") == 0) {
+                    strcpy(player->inventory.items[j], "+Attack");
+                    player->stats.attack=player->stats.attack+5;
+                    itemAssigned = 1;
+                    break;
+                }
+            }
+            break;
+        case 'D':
+            for (int j=0; j<5; j++) {
+                if (strcmp(player->inventory.items[j], ".") == 0) {
+                    strcpy(player->inventory.items[j], "+Ukupan hp ");
+                    player->stats.constHealth=player->stats.constHealth+5;
+                    itemAssigned = 1;
+                    break;
+                }
+            }
+            break;
+        case 'H':
+            printf ("Potpuno si izljicen\n");
+            player->stats.health= player->stats.constHealth;
+            break;
+    }
+    if (itemAssigned) break;
+}
+    }
+}
     // inicijalizira playera na mjesto deklarisano u funkciji movement
     void initPlayer(Player *player, World *world) {
     

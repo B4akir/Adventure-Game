@@ -57,7 +57,7 @@
     
 
     Region *region0=&regions[player->inRegion];
-    printf (" Player health: %d(%d)       Player attack: %d(%d)\n", player->stats.health, player->stats.constHealth, player->stats.attack, player->stats.constAttack);
+    printf (" Player health: %d(%d)       Player attack: %d\n", player->stats.health, player->stats.constHealth, player->stats.attack, player->stats.constAttack);
     printf("Sewage dwellers name: %s \n", player->ime);
     for (int i=0; i<5; i++){
   
@@ -302,35 +302,35 @@ while(1){
  
  
 
-populateWorldWithRegions(regions, 5, &world, &player, &region, &world2);
-enemySpawnActivation(&player, &region,&world);
+        populateWorldWithRegions(regions, 5, &world, &player, &region, &world2);
+        enemySpawnActivation(&player, &region,&world);
 
-enemiesIntoWorld(&world, &region);
- char unos = _getch();
+        enemiesIntoWorld(&world, &region);
+        char unos = _getch();
 
- if (unos=='i'){
-checkInventory(&player, unos);
+        if (unos=='i'){
+        checkInventory(&player, unos);
 
- }
-else {
-movement(&player,&world, &region, unos);
-}
+        }
+        else {
+        movement(&player,&world, &region, unos);
+        }
+spawnItem(&player,&region); //provjeri da li je player u regiji
+        itemsIntoWorld(&region, &world);
 
-
-initPlayer(&player,&world);
-isInRegion(&region, &player);
-spawnItem(&player,&region);
-itemsIntoWorld(&region, &world);
-
-
-ispis(&world, &player,&region);
- if (br==2){
-    printf("Moram izaci odavdje");
-  }
+        initPlayer(&player,&world);
+        isInRegion(&region, &player);
+        
 
 
+        ispis(&world, &player,&region);
+        if (br==2){
+            printf("Moram izaci odavdje");
+        }
 
-   br++;
+
+
+        br++;
 
 
 }

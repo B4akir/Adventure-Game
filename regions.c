@@ -405,7 +405,7 @@
     void initItems(Region *region){
 
 
-        for (int i=0; i<5; i++){
+        for (int i=0; i<4; i++){
 
             Region *region0= &regions[i];
 
@@ -429,17 +429,25 @@
 
 void itemsIntoWorld(Region *region, World *world){
 
-    for (int i=0;i<5; i++){
+    for (int i=0;i<4; i++){
 
         
             Region *region0= &regions[i];
             if (region0->item.activated==1 && region0->item.pickedUp==0){
                   world->data[region0->item.position.y][region0->item.position.x] = region0->item.karakter;
     }
-    else if  (region0->item.activated==0){
+    else if  (region0->item.activated==0 && region0->populated==1){
 
         world->data[region0->item.position.y][region0->item.position.x] = '.';
     }
+
+    else if (region0->item.activated==0 && region0->populated==0){
+world->data[region0->item.position.y][region0->item.position.x] = ' ';
+
+    }
+
+else if (region0->item.pickedUp==1){
+world->data[region0->item.position.y][region0->item.position.x] = '.';
 
     }
 
@@ -449,17 +457,17 @@ void itemsIntoWorld(Region *region, World *world){
 }
 
 
-
+}
 
 void spawnItem(Player *player, Region *region){
 
 
-    for (int i=0;i<5;i++){
+    for (int i=0;i<4;i++){
 
         Region *region0= &regions[i];   
 
     
-
+    
         if (player->inRegion==i){
 
             region0->item.activated=1;

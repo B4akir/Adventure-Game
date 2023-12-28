@@ -146,7 +146,7 @@ void intro (Player *player){
 
 
             if (i==9){
-                   sleep(1);
+                  // sleep(1);
                 printf("Jos jedan dosadan dan u Gracanici...\n");
                 // sleep(3);
             }
@@ -166,7 +166,7 @@ void intro (Player *player){
                // sleep (1);
                printf("\n\n");
                 printf("Zdravo Izikijale \n");
-                sleep (2);
+                //sleep (2);
                 printf("...");
                 printf("Zdravo Harune?");
                // sleep (2);

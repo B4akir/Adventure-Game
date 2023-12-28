@@ -8,6 +8,7 @@
     #include <conio.h>
     #include <time.h>
     #include <unistd.h>
+    #include <string.h>
     #define HODNJIK 35
     #define VRATA 15
     #define ZID 186
@@ -64,6 +65,7 @@ typedef struct{
 typedef struct {
 
     char items[5][20];
+   
 
 
 }Inventory;
