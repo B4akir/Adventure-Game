@@ -61,7 +61,12 @@ typedef struct{
 
 
 
+typedef struct {
 
+    char items[5][20];
+
+
+}Inventory;
 
 
 // Strukture i tipovi
@@ -75,6 +80,7 @@ typedef struct{
     Stats stats;
     int alive;
     int inRegion;
+    Inventory inventory;
 
         }Player;
 
