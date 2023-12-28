@@ -9,6 +9,12 @@
 void initialInventory(Player *player){
 
 
+    for (int i=0; i<5; i++){
+
+        strcpy(player->inventory.items[i], " ");
+
+
+    }
 
 
     switch (player->karakter){

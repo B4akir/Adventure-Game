@@ -206,7 +206,6 @@ int connectDoors(World *world, int r1, int r2, int door1, int door2, World *worl
 
  
 
-
    
 
 
@@ -231,86 +230,103 @@ RandomNumbers numbers;
 
 
 
+
+
+
+
+
+
+
+
+intro(&player);
+
+generateRandomNumbers(&numbers);
+
+
+initWorld(&world2);
+ 
+
+
+
+
+
+
+
+
+
+initializeRegions2(&world2, &numbers);
+initializeDoors2(&world2, &region);
+
+
+
+
+
+
+
+
+// pocetne inicijalizacije
+
+
+system("cls");
 kreator(&player);
 
-
+system("cls");
+printf("Pomjeranje je sa WASD. \n Inventory je sa I. \n");
+sleep(4);
 initialInventory(&player);
-
-printf("%s", player.inventory.items[0]);
-
-// intro(&player);
-
-// generateRandomNumbers(&numbers);
+initWorld(&world);
+initializeRegions(&world, &player, &numbers, &world2);
+putXOnEdges(&world);
+putXOnEdges(&world2);
 
 
-// initWorld(&world2);
- 
+initalPosition(&player, &region);
+enemyInit(&region, &world);
+initalStatsEnemy(&region);
+
+ isInRegion(&region, &player);
 
 
+int br=0;
 
 
-
-
-
-
-
-// initializeRegions2(&world2, &numbers);
-// initializeDoors2(&world2, &region);
-
-
-
-
-
-
-
-
-// // pocetne inicijalizacije
-
-// generateRandomNumbers(&numbers);
-
-// kreator(&player);
-// initWorld(&world);
-// initializeRegions(&world, &player, &numbers, &world2);
-// putXOnEdges(&world);
-// putXOnEdges(&world2);
-
-
-// initalPosition(&player, &region);
-// enemyInit(&region, &world);
-// initalStatsEnemy(&region);
-
-//  isInRegion(&region, &player);
-
-
-// int br=0;
-
-// while(1){
+while(1){
 
 
  
  
 
-// populateWorldWithRegions(regions, 5, &world, &player, &region, &world2);
-// enemySpawnActivation(&player, &region,&world);
+populateWorldWithRegions(regions, 5, &world, &player, &region, &world2);
+enemySpawnActivation(&player, &region,&world);
 
-// enemiesIntoWorld(&world, &region);
-// movement(&player,&world, &region);
-// initPlayer(&player,&world);
-//  isInRegion(&region, &player);
+enemiesIntoWorld(&world, &region);
+ char unos = _getch();
 
+ if (unos=='i'){
+checkInventory(&player, unos);
 
-
-// ispis(&world, &player,&region);
-//  if (br==2){
-//     printf("Moram izaci odavdje");
-//   }
-
+ }
+else {
+movement(&player,&world, &region, unos);
+}
 
 
-//    br++;
+initPlayer(&player,&world);
+ isInRegion(&region, &player);
 
 
-// }
+
+ispis(&world, &player,&region);
+ if (br==2){
+    printf("Moram izaci odavdje");
+  }
+
+
+
+   br++;
+
+
+}
 
 
 

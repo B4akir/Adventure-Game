@@ -115,7 +115,7 @@ typedef struct {
 
      void initWorld(World *world);
       void initalPosition(Player *player, Region *region);
-        void movement(Player *player, World *world, Region *region);
+        void movement(Player *player, World *world, Region *region, char unos);
         void initPlayer(Player *player, World *world);
          void kreator(Player *player);
          void regionIntoWorld(Region *region, World *world);

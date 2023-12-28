@@ -3,6 +3,34 @@
 
 
 
+
+// aktivacija na slovo I
+void checkInventory(Player *player,char unos) {
+    
+
+    do {
+        system("cls");
+        printf("Inventory: \n");
+
+        for (int i = 0; i < 5; i++) {
+            printf("| [%d] %s | \n", i, player->inventory.items[i]);
+        }
+
+        printf("Q je izlaz iz inventorya\n");
+        unos = _getch();
+
+        switch (unos) {
+            case 'q':
+                // Exit the inventory loop
+                return;
+        }
+    } while (1); // Continue looping until the player exits the inventory
+}
+
+
+
+
+
 void initalPosition(Player *player, Region *region){ // pocetna pozicija playera
 
     Region *region0 = &regions[0]; // stavlja ga u regiju 0
@@ -20,7 +48,7 @@ void initalPosition(Player *player, Region *region){ // pocetna pozicija playera
 
 
 
-void movement(Player *player, World *world, Region *region){ // player movement
+void movement(Player *player, World *world, Region *region, char unos){ // player movement
 
 
         int newX, newY;
@@ -28,7 +56,7 @@ void movement(Player *player, World *world, Region *region){ // player movement
         world->data[player->position.y][player->position.x] = player->oldChar;   //uzima podatke na trenuntim kordinatama playera da ih poslije moze zamijeniti kada se player pomjeri
     
 
-    char unos = _getch(); // uzima input unosa, bez cekanja scanf-a. Brze je od scanf-a jer scanf uzima input tek kada se pritisne enter, a _getch uzima input odmah, te scanf koristi puno vise funkcija
+    // uzima input unosa, bez cekanja scanf-a. Brze je od scanf-a jer scanf uzima input tek kada se pritisne enter, a _getch uzima input odmah, te scanf koristi puno vise funkcija
     //kao npr strlen (Vidio na ranodm youtube videu o gta 5 optimiziaciji loading online ).
 
 
