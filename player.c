@@ -1,5 +1,8 @@
 #include "big-m.h"
 
+
+
+
 void initalPosition(Player *player, Region *region){ // pocetna pozicija playera
 
     Region *region0 = &regions[0]; // stavlja ga u regiju 0
@@ -64,6 +67,9 @@ void movement(Player *player, World *world, Region *region){ // player movement
         // ovo ne da playeru da ulazi u zidove ili u void
 
 
+
+
+
         char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli provjeriti da li je validno mjesto za pokretanje
 
     
@@ -71,6 +77,12 @@ void movement(Player *player, World *world, Region *region){ // player movement
         if (newArea == '.' || newArea == '=' || newArea == VRATA) {  // ' ' je void, '=' je hodnjik, VRATA su vrata 
         
         
+       
+         if ((newX==5 && newY==11)){
+            printf("Troll: Stomp Stomp Stomp");
+            sleep(1);
+          
+         }
 
 
         // ovo spasava karakter na koji player ide, da u sledecoj iteraciji loopa moze da ga vrati na staro mjesto
@@ -91,7 +103,7 @@ void movement(Player *player, World *world, Region *region){ // player movement
    
        else if (newArea == regions[player->inRegion].enemy.constKarakter) {
                initiateCombat(player, region);
-               printf("Pozvan combat");
+               
         }
 
 
@@ -110,20 +122,34 @@ void movement(Player *player, World *world, Region *region){ // player movement
     }
 
 // pocetna funkcija za deklarisanje imena playera i njegovog zeljenog znaka
-   void kreator (Player *player) {
+
+
+
+
+
+void ime (Player *player){
+
+
     printf("Unesite vase ime:\n");
     scanf("%19s", player->ime);
+     while (getchar() != '\n');
+
+}
+
+
+
+   void kreator (Player *player) {
+   
 
     // ukloni buffer da ne zeza sa konzolom
-    while (getchar() != '\n');
+   
 
-    printf("Izaberite vasu klasu: \n");
-    printf("1. Knight: \nIzgled: K, \n15 hp, \n5 attack \n\n");
-    printf("2. Mage:   \nIzgled: M,  \n5 hp, \n14 attack \n\n");
-    printf("3. Archer: \nIzgled: A,  \n10 hp, \n10 attack \n\n");
+    printf("Nalazis se u mracnoj prostoriji.\n Prepodstavljas da si pao kroz labavi saht neodgovornih radnika. ");
+    printf("Ispred sebe vidis stari kostur, koji je vjerovatno pao prije tebe.\n");
+    printf("Kostur u ruci drzi: \n1.Mac \n2.Magicni stap \n3.Luk i strijele\n");
 
     int odabir;
-    printf("Unesite 1, 2 ili 3\n");
+    printf("Unesite 1 2 ili 3\n");
     scanf("%d", &odabir);
 
     while(odabir!=1 && odabir!=2 && odabir!=3){

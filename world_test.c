@@ -3,7 +3,7 @@
 // pozovi sve potrebne funckije
     #include "big-m.h"
 
-
+    #include "intro.c"
     #include "regions_fake.c"
     #include "enemy.c"
     #include "regions.c"
@@ -21,15 +21,7 @@
         }
     }
 
-     void initWorldIntro(World *world) {
-        for (int i = 0; i < HEIGHT; i++) {
-            for (int j = 0; j < WIDTH; j++) {
-            
-          
-            world->data[i][j] = ' ';
-            }
-        }
-    }
+    
 
 
 
@@ -64,9 +56,8 @@
     
 
     Region *region0=&regions[player->inRegion];
-    printf (" In region: %d\n", player->inRegion);
     printf (" Player health: %d(%d)       Player attack: %d(%d)\n", player->stats.health, player->stats.constHealth, player->stats.attack, player->stats.constAttack);
-    printf("Enemy hp: %d      Enemy attack: %d\n", region0->enemy.stats.health, region0->enemy.stats.attack);
+    printf("Sewage dwellers name: %s \n", player->ime);
     for (int i=0; i<5; i++){
   
         
@@ -238,10 +229,14 @@ World world2;
 RandomNumbers numbers;
 
 
+
+intro(&player);
+
 generateRandomNumbers(&numbers);
 
 
 initWorld(&world2);
+ 
 
 
 
@@ -279,9 +274,13 @@ initalStatsEnemy(&region);
  isInRegion(&region, &player);
 
 
-
+int br=0;
 
 while(1){
+
+
+ 
+ 
 
 populateWorldWithRegions(regions, 5, &world, &player, &region, &world2);
 enemySpawnActivation(&player, &region,&world);
@@ -294,7 +293,13 @@ initPlayer(&player,&world);
 
 
 ispis(&world, &player,&region);
+ if (br==2){
+    printf("Moram izaci odavdje");
+  }
 
+
+
+   br++;
 
 
 }

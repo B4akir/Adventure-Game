@@ -130,10 +130,20 @@ for (int i=0; i<5; i++){
       printf("Enemy je napadnut za %d\n", num1);
       player->stats.health=player->stats.health-num2;
       printf("Player je napadnut za %d\n", num2);
+      sleep (2);
 
+        if (player->stats.health<=0){
+    //umro player
+  }
+
+  if (regions[player->inRegion].enemy.stats.health<=0){
+    printf("Ubili ste enemya\n ");
+    sleep(3);
+  }
 
   }
-sleep (0.5);
+
+
 
 }
 

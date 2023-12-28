@@ -132,11 +132,11 @@ void putXOnEdgesIntro(World *world) {
 
 
 
-int main (){
+void intro (Player *player){
 
 
     World worldIntro;
-    Player player;
+    
         
         
         initWorldIntro(&worldIntro);
@@ -148,12 +148,12 @@ int main (){
             if (i==9){
                    sleep(1);
                 printf("Jos jedan dosadan dan u Gracanici...\n");
-                 sleep(3);
+                // sleep(3);
             }
             worldIntro.data[10][i-1] = '.';
             worldIntro.data[10][i] = '?';
              ispisIntro(&worldIntro);
-              sleep(1);
+            //  sleep(1);
             
  
         }
@@ -163,12 +163,12 @@ int main (){
 
 
             if (i==10){
-                sleep (1);
+               // sleep (1);
                 printf("Zdravo Izikijale \n");
                 sleep (2);
                 printf("...");
                 printf("Zdravo Harune?");
-                sleep (2);
+               // sleep (2);
 
             }
 
@@ -177,15 +177,17 @@ int main (){
             
             
              ispisIntro(&worldIntro);
-             sleep (1);
+           //  sleep (1);
           
         }
      
        printf("Ne znam zasto me zove Izikijal, kako cudan covjek...\n");
-        sleep (3);
+       // sleep (3);
        printf("Trebo bi mu reci da se zapravo zovem _______ \n");
+        ime (player);
+      
   
-       sleep (3);
+       //sleep (3);
        //ime funkcija
 
 
@@ -198,21 +200,21 @@ int main (){
             if (i==15){
                    sleep(1);
                    printf("*trk *trk *tr\n");
-                   sleep(2);
+                   //sleep(2);
 
                 printf("Woaaaah.....\n");
-                 sleep(2);
+                // sleep(2);
                 worldIntro.data[10][i] = ' ';
                 worldIntro.data[10][i-1] = '.';
                   ispisIntro(&worldIntro);
-                 sleep(3);
+                 //sleep(3);
                 
                  break;
             }
             worldIntro.data[10][i-1] = '.';
             worldIntro.data[10][i] = '?';
              ispisIntro(&worldIntro);
-              sleep(1);
+             // sleep(1);
             
  
         }
@@ -221,11 +223,13 @@ int main (){
         
         
 
-        int x;
-        scanf("%d", &x);
+      
 
 
 }
+
+
+
 
 
 

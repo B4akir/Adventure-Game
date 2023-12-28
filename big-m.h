@@ -61,6 +61,9 @@ typedef struct{
 
 
 
+
+
+
 // Strukture i tipovi
 
 
@@ -128,5 +131,7 @@ typedef struct{
             void initiateCombat(Player *player, Region *region);
             void checkHealth(Region *region);
         void initalStatsPlayer(Player *player, int odabir);
+        void ime(Player *player);
+        void intro(Player *player);
 
      #endif
