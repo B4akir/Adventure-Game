@@ -90,6 +90,13 @@ typedef struct {
             } World;
 
 
+typedef struct {
+
+    Position position;
+    char karakter;
+
+}Item;
+
 
         // krene od tacke x i y te se siri prema desno. 
         typedef struct {
@@ -100,7 +107,7 @@ typedef struct {
             Position doors[4];
             Enemy enemy;
             int populated;
-
+            Item item;
 
                 } Region;
 

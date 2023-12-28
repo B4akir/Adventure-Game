@@ -135,6 +135,9 @@ void movement(Player *player, World *world, Region *region, char unos){ // playe
         }
 
 
+       
+
+
     
         
         //ceka 100ms

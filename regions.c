@@ -402,6 +402,40 @@
 
 
 
+    void initItems(Region *region){
+
+
+        for (int i=0; i<5; i++){
+
+            Region *region0= &regions[i];
+            region0->item.karakter='A';
+            region0->item.position.x=region0->position.x+1;
+            region0->item.position.y=region0->position.y+1; 
+
+        }
+        
+
+
+
+
+    }
+
+
+void itemsIntoWorld(Region *region, World *world){
+
+    for (int i=0;i<5; i++){
+
+        
+            Region *region0= &regions[i];
+                  world->data[region0->item.position.y][region0->item.position.x] = region0->item.karakter;
+    }
+
+
+   
+
+}
+
+
 
 
 

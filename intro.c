@@ -164,6 +164,7 @@ void intro (Player *player){
 
             if (i==10){
                // sleep (1);
+               printf("\n\n");
                 printf("Zdravo Izikijale \n");
                 sleep (2);
                 printf("...");
@@ -180,8 +181,9 @@ void intro (Player *player){
            //  sleep (1);
           
         }
-     
-       printf("Ne znam zasto me zove Izikijal, kako cudan covjek...\n");
+
+        printf("\n\n");
+       printf("Ne znam zasto me zove Izikijal, kako cudan covjek...\n\n");
        // sleep (3);
        printf("Trebo bi mu reci da se zapravo zovem _______ \n");
         ime (player);
