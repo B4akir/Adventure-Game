@@ -295,18 +295,21 @@ void ime (Player *player){
     // ukloni buffer da ne zeza sa konzolom
    
 
-    printf("Nalazis se u mracnoj prostoriji.\n Prepodstavljas da si pao kroz labavi saht neodgovornih radnika. ");
-    printf("Ispred sebe vidis stari kostur, koji je vjerovatno pao prije tebe.\n");
-    printf("Kostur u ruci drzi: \n1.Mac \n2.Magicni stap \n3.Luk i strijele\n");
+    printf(" Pao si kroz labavi saht\n Nalazis se u mracnoj prostoriji.\n");
+    printf(" Ispred sebe vidis stari kostur\n");
+    printf(" Kostur u ruci drzi: \n1.Mac \n2.Magicni stap \n3.Luk i strijele\n");
 
-    int odabir;
+    
     printf("Unesite 1 2 ili 3\n");
-    scanf("%d", &odabir);
-
-    while(odabir!=1 && odabir!=2 && odabir!=3){
+    char unos = _getch();
+    while(unos!='1' && unos!='2' && unos!='3'){
         printf("Unesite 1,2, ili 3\n");
-        scanf("%d", &odabir);
+        unos = _getch();
+
+
+        
     }
+int odabir = unos - '0';
 
     switch (odabir)
     {
