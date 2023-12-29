@@ -36,24 +36,28 @@ void enemyInit(Region *region, World *world){
 
         if (i==0 ){
               region0->enemy.constKarakter = 'B';
-
+              strcpy(region0->enemy.ime, "Bat");
         }
 
 
         else if (i==1){
             region0->enemy.constKarakter = 'R';
+            strcpy(region0->enemy.ime, "Rat");
         }
       else if (i==2){
 
         region0->enemy.constKarakter = 'T';
+        strcpy(region0->enemy.ime, "Troll");
 
       } 
       else if (i==3){
         region0->enemy.constKarakter = 'B';
+        strcpy(region0->enemy.ime, "Bat");
       }
 
       else if (i==4){
-        region0->enemy.constKarakter = 'B';
+        region0->enemy.constKarakter = 'R';
+        strcpy(region0->enemy.ime, "Rat");
       }
         
         // Set enemy as alive

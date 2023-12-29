@@ -1,6 +1,83 @@
 #include "big-m.h"
 
+void win (Player *player,Region *region){
 
+
+ FILE *file;
+
+    // Open the file in append mode. If the file does not exist, it will be created.
+    file = fopen("score.txt", "a");
+
+    if (file == NULL) {
+        printf("Error opening file!\n");
+        return;
+    }
+
+    // Write to the file
+    fprintf(file,"-------------------\n");
+    fprintf(file, "Uspjesno pobjegao od horora Gracanicke kanalizacije: %s\n",player->ime);
+    fprintf(file, "Hrabri: %s\n", player->stats.klasa);
+    fprintf(file, "Pokupio sa sobom zlata: %d\n", player->inventory.zlato);
+
+    for (int i=0;i<5;i++){
+
+        if (strcmp(player->inventory.items[i], ".") != 0) {
+            fprintf(file, "Ponijeo sa sobom: %s\n", player->inventory.items[i]);
+        }
+    }
+    
+
+
+
+
+    fprintf(file,"-------------------\n");
+    // Close the file
+    fclose(file);
+
+
+
+
+
+
+
+
+
+
+    system("cls");
+    printf("Pobjedio si :) ");
+
+
+}
+
+
+void loose (Player *player, Region *region){
+    FILE *file;
+
+    // Open the file in append mode. If the file does not exist, it will be created.
+    file = fopen("mezar.txt", "a");
+
+    if (file == NULL) {
+        printf("Error opening file!\n");
+        return;
+    }
+
+    // Write to the file
+    fprintf(file,"-------------------\n");
+    fprintf(file, "RIP: %s\n",player->ime);
+    fprintf(file, "Hrabri: %s\n", player->stats.klasa);
+    fprintf(file, "Ubijen od strane: %s\n", regions[player->inRegion].enemy.ime);
+    fprintf(file, "Ubijen u regiji: %d\n", player->inRegion);
+
+
+
+
+    fprintf(file,"-------------------\n");
+    // Close the file
+    fclose(file);
+
+    system("cls");
+    printf("Izgubio si :( ");
+}
 
 
 
@@ -15,6 +92,8 @@ void checkInventory(Player *player,char unos) {
         for (int i = 0; i < 5; i++) {
             printf("| [%d] %s | \n", i, player->inventory.items[i]);
         }
+        printf("Zlatnici: %d\n", player->inventory.zlato);
+
 
         printf("Q je izlaz iz inventorya\n");
         printf("D je izbacivanje itema\n");
@@ -91,7 +170,7 @@ void initalPosition(Player *player, Region *region){ // pocetna pozicija playera
     // stavlja pocetne kordinate playera
     player->position.y= region0->position.y+1;
     player->position.x= region0->position.x+2;
-    player->karakter='W';
+
     player->inRegion=0; // stavlja ga u regiju 0
 
     }; 
@@ -190,7 +269,7 @@ void movement(Player *player, World *world, Region *region, char unos){ // playe
 //end goal
 
 else if (newArea=='^'){
-    printf("Pobjedio si!");
+    player->win=1;
     
 }
 
@@ -257,12 +336,35 @@ for (int i=0; i<5; i++){
             break;
         case 'H':
             printf ("Potpuno si izljicen\n");
+            sleep (2);
             player->stats.health= player->stats.constHealth;
+            itemAssigned = 1;
             break;
     }
     if (itemAssigned) break;
 }
     }
+
+
+else if (newArea=='z'){
+
+
+    //random number between 5 and 10
+    int random = rand() % 6 + 5;
+
+    player->inventory.zlato=player->inventory.zlato+random;
+    printf("Pokupio si %d zlatnika\n", random);
+    regions[player->inRegion].zlato.pickedUp=1;
+            player->position.y = newY;
+            player->position.x = newX;
+    
+
+
+
+}
+
+
+
 }
     // inicijalizira playera na mjesto deklarisano u funkciji movement
     void initPlayer(Player *player, World *world) {
@@ -315,16 +417,20 @@ int odabir = unos - '0';
     {
         case 1:
             player->karakter = 'W';
+            strcpy(player->stats.klasa, "Warrior");
             initalStatsPlayer(player,odabir);
             break;
         case 2:
             player->karakter = 'M';
             initalStatsPlayer(player,odabir);
+            strcpy(player->stats.klasa, "Mage");
             break;
         case 3:
             player->karakter = 'A';
             initalStatsPlayer(player,odabir);
+            strcpy(player->stats.klasa, "Archer");
             break;
     }
 }
+
 

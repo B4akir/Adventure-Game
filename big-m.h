@@ -43,9 +43,9 @@ typedef struct{
 
     int health;
     int attack;
-
     int constHealth;
     int constAttack;
+    char klasa[20];
 
 
 }Stats;
@@ -57,6 +57,7 @@ typedef struct{
     char oldChar;
     Stats stats;
     int alive;
+    char ime[20];
 
 } Enemy;
 
@@ -64,9 +65,10 @@ typedef struct{
 
 typedef struct {
 
-    char items[5][20];
+    char items[5][30];
     int itemAssigned[5];
     char itemTypes[5][10];
+    int zlato;
 
 
 }Inventory;
@@ -84,6 +86,7 @@ typedef struct {
     int alive;
     int inRegion;
     Inventory inventory;
+    int win;
 
         }Player;
 
@@ -103,6 +106,15 @@ typedef struct {
 }Item;
 
 
+typedef struct{
+    Position position;
+    int pickedUp;
+    int activated;
+
+
+}Zlato;
+
+
         // krene od tacke x i y te se siri prema desno. 
         typedef struct {
             Position position; 
@@ -113,6 +125,7 @@ typedef struct {
             Enemy enemy;
             int populated;
             Item item;
+            Zlato zlato;
 
                 } Region;
 

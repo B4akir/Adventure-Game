@@ -59,6 +59,7 @@
     Region *region0=&regions[player->inRegion];
     printf (" Player health: %d(%d)       Player attack: %d\n", player->stats.health, player->stats.constHealth, player->stats.attack, player->stats.constAttack);
     printf("Sewage dwellers name: %s \n", player->ime);
+    printf("Player class: %s\n",player->stats.klasa);
     for (int i=0; i<5; i++){
   
         
@@ -344,9 +345,14 @@ while(1){
 
         br++;
         if (player.stats.health<=0){
-            printf("Umro si\n");
+            loose(&player, &region);
             break;
         }
+        if (player.win==1){
+            win(&player, &region);
+            break;
+        }
+        
 
 
 }

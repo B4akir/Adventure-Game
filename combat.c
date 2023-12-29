@@ -24,6 +24,7 @@ void checkHealth(Region *region0){
 void initalStatsPlayer(Player *player ,int odabir){
 
 
+player->win=0;
 
 switch (odabir){
 
@@ -149,29 +150,21 @@ for (int i=0; i<5; i++){
 
     }
      
-      sleep (2);
+    
 
       
 
   if (regions[player->inRegion].enemy.stats.health<=0){
 
 
-    char enemy[20];
-    if (regions[player->inRegion].enemy.constKarakter=='B'){
-      strcpy(enemy, "Bata");
-    }
-
-    else if (regions[player->inRegion].enemy.constKarakter=='T'){
-      strcpy(enemy, "Trolla");
-    }
-
-    else if (regions[player->inRegion].enemy.constKarakter=='R'){
-      strcpy(enemy, "Rata");
-    }
-
-    printf("Ubili ste %s \n ",enemy);
+   
     
-    sleep(1);
+    printf("Pobjedio si: %s \n ", regions[player->inRegion].enemy.ime);
+    
+
+
+
+    sleep(2);
   }
 
   }

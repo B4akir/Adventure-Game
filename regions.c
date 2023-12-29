@@ -428,6 +428,15 @@
             region0->item.activated=0;
 
         }
+
+        for (int i=0;i<5;i++){
+
+             Region *region0= &regions[i];
+            region0->zlato.position.x=region0->position.x+3;
+            region0->zlato.position.y=region0->position.y+1;
+            region0->zlato.pickedUp=0;
+            region0->zlato.activated=0;
+        }
         
 
 
@@ -466,6 +475,36 @@ world->data[region0->item.position.y][region0->item.position.x] = '.';
 }
 
 
+ for (int i=0;i<5; i++){
+
+        
+            Region *region0= &regions[i];
+            if (region0->zlato.activated==1 && region0->zlato.pickedUp==0){
+                  world->data[region0->zlato.position.y][region0->zlato.position.x] = 'z';
+    }
+        else if  (region0->item.activated==0 && region0->populated==1){
+
+            world->data[region0->zlato.position.y][region0->zlato.position.x] = '.';
+        }
+
+            else if (region0->zlato.activated==0 && region0->populated==0){
+        world->data[region0->zlato.position.y][region0->zlato.position.x] = ' ';
+
+            }
+
+        else if (region0->zlato.pickedUp==1){
+        world->data[region0->zlato.position.y][region0->zlato.position.x] = '.';
+
+            }
+
+
+        
+
+}
+
+
+
+
 }
 
 void spawnItem(Player *player, Region *region){
@@ -480,7 +519,7 @@ void spawnItem(Player *player, Region *region){
         if (player->inRegion==i){
 
             region0->item.activated=1;
-
+            region0->zlato.activated=1;
 
 
 
@@ -488,6 +527,7 @@ void spawnItem(Player *player, Region *region){
 
         else {
             region0->item.activated=0;
+            region0->zlato.activated=0;
         }
         
 
