@@ -16,3 +16,15 @@ Hrabri: Mage
 Ubijen od strane: Rat
 Ubijen u regiji: 1
 -------------------
+-------------------
+RIP: mahir
+Hrabri: Warrior
+Ubijen od strane: Troll
+Ubijen u regiji: 2
+-------------------
+-------------------
+RIP: 
+Hrabri: Warrior
+Ubijen od strane: Troll
+Ubijen u regiji: 2
+-------------------

@@ -40,20 +40,28 @@
 // izbrise prosli ispis
     system("cls");
 
-    // isprinta world
-    char buffer[HEIGHT * (WIDTH + 1) + 1]; // +1 for each newline and +1 for null terminator
-    char *p = buffer;
-    for (int i = 0; i < HEIGHT; i++) {
-        for (int j = 0; j < WIDTH; j++) {
-            *p++ = world->data[i][j];
-        }
-        *p++ = '\n';
+    printf("\n\n");
+// isprinta world
+char buffer[HEIGHT * (WIDTH + 7) + 1]; // +3 for each newline, two spaces and +1 for null terminator
+char *p = buffer;
+for (int i = 0; i < HEIGHT; i++) {
+     *p++ = ' ';
+    *p++ = ' ';
+    *p++ = ' ';
+    *p++ = ' ';
+    *p++ = ' ';
+    *p++ = ' ';
+ 
+    for (int j = 0; j < WIDTH; j++) {
+        *p++ = world->data[i][j];
     }
-    *p = '\0'; // null terminate the string
-    
-    
-    // ispise statse playera i enemya
-    printf("%s", buffer);
+   
+    *p++ = '\n';
+}
+*p = '\0'; // null terminate the string
+
+// ispise statse playera i enemya
+printf("%s", buffer);
     
 
     Region *region0=&regions[player->inRegion];
@@ -241,7 +249,7 @@ RandomNumbers numbers;
 
 
 
-intro(&player);
+//intro(&player);
 
 generateRandomNumbers(&numbers);
 

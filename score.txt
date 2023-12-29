@@ -1,6 +1,9 @@
+
 -------------------
-Uspjesno pobjegao od horora Gracanicke kanalizacije: 2
-Hrabri: Mage
-Pokupio sa sobom zlata: 10
-Ponijeo sa sobom: Staff
+Uspjesno pobjegao od horora Gracanicke kanalizacije: 
+Hrabri: Warrior
+Pokupio sa sobom zlata: 11
+Ponijeo sa sobom: Sword
+Ponijeo sa sobom: Kartonski stit
+Ponijeo sa sobom: Sumljiva Igla
 -------------------
