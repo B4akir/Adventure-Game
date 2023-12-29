@@ -1,13 +1,12 @@
+Bugovi:
 
-Todo:
-
-Combat:
-
-        - Add more enemies
-        - Add enemy movement and pathfinding
-        - Player can't initate combat
+  - Zlantik na pocetku
 
 
-Inventroy
 
+Code prep:
 
+ - Bolja distribucija
+ - Koristi vise player->inRegion;
+ - Obrisi nepotrebne komentarer
+ - Komentarisi bolje

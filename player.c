@@ -45,6 +45,8 @@ void win (Player *player,Region *region){
 
     system("cls");
     printf("Pobjedio si :) ");
+    int x;
+    scanf("%d",x);
 
 
 }
@@ -77,6 +79,9 @@ void loose (Player *player, Region *region){
 
     system("cls");
     printf("Izgubio si :( ");
+     int x;
+    scanf("%d",x);
+
 }
 
 
@@ -354,6 +359,7 @@ else if (newArea=='z'){
 
     player->inventory.zlato=player->inventory.zlato+random;
     printf("Pokupio si %d zlatnika\n", random);
+    sleep(2);
     regions[player->inRegion].zlato.pickedUp=1;
             player->position.y = newY;
             player->position.x = newX;
@@ -401,9 +407,8 @@ void ime (Player *player){
     printf(" Ispred sebe vidis stari kostur\n");
     printf(" Kostur u ruci drzi: \n1.Mac \n2.Magicni stap \n3.Luk i strijele\n");
 
-    
-    printf("Unesite 1 2 ili 3\n");
-    char unos = _getch();
+    int unos = _getch();
+ 
     while(unos!='1' && unos!='2' && unos!='3'){
         printf("Unesite 1,2, ili 3\n");
         unos = _getch();

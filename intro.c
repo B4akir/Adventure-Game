@@ -146,14 +146,14 @@ void intro (Player *player){
 
 
             if (i==9){
-                  // sleep(1);
+                 
                 printf("Jos jedan dosadan dan u Gracanici...\n");
-                // sleep(3);
+                 sleep(3);
             }
             worldIntro.data[10][i-1] = '.';
             worldIntro.data[10][i] = '?';
              ispisIntro(&worldIntro);
-            //  sleep(1);
+              sleep(1);
             
  
         }
@@ -166,10 +166,10 @@ void intro (Player *player){
                // sleep (1);
                printf("\n\n");
                 printf("Zdravo Izikijale \n");
-                //sleep (2);
+                 (2);
                 printf("...");
                 printf("Zdravo Harune?");
-               // sleep (2);
+               sleep (2);
 
             }
 
@@ -178,7 +178,7 @@ void intro (Player *player){
             
             
              ispisIntro(&worldIntro);
-           //  sleep (1);
+             sleep (1);
           
         }
 
@@ -189,7 +189,7 @@ void intro (Player *player){
         ime (player);
       
   
-       //sleep (3);
+
        //ime funkcija
 
 
@@ -202,21 +202,21 @@ void intro (Player *player){
             if (i==15){
                    sleep(1);
                    printf("*trk *trk *tr\n");
-                   //sleep(2);
+                   sleep(2);
 
                 printf("Woaaaah.....\n");
-                // sleep(2);
+                sleep(2);
                 worldIntro.data[10][i] = ' ';
                 worldIntro.data[10][i-1] = '.';
                   ispisIntro(&worldIntro);
-                 //sleep(3);
+                 sleep(3);
                 
                  break;
             }
             worldIntro.data[10][i-1] = '.';
             worldIntro.data[10][i] = '?';
              ispisIntro(&worldIntro);
-             // sleep(1);
+             sleep(1);
             
  
         }

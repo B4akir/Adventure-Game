@@ -1,19 +1,18 @@
-
 -------------------
 RIP: Bakir
-Hrabri: Archer
+Hrabri: Mage
 Ubijen od strane: Rat
 Ubijen u regiji: 1
 -------------------
 -------------------
-RIP: 2
+RIP: Bakir
 Hrabri: Mage
-Ubijen od strane: Troll
-Ubijen u regiji: 2
+Ubijen od strane: Bat
+Ubijen u regiji: 0
 -------------------
 -------------------
-RIP: 2
+RIP: bakir
 Hrabri: Mage
-Ubijen od strane: Troll
-Ubijen u regiji: 2
+Ubijen od strane: Rat
+Ubijen u regiji: 1
 -------------------

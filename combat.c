@@ -119,6 +119,7 @@ for (int i=0; i<5; i++){
 
   Region *region0=&regions[i];
 
+printf ("\n")
   if (player->inRegion==i){
           // uzima random broj od 0 do max napada playera
         int num1= rand() % player->stats.attack;
