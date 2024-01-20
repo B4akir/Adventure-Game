@@ -1,9 +1,6 @@
 #include "big-m.h"
 
-//regije
 
-    //deklarisanje reegije u zavisnosti od kordinata
-    //prima kordinate od arraya Regions, koji u sebi sadrzi tip Region, koji dalje ima svoje kordinate velicinu...
 
 
 
@@ -315,7 +312,7 @@
 
 
     
-    // samo salje dobijene podatke u strukturu regije
+   
     void regionInit(Region *region, int startY, int startX, int height, int width, char fillCharacter) {
         region->position.y = startY;
         region->position.x = startX;

@@ -20,7 +20,7 @@ void checkHealth(Region *region0){
 }
 
 
-// pocetne statse playera
+
 void initalStatsPlayer(Player *player ,int odabir){
 
 
@@ -62,7 +62,6 @@ case 3:
 }
 
 
-//pocetne statse enemya
 
 void initalStatsEnemy(Region *region){
 
@@ -103,12 +102,7 @@ void initalStatsEnemy(Region *region){
 
 
 
-
-
-
-
 // pozvana kada player ili enemy zeli doci na mjesto enemya ili playera
-
 // povezana sa enemyMovement i playerMovement
 
 void initiateCombat(Player *player, Region *region){
@@ -121,11 +115,9 @@ for (int i=0; i<5; i++){
 
 printf ("\n");
   if (player->inRegion==i){
-          // uzima random broj od 0 do max napada playera
+        
         int num1= rand() % player->stats.attack;
-
-      // uzima random broj od 0 do max napada enemya
-      int num2= rand() % region0->enemy.stats.attack;
+        int num2= rand() % region0->enemy.stats.attack;
 
 
       if (num1==0){

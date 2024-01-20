@@ -115,7 +115,7 @@ typedef struct{
 }Zlato;
 
 
-        // krene od tacke x i y te se siri prema desno. 
+     
         typedef struct {
             Position position; 
             int width, height;
@@ -129,7 +129,7 @@ typedef struct{
 
                 } Region;
 
-        // array regija
+        
        
 
      Region regions[5];

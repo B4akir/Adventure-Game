@@ -80,15 +80,14 @@ else if  (i==2 && (j==3 || j==9)){
  void ispisIntro(World *world) {
 
 
-// Ovo je samo za prvu regiju, treba napraviti za sve regije
 
 
 
-// izbrise prosli ispis
+
     system("cls");
 
     // isprinta world
-    char buffer[INTROHEIGHT * (INTROWIDTH + 1) + 1]; // +1 for each newline and +1 for null terminator
+    char buffer[INTROHEIGHT * (INTROWIDTH + 1) + 1]; 
     char *p = buffer;
     for (int i = 0; i < INTROHEIGHT; i++) {
         for (int j = 0; j < INTROWIDTH; j++) {
@@ -96,10 +95,8 @@ else if  (i==2 && (j==3 || j==9)){
         }
         *p++ = '\n';
     }
-    *p = '\0'; // null terminate the string
+    *p = '\0'; 
     
-    
-    // ispise statse playera i enemya
     printf("%s", buffer);
 
     
@@ -110,13 +107,12 @@ void putXOnEdgesIntro(World *world) {
     int rows = sizeof(world->data) / sizeof(world->data[0]);
     int cols = sizeof(world->data[0]) / sizeof(world->data[0][0]);
 
-    // Put 'x' on the top and bottom edges
+    
     for (int i = 0; i < INTROHEIGHT; i++) {
         world->data[0][i] = 'x';
         world->data[rows - 1][i] = 'x';
     }
 
-    // Put 'x' on the left and right edges
     for (int i = 0; i < INTROWIDTH; i++) {
         world->data[i][0] = 'x';
         world->data[i][cols - 1] = 'x';
@@ -185,12 +181,10 @@ void intro (Player *player){
         printf("\n\n");
        printf("Ne znam zasto me zove Izikijal, kako cudan covjek...\n\n");
        // sleep (3);
-       printf("Trebo bi mu reci da se zapravo zovem _______ \n");
+       printf("Trebo bi mu reci da se zapravo zovem       ");
         ime (player);
       
   
-
-       //ime funkcija
 
 
        

@@ -8,7 +8,7 @@
 
 
     void regionIntoWorld2(Region *region, World *world2) {
-        for (int i = 0; i < HEIGHT; i++) { // ide kroz citavu matricu world
+        for (int i = 0; i < HEIGHT; i++) { 
             for (int j = 0; j < WIDTH; j++) {
 
                     // deklarise obim regije

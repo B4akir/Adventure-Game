@@ -33,19 +33,19 @@
     void ispis(World *world, Player *player, Region *region) {
 
 
-// Ovo je samo za prvu regiju, treba napraviti za sve regije
 
 
 
-// izbrise prosli ispis
+
+
     system("cls");
 
     printf("\n\n");
 // isprinta world
-char buffer[HEIGHT * (WIDTH + 7) + 1]; // +3 for each newline, two spaces and +1 for null terminator
+char buffer[HEIGHT * (WIDTH + 7) + 1]; 
 char *p = buffer;
 for (int i = 0; i < HEIGHT; i++) {
-     *p++ = ' ';
+    *p++ = ' ';
     *p++ = ' ';
     *p++ = ' ';
     *p++ = ' ';
@@ -89,19 +89,19 @@ printf("%s", buffer);
 
 
 
-// stavi regiju na svijet
+
 
 void putXOnEdges(World *world) {
     int rows = sizeof(world->data) / sizeof(world->data[0]);
     int cols = sizeof(world->data[0]) / sizeof(world->data[0][0]);
 
-    // Put 'x' on the top and bottom edges
+   
     for (int i = 0; i < cols; i++) {
         world->data[0][i] = 'x';
         world->data[rows - 1][i] = 'x';
     }
 
-    // Put 'x' on the left and right edges
+   
     for (int i = 0; i < rows; i++) {
         world->data[i][0] = 'x';
         world->data[i][cols - 1] = 'x';
@@ -109,7 +109,7 @@ void putXOnEdges(World *world) {
 }
 
 
-// spaja vrata regija
+
 
 int connectDoors(World *world, int r1, int r2, int door1, int door2, World *world2)
 {
@@ -201,18 +201,6 @@ int connectDoors(World *world, int r1, int r2, int door1, int door2, World *worl
 
 
 
-
-
-
-
-
-
-
-
-//make a function that determines if this position is in a region
-
-
-
  
 
    
@@ -249,7 +237,7 @@ RandomNumbers numbers;
 
 
 
-//intro(&player);
+
 
 generateRandomNumbers(&numbers);
 
@@ -258,7 +246,7 @@ initWorld(&world2);
  
 
 
-
+intro(&player);
 
 
 
@@ -336,7 +324,7 @@ while(1){
             
         movement(&player,&world, &region, unos);
         }
-        spawnItem(&player,&region); //provjeri da li je player u regiji
+        spawnItem(&player,&region); 
         itemsIntoWorld(&region, &world);
 
         initPlayer(&player,&world);

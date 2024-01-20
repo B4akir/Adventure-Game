@@ -5,7 +5,6 @@ void win (Player *player,Region *region){
 
  FILE *file;
 
-    // Open the file in append mode. If the file does not exist, it will be created.
     file = fopen("score.txt", "a");
 
     if (file == NULL) {
@@ -13,7 +12,7 @@ void win (Player *player,Region *region){
         return;
     }
 
-    // Write to the file
+
     fprintf(file,"-------------------\n");
     fprintf(file, "Uspjesno pobjegao od horora Gracanicke kanalizacije: %s\n",player->ime);
     fprintf(file, "Hrabri: %s\n", player->stats.klasa);
@@ -31,7 +30,7 @@ void win (Player *player,Region *region){
 
 
     fprintf(file,"-------------------\n");
-    // Close the file
+   
     fclose(file);
 
 
@@ -55,7 +54,7 @@ void win (Player *player,Region *region){
 void loose (Player *player, Region *region){
     FILE *file;
 
-    // Open the file in append mode. If the file does not exist, it will be created.
+ 
     file = fopen("mezar.txt", "a");
 
     if (file == NULL) {
@@ -63,7 +62,7 @@ void loose (Player *player, Region *region){
         return;
     }
 
-    // Write to the file
+ 
     fprintf(file,"-------------------\n");
     fprintf(file, "RIP: %s\n",player->ime);
     fprintf(file, "Hrabri: %s\n", player->stats.klasa);
@@ -74,7 +73,7 @@ void loose (Player *player, Region *region){
 
 
     fprintf(file,"-------------------\n");
-    // Close the file
+   
     fclose(file);
 
     system("cls");
@@ -86,7 +85,7 @@ void loose (Player *player, Region *region){
 
 
 
-// aktivacija na slovo I
+
 void checkInventory(Player *player,char unos) {
     
 
@@ -106,7 +105,7 @@ void checkInventory(Player *player,char unos) {
 
         switch (unos) {
             case 'q':
-                // Exit the inventory loop
+                
                 return;
 
             case 'd':
@@ -159,24 +158,24 @@ void checkInventory(Player *player,char unos) {
 
 
         }
-    } while (1); // Continue looping until the player exits the inventory
+    } while (1); 
 }
 
 
 
 
 
-void initalPosition(Player *player, Region *region){ // pocetna pozicija playera
+void initalPosition(Player *player, Region *region){ 
 
-    Region *region0 = &regions[0]; // stavlja ga u regiju 0
-    player->oldChar = '.'; // deklarise prvo proslo mjesto, kada se player pomjeri da ostane tacka 
+    Region *region0 = &regions[0]; 
+    player->oldChar = '.'; 
 
 
-    // stavlja pocetne kordinate playera
+    
     player->position.y= region0->position.y+1;
     player->position.x= region0->position.x+2;
 
-    player->inRegion=0; // stavlja ga u regiju 0
+    player->inRegion=0; 
 
     }; 
 
@@ -184,19 +183,15 @@ void initalPosition(Player *player, Region *region){ // pocetna pozicija playera
 
 
 
-void movement(Player *player, World *world, Region *region, char unos){ // player movement
+void movement(Player *player, World *world, Region *region, char unos){
 
 
         int newX, newY;
 
-        world->data[player->position.y][player->position.x] = player->oldChar;   //uzima podatke na trenuntim kordinatama playera da ih poslije moze zamijeniti kada se player pomjeri
-    
-
-    // uzima input unosa, bez cekanja scanf-a. Brze je od scanf-a jer scanf uzima input tek kada se pritisne enter, a _getch uzima input odmah, te scanf koristi puno vise funkcija
-    //kao npr strlen (Vidio na ranodm youtube videu o gta 5 optimiziaciji loading online ).
+        world->data[player->position.y][player->position.x] = player->oldChar;   
 
 
-        // kalulise nove kordinate na osnovu unosa, pri tome deklarise u newY i newX; lokalne varijable.
+      
         switch (unos){
             case 'w':
                 newY = player->position.y - 1;
@@ -224,21 +219,20 @@ void movement(Player *player, World *world, Region *region, char unos){ // playe
             
                 break;
             default:
-                return; // nemoj raditi nista, invalid input
+                return; 
         }
 
-        //provjeri da li nove kordinate su validno mjesto za pokretanje
-        // ovo ne da playeru da ulazi u zidove ili u void
+     
 
 
 
 
 
-        char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli provjeriti da li je validno mjesto za pokretanje
+        char newArea = world->data[newY][newX]; 
 
     
 
-        if (newArea == '.' || newArea == '=' || newArea == VRATA) {  // ' ' je void, '=' je hodnjik, VRATA su vrata 
+        if (newArea == '.' || newArea == '=' || newArea == VRATA) {  
         
         
        
@@ -271,7 +265,7 @@ void movement(Player *player, World *world, Region *region, char unos){ // playe
                initiateCombat(player, region);
                
         }
-//end goal
+
 
 else if (newArea=='^'){
     player->win=1;
@@ -354,7 +348,7 @@ for (int i=0; i<5; i++){
 else if (newArea=='z'){
 
 
-    //random number between 5 and 10
+    
     int random = rand() % 6 + 5;
 
     player->inventory.zlato=player->inventory.zlato+random;
@@ -400,7 +394,7 @@ void ime (Player *player){
    void kreator (Player *player) {
    
 
-    // ukloni buffer da ne zeza sa konzolom
+ 
    
 
     printf(" Pao si kroz labavi saht\n Nalazis se u mracnoj prostoriji.\n");

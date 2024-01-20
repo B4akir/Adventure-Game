@@ -18,22 +18,17 @@ for (int i=0; i<5; i++){
 
 // Kada player udje u regiju enemy se aktivira, kada player izadje iz regije, enemy se deaktivira
 
-
-
 void enemyInit(Region *region, World *world){
-    //put coordinates of enemies in each region in the middle of the region
+    
     for (int i=0; i<5; i++){
         Region *region0 = &regions[i];
         region0->enemy.position.y = region0->position.y + region0->height / 2;
         region0->enemy.position.x = region0->position.x + region0->width / 2;
 
-        // Initialize oldChar as '.' for all enemies
+        
         region0->enemy.oldChar = '.';
 
-        // Temporary enemy types
-        
-       
-
+    
         if (i==0 ){
               region0->enemy.constKarakter = 'B';
               strcpy(region0->enemy.ime, "Bat");
@@ -60,20 +55,11 @@ void enemyInit(Region *region, World *world){
         strcpy(region0->enemy.ime, "Rat");
       }
         
-        // Set enemy as alive
+       
         region0->enemy.alive=1;
     }
 }
 
-
-
-// pomjeranje enemya
-//pozvano je u enemySpawnActivation
-
-
-
-
-// sve varijable dobija od enemySpawnActivation
 
 void enemyLogic(World *world, Region *region, int index , Player *player){
     Region *region0= &regions[index]; 
@@ -82,28 +68,29 @@ void enemyLogic(World *world, Region *region, int index , Player *player){
 
 int newX, newY;
 
-//bat movement
+//bat pomjeranje
     if (region0->enemy.constKarakter=='B'){
 
 
 
  
-    int direction = rand() % 5; // Generate a random number between 0 and 3
+    int direction = rand() % 5;
 
+    //bat movement
     switch (direction) {
-        case 0: // Move up
+        case 0: 
              newY=region0->enemy.position.y-1;
              newX=region0->enemy.position.x;
             break;
-        case 1: // Move down
+        case 1: 
              newY=region0->enemy.position.y+1;
             newX=region0->enemy.position.x;
             break;
-        case 2: // Move left
+        case 2: 
              newX=region0->enemy.position.x-1;
               newY=region0->enemy.position.y;
             break;
-        case 3: // Move right
+        case 3: 
             newX=region0->enemy.position.x+1;
             newY=region0->enemy.position.y;
             break;
@@ -114,6 +101,7 @@ int newX, newY;
     
     }
     }
+    //troll movement
     else if (region0->enemy.constKarakter=='T'){
 
 
@@ -123,23 +111,23 @@ int newX, newY;
 
     if (sleep==0){
             
-        //make enemy track player
-        //if player is on the right side of the enemy
+      // enemy pathfinding do playera
+        //player sa desne strane enemya
         if (player->position.x > region0->enemy.position.x) {
             newX=region0->enemy.position.x+1;
             newY=region0->enemy.position.y;
         }
-        //if player is on the left side of the enemy
+        //player sa lijeve strane enemya
         else if (player->position.x < region0->enemy.position.x) {
             newX=region0->enemy.position.x-1;
             newY=region0->enemy.position.y;
         }
-        //if player is on the bottom side of the enemy
+        //player sa donje strane enemya
         else if (player->position.y > region0->enemy.position.y) {
            newY= region0->enemy.position.y+1;
            newX=region0->enemy.position.x;
         }
-        //if player is on the top side of the enemy
+        //player sa gornje strane enemya
         else if (player->position.y < region0->enemy.position.y) {
            newY= region0->enemy.position.y-1;
            newX=region0->enemy.position.x;
@@ -155,28 +143,28 @@ int newX, newY;
    
     
 
-                    else if (region0->enemy.constKarakter=='R'){
+    else if (region0->enemy.constKarakter=='R'){
 
 
  int random = rand() % 3;
             
-        //make enemy track player
-        //if player is on the right side of the enemy
+       // enemy pathfinding do playera
+       
         if (player->position.x > region0->enemy.position.x) {
             newX=region0->enemy.position.x+random;
             newY=region0->enemy.position.y;
         }
-        //if player is on the left side of the enemy
+        
         else if (player->position.x < region0->enemy.position.x) {
             newX=region0->enemy.position.x-random;
             newY=region0->enemy.position.y;
         }
-        //if player is on the bottom side of the enemy
+        
         else if (player->position.y > region0->enemy.position.y) {
            newY= region0->enemy.position.y+random;
            newX=region0->enemy.position.x;
         }
-        //if player is on the top side of the enemy
+        
         else if (player->position.y < region0->enemy.position.y) {
            newY= region0->enemy.position.y-random;
            newX=region0->enemy.position.x;
@@ -188,9 +176,9 @@ int newX, newY;
     
 
 
-    char newArea = world->data[newY][newX];  // deklarisemo newArea da bi mogli provjeriti da li je validno mjesto za pokretanje
+    char newArea = world->data[newY][newX];  
 
-    if (newArea == '.') {   //enemy se moze samo pomjerati unutar regije 
+    if (newArea == '.') {   
         region0->enemy.oldChar = '.';
         region0->enemy.position.y = newY;
         region0->enemy.position.x = newX;
@@ -227,8 +215,8 @@ int newX, newY;
 
 
 void enemySpawnActivation(Player *player, Region *region, World *world){
-    //detect in which region the player is
-    for(int i=0; i<5; i++){ // this sends indexes to all
+   
+    for(int i=0; i<5; i++){ 
         Region *region0 = &regions[i];
         checkHealth(region0);
         if (player->inRegion == i) {
@@ -238,7 +226,7 @@ void enemySpawnActivation(Player *player, Region *region, World *world){
             else if (region0->enemy.alive==1) {
                 region0->enemy.oldChar='.';
                 region0->enemy.karakter = region0->enemy.constKarakter;
-                // start enemy movement
+                
                 enemyLogic( world, region, player->inRegion, player);
             }
         }
@@ -254,13 +242,12 @@ void enemySpawnActivation(Player *player, Region *region, World *world){
 }
 
 
-// deklarise enemije u svijet
 
 void enemiesIntoWorld(World *world, Region *region){
 
 
 
-//pokupi sve regije
+
 for (int i=0;i<5;i++){
 
 
@@ -268,7 +255,7 @@ for (int i=0;i<5;i++){
 Region *region0 = &regions[i];
 
 
-// stavlja enemya u svijet
+
     world->data[region0->enemy.position.y][region0->enemy.position.x] = region0->enemy.karakter;
 
 
